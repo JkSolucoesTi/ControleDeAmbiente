@@ -1,0 +1,65 @@
+[{
+"ambiente": "Dev01",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev02",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev03",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev04",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev05",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev06",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev07",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+},
+{
+"ambiente": "Dev08",
+"chamado":"Aplicação Automática",
+"descricao":"Alteração de texto",
+"api":"Marco",
+"ios":"Adauto",
+"android":"Romulo"
+}
+]
