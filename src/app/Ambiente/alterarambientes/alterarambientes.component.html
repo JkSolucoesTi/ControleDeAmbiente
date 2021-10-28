@@ -4,13 +4,17 @@
   <mat-card-title>Alterar Ambiente Mobile</mat-card-title>
   <mat-card-subtitle>O ambiente deve ser cadastrado corretamente</mat-card-subtitle>
 </div>
-    <form [formGroup]="formulario" *ngIf="formulario" class="formulario">
+    <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
+      <mat-form-field appearance="fill">
+        <mat-label>Id</mat-label>
+        <input type="text" matInput placeholder="Id" formControlName="id" [disabled]=true>
+      </mat-form-field>
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nome do Ambiente</mat-label>
           <input type="text" matInput placeholder="Ambiente" formControlName="ambiente">
           <mat-error *ngIf="propriedade.ambiente.touched && propriedade.ambiente.invalid" >
-             <sup>*</sup> Preencher o nome do ambiente 
+             <sup>*</sup> Preencher o nome do ambiente
           </mat-error>
         </mat-form-field>
       </div>
@@ -19,7 +23,7 @@
           <mat-label>Nº do Chamado</mat-label>
           <input type="text" matInput placeholder="Chamado" formControlName="chamado">
           <mat-error *ngIf="propriedade.chamado.touched && propriedade.chamado.invalid" >
-            <sup>*</sup> Preencher o numero do chamado 
+            <sup>*</sup> Preencher o numero do chamado
          </mat-error>
         </mat-form-field>
       </div>
@@ -62,7 +66,7 @@
       <mat-divider></mat-divider>
       <mat-card-actions align="end" style="padding-top:20px;margin-right: 30px;">
         <button mat-button mat-raised-button color="accent" [routerLink]="['/ambientes']" >Voltar</button>
-        <button type="submit" mat-button mat-raised-button color="primary" [disabled]="formulario.invalid">Adicionar</button>        
+        <button type="submit" mat-button mat-raised-button color="primary" [disabled]="formulario.invalid">Alterar</button>
       </mat-card-actions>
       <mat-divider></mat-divider>
     </form>

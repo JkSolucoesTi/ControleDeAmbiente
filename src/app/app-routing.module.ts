@@ -11,11 +11,11 @@ const routes: Routes = [
   }
   ,
   {
-    path:"ambientes/alterar/:ambiente",component:AlterarambientesComponent
+    path:"ambientes/alterar/:id",component:AlterarambientesComponent
   }
   ,
   {
-    path:"ambientes/excluir/:ambiente",component:ExcluirambienteComponent
+    path:"ambientes/excluir/:id",component:ExcluirambienteComponent
   }
   ,
   {

@@ -1,4 +1,5 @@
 export class Ambiente{
+  id!:string;
   ambiente!:string;
   chamado!:string;
   descricao!:string;

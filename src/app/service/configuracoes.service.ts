@@ -9,7 +9,6 @@ import { Ambiente } from '../model/ambiente';
 export class ConfiguracoesService {
 
   uri:string = "http://localhost:3000/Ambiente/";
-
   uriP:string = "http://localhost:3000/ambiente";
 
   constructor(private http : HttpClient) { }
@@ -22,9 +21,19 @@ export class ConfiguracoesService {
   {
     return this.http.get<Ambiente[]>(this.uri);
   }
+/*GET/posts/1 */
+  GetAmbientesBackEndById(idAmbiente:string):Observable<any>{
+    const rota = `${this.uri}${idAmbiente}`
+    return this.http.get<Ambiente>(rota);
+  }
 
   PostAmbienteBackEnd(ambiente:Ambiente):Observable<any>{
     return this.http.post<Ambiente>(this.uri,ambiente);
+  }
+
+  PutAmbienteBackEnd(ambiente:Ambiente,idAmbiente:string):Observable<any>{
+    const rota = `${this.uri}/${idAmbiente}`;
+    return this.http.put<Ambiente>(rota,ambiente);
   }
 
 }

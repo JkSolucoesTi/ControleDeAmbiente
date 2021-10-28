@@ -1,7 +1,7 @@
 import { Ambiente } from '../../model/ambiente';
 import { ConfiguracoesService } from '../../service/configuracoes.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup , FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -11,24 +11,28 @@ import { FormGroup , FormControl, Validators } from '@angular/forms';
 })
 export class AlterarambientesComponent implements OnInit {
 
+  rota :string ="";
   ambienteDev: string = "";
   path : string = "./assets/ambientes.json";
   retorno!:any;
   formulario:any;
 
   ambienteSelecionado!:Ambiente;
+  ambienteAlterar!:Ambiente;
 
-  constructor(private route : ActivatedRoute ,
+  constructor(private router : Router,
+              private route : ActivatedRoute ,
               private service : ConfiguracoesService) {
   }
 
   ngOnInit(): void {
-    this.ambienteDev= this.route.snapshot.params.ambiente;
-    this.service.GetAmbientesBackEnd().subscribe( resultado =>{
-      this.retorno = resultado.find(x => x.ambiente === this.ambienteDev);
-      const variavel : Ambiente = this.retorno;
+    this.rota = this.route.snapshot.params.id;
+    console.log(this.rota);
+    this.service.GetAmbientesBackEndById(this.rota).subscribe( resultado =>{
+      const variavel : Ambiente = resultado;
 
       this.formulario = new FormGroup({
+        id : new FormControl(variavel.id,[Validators.required]),
         ambiente : new FormControl(variavel.ambiente,[Validators.required]),
         chamado : new FormControl(variavel.chamado,[Validators.required]),
         descricao : new FormControl(variavel.descricao,[Validators.required]),
@@ -40,9 +44,13 @@ export class AlterarambientesComponent implements OnInit {
 
   }
 
-  VerificarParametroDeRota(){
-    console.log('botao pressionado');
-    console.log(this.retorno);
+  AlterarAmbiente(){
+    const parametros = this.formulario.value;
+    console.log(parametros);
+      this.service.PutAmbienteBackEnd(parametros,this.rota).subscribe(resultado =>{
+      console.log('resultado');
+      this.router.navigate(['ambientes']);
+    })
 
   }
 

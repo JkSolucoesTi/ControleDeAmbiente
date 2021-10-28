@@ -1,49 +1,25 @@
 {
   "ambiente": [
     {
-      "id": "1",
-      "ambiente": "Dev01",
-      "chamado": "Aplicação Automática",
-      "descricao": "Alteração de texto",
-      "api": "Marco",
-      "ios": "Adauto",
-      "android": "Romulo"
+      "id": "1"
     },
     {
-      "id": "2",
-      "ambiente": "Dev02",
-      "chamado": "Aplicação Automática",
-      "descricao": "Alteração de texto",
-      "api": "Marco",
-      "ios": "Adauto",
-      "android": "Romulo"
+      "id": "2"
     },
     {
-      "id": "3",
-      "ambiente": "Dev03",
-      "chamado": "Aplicação Automática",
-      "descricao": "Alteração de texto",
-      "api": "Marco",
-      "ios": "Adauto",
-      "android": "Romulo"
+      "id": "3"
     },
     {
-      "id": "4",
-      "ambiente": "Dev04",
-      "chamado": "Aplicação Automática",
-      "descricao": "Alteração de texto",
-      "api": "Marco",
-      "ios": "Adauto",
-      "android": "Romulo"
+      "id": "4"
     },
     {
       "id": "5",
-      "ambiente": "Dev05",
-      "chamado": "Aplicação Automática",
-      "descricao": "Alteração de texto",
-      "api": "Marco",
-      "ios": "Adauto",
-      "android": "Romulo"
+      "ambiente": "sdfgh",
+      "chamado": "sdfgh",
+      "descricao": "sdfgh",
+      "api": "jsdfghj",
+      "ios": "sdfghj",
+      "android": "dfghj"
     },
     {
       "id": "6",

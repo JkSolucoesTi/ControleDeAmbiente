@@ -21,6 +21,7 @@ export class AmbientesComponent implements OnInit {
   ngOnInit(): void {
     this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
       this.dataSource.data = resultado;
+      console.log(resultado);
     })
     this.displayedColumns = this.ExibirColunas();
   }
