@@ -1,5 +1,5 @@
-import { Ambiente } from './../model/ambiente';
-import { ConfiguracoesService } from './../service/configuracoes.service';
+import { Ambiente } from '../../model/ambiente';
+import { ConfiguracoesService } from '../../service/configuracoes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup , FormControl, Validators } from '@angular/forms';
@@ -24,7 +24,7 @@ export class AlterarambientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.ambienteDev= this.route.snapshot.params.ambiente;
-    this.service.GetAmbientes(this.path).subscribe( resultado =>{
+    this.service.GetAmbientesBackEnd().subscribe( resultado =>{
       this.retorno = resultado.find(x => x.ambiente === this.ambienteDev);
       const variavel : Ambiente = this.retorno;
 
@@ -37,8 +37,6 @@ export class AlterarambientesComponent implements OnInit {
         android : new FormControl(variavel.android,[Validators.required])
       });
     });
-
-
 
   }
 

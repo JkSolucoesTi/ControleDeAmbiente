@@ -1,0 +1,16 @@
+.formulario{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.mat-form-field.mat-form-field{
+    max-width: 500px;
+    min-width: 300px;
+    width: 100%;
+}
+
+mat-card {
+    max-width: 550px;
+    min-width: 300px;
+}
+  

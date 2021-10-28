@@ -1,5 +1,5 @@
-import { Ambiente } from './../model/ambiente';
-import { ConfiguracoesService } from './../service/configuracoes.service';
+import { Ambiente } from '../../model/ambiente';
+import { ConfiguracoesService } from '../../service/configuracoes.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -19,12 +19,9 @@ export class AmbientesComponent implements OnInit {
   constructor(private ambiente: ConfiguracoesService) { }
 
   ngOnInit(): void {
-
-    this.ambiente.GetAmbientes(this.path).subscribe(resultado =>{
+    this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
       this.dataSource.data = resultado;
-      console.log(this.dataSource.data);
-      this.displayedColumns = this.ExibirColunas();
-    });
+    })
     this.displayedColumns = this.ExibirColunas();
   }
 

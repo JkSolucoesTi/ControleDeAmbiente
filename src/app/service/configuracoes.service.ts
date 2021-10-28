@@ -8,10 +8,23 @@ import { Ambiente } from '../model/ambiente';
 })
 export class ConfiguracoesService {
 
+  uri:string = "http://localhost:3000/Ambiente/";
+
+  uriP:string = "http://localhost:3000/ambiente";
+
   constructor(private http : HttpClient) { }
 
   GetAmbientes(path:string):Observable<Ambiente[]> {
     return this.http.get<Ambiente[]>(path);
+  }
+
+  GetAmbientesBackEnd(): Observable<Ambiente[]>
+  {
+    return this.http.get<Ambiente[]>(this.uri);
+  }
+
+  PostAmbienteBackEnd(ambiente:Ambiente):Observable<any>{
+    return this.http.post<Ambiente>(this.uri,ambiente);
   }
 
 }

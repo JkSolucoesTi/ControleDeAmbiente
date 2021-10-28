@@ -16,15 +16,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 
-import { AmbientesComponent } from './ambientes/ambientes.component';
-import { AlterarambientesComponent } from './alterarambientes/alterarambientes.component';
-
+import { AmbientesComponent } from './Ambiente/ambientes/ambientes.component';
+import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
+import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
+import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambiente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AmbientesComponent,
-    AlterarambientesComponent
+    AlterarambientesComponent,
+    AdicionarambienteComponent,
+    ExcluirambienteComponent
   ],
   imports: [
     BrowserModule,

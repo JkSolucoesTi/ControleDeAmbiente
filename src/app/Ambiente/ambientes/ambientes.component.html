@@ -1,9 +1,5 @@
-<div>
-  <div class="row">
-    <div class="col-6">
-    <button mat-button color="primary">Adicionar Ambiente</button>
-    </div>
-  </div>
+<div class="col-6">
+  <button mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >Adicionar Ambiente</button>  
 </div>
 <mat-divider></mat-divider>
 <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource">
@@ -47,7 +43,12 @@
       [routerLink]="['/ambientes/alterar/',dataSource.ambiente]">
       Alterar
     </button>
-     </td>
+      <button style="margin-left: 15px;"
+      mat-raised-button
+      color="warn"
+      [routerLink]="['/ambientes/alterar/',dataSource.ambiente]">
+      Excluir
+    </button>     
    </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
