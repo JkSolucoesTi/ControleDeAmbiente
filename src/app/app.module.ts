@@ -13,7 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AmbientesComponent } from './Ambiente/ambientes/ambientes.component';
@@ -42,7 +42,7 @@ import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambi
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    MatSnackBarModule
   ],
   providers: [
     ConfiguracoesService

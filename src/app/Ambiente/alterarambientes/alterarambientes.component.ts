@@ -3,6 +3,7 @@ import { ConfiguracoesService } from '../../service/configuracoes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup , FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-alterarambientes',
@@ -22,7 +23,8 @@ export class AlterarambientesComponent implements OnInit {
 
   constructor(private router : Router,
               private route : ActivatedRoute ,
-              private service : ConfiguracoesService) {
+              private service : ConfiguracoesService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -48,7 +50,11 @@ export class AlterarambientesComponent implements OnInit {
     const parametros = this.formulario.value;
     console.log(parametros);
       this.service.PutAmbienteBackEnd(parametros,this.rota).subscribe(resultado =>{
-      console.log('resultado');
+      this.snackBar.open("Ambiente atualizado com sucess" ,"Atualização", {
+        duration:2000,
+        horizontalPosition:'center',
+        verticalPosition:'bottom'
+      })
       this.router.navigate(['ambientes']);
     })
 

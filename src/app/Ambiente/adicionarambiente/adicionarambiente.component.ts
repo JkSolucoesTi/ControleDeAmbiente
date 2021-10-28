@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
 import { ConfiguracoesService } from 'src/app/service/configuracoes.service';
@@ -16,6 +17,7 @@ export class AdicionarambienteComponent implements OnInit {
   novoAmbiente!:Ambiente;
 
   constructor(private http : ConfiguracoesService,
+              private snackBar: MatSnackBar,
               private router : Router) { }
 
   ngOnInit(): void {
@@ -39,6 +41,12 @@ Adicionar(){
   console.log(json);
   console.log(this.novoAmbiente);
   this.http.PostAmbienteBackEnd(this.novoAmbiente).subscribe(resultado =>{
+    this.snackBar.open("Ambiente inserido com sucess" ,"Atualização", {
+      duration:2000,
+      horizontalPosition:'center',
+      verticalPosition:'bottom'
+    })
+
     this.router.navigate(['/ambientes']);
   },
   erro => {
