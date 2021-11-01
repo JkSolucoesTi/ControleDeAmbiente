@@ -3,7 +3,6 @@ import { AmbientesComponent } from './Ambiente/ambientes/ambientes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
-import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambiente.component';
 
 const routes: Routes = [
   {
@@ -11,16 +10,13 @@ const routes: Routes = [
   }
   ,
   {
-    path:"ambientes/alterar/:id",component:AlterarambientesComponent
-  }
-  ,
-  {
-    path:"ambientes/excluir/:id",component:ExcluirambienteComponent
-  }
-  ,
-  {
     path:"ambientes/adicionar",component:AdicionarambienteComponent
   }
+  ,
+  {
+    path:"ambientes/alterar/:id",component:AlterarambientesComponent
+  }
+  
 ];
 
 @NgModule({

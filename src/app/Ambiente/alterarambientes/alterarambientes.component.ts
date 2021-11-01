@@ -57,7 +57,6 @@ export class AlterarambientesComponent implements OnInit {
       })
       this.router.navigate(['ambientes']);
     })
-
   }
 
   get propriedade(){

@@ -15,11 +15,14 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { AmbientesComponent } from './Ambiente/ambientes/ambientes.component';
+
+import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
-import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambiente.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,7 @@ import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambi
     AmbientesComponent,
     AlterarambientesComponent,
     AdicionarambienteComponent,
-    ExcluirambienteComponent
+    DialogLiberarAmbientComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,10 @@ import { ExcluirambienteComponent } from './Ambiente/excluirambiente/excluirambi
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    FlexLayoutModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ConfiguracoesService
