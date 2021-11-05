@@ -1,5 +1,13 @@
+<div *ngIf="erros.length > 0">
+  <div class="divErros">
+    <h4 *ngFor="let erro of erros">
+      {{erro}}
+    </h4>
+  </div>
+</div>
+
 <div class="col-6">
-  <button mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >Adicionar Ambiente</button>  
+  <button mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >Adicionar Ambiente</button>
 </div>
 <mat-divider></mat-divider>
 <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource">
@@ -40,22 +48,21 @@
       <button
       mat-raised-button
       color="primary"
-      [routerLink]="['/ambientes/alterar/',dataSource.ambiente]">
+      [routerLink]="['/ambientes/alterar/',dataSource.id]">
       Alterar
-    </button>
-      <button style="margin-left: 15px;"
-      mat-raised-button
-      color="warn"
-      [routerLink]="['/ambientes/alterar/',dataSource.ambiente]">
-      Excluir
-    </button>     
+    </button>    
+    <button mat-raised-button color="primary" (click)="AbrirDialog(dataSource.id,dataSource.ambiente)">
+    Liberar
+  </button>
+    </td>
    </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-divider></mat-divider>
 <div class="container">
+  <br>
   <div style="text-align: center;">
-  <h3>Os ambientes devem ser atualizados de acordo com a atividade executada</h3>
+  <h3>Os ambientes devem ser atualizados de acordo com as informações de cada atividade</h3>
 </div>
 </div>

@@ -4,22 +4,22 @@
   <mat-card-title>Alterar Ambiente Mobile</mat-card-title>
   <mat-card-subtitle>O ambiente deve ser cadastrado corretamente</mat-card-subtitle>
 </div>
-    <form [formGroup]="formulario" *ngIf="formulario" class="formulario">
+    <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nome do Ambiente</mat-label>
           <input type="text" matInput placeholder="Ambiente" formControlName="ambiente">
           <mat-error *ngIf="propriedade.ambiente.touched && propriedade.ambiente.invalid" >
-             <sup>*</sup> Preencher o nome do ambiente 
+             <sup>*</sup> Preencher o nome do ambiente
           </mat-error>
-        </mat-form-field>
+        </mat-form-field>        
       </div>
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nº do Chamado</mat-label>
           <input type="text" matInput placeholder="Chamado" formControlName="chamado">
           <mat-error *ngIf="propriedade.chamado.touched && propriedade.chamado.invalid" >
-            <sup>*</sup> Preencher o numero do chamado 
+            <sup>*</sup> Preencher o numero do chamado
          </mat-error>
         </mat-form-field>
       </div>
@@ -33,36 +33,42 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pela API</mat-label>
-          <input type="text" matInput placeholder="API" formControlName="api">
-          <mat-error *ngIf="propriedade.descricao.touched && propriedade.descricao.invalid" >
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pela API</mat-label>
+          <mat-select formControlName="api">            
+            <mat-option *ngFor="let responsavel of api" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="propriedade.api.touched && propriedade.api.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento da API
          </mat-error>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pelo IOS</mat-label>
-          <input type="text" matInput placeholder="IOS" formControlName="ios">
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pelo IOS</mat-label>
+          <mat-select formControlName="ios">            
+            <mat-option *ngFor="let responsavel of ios" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
           <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pelo Android</mat-label>
-          <input type="text" matInput placeholder="Android" formControlName="android">
-          <mat-error *ngIf="propriedade.android.touched && propriedade.android.invalid" >
-            <sup>*</sup> Preencher o responsável pelo desenvolvimento do Android
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pelo Android</mat-label>
+          <mat-select formControlName="android">            
+            <mat-option *ngFor="let responsavel of android" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
+            <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
       </div>
       <mat-divider></mat-divider>
       <mat-card-actions align="end" style="padding-top:20px;margin-right: 30px;">
         <button mat-button mat-raised-button color="accent" [routerLink]="['/ambientes']" >Voltar</button>
-        <button type="submit" mat-button mat-raised-button color="primary" [disabled]="formulario.invalid">Adicionar</button>        
+        <button type="submit" mat-button mat-raised-button color="primary" [disabled]="formulario.invalid">Alterar</button>
       </mat-card-actions>
       <mat-divider></mat-divider>
     </form>

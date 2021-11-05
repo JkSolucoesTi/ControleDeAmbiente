@@ -1,8 +1,15 @@
+import { ApiService } from './../../service/api.service';
+import { IosService } from './../../service/ios.service';
+import { AndroidService } from './../../service/android.service';
 import { Ambiente } from '../../model/ambiente';
 import { ConfiguracoesService } from '../../service/configuracoes.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup , FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Api } from 'src/app/model/api';
+import { Ios } from 'src/app/model/ios';
+import { Android } from 'src/app/model/android';
 
 @Component({
   selector: 'app-alterarambientes',
@@ -11,24 +18,42 @@ import { FormGroup , FormControl, Validators } from '@angular/forms';
 })
 export class AlterarambientesComponent implements OnInit {
 
-  ambienteDev: string = "";
-  path : string = "./assets/ambientes.json";
-  retorno!:any;
+  rota :string ="";
   formulario:any;
+  erros!:string[];
+  api!:Api[];
+  ios!:Ios[];
+  android!:Android[];
 
-  ambienteSelecionado!:Ambiente;
-
-  constructor(private route : ActivatedRoute ,
-              private service : ConfiguracoesService) {
+  constructor(private router : Router,
+              private route : ActivatedRoute ,
+              private service : ConfiguracoesService,
+              private androidService : AndroidService,
+              private iosService:IosService,
+              private apiService:ApiService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.ambienteDev= this.route.snapshot.params.ambiente;
-    this.service.GetAmbientesBackEnd().subscribe( resultado =>{
-      this.retorno = resultado.find(x => x.ambiente === this.ambienteDev);
-      const variavel : Ambiente = this.retorno;
+    
+    this.erros =[];
+    
+    this.apiService.ObterTodos().subscribe(resultado =>{
+      this.api = resultado;
+    })
+    this.iosService.ObterTodos().subscribe(resultado =>{
+      this.ios = resultado;
+    })
+    this.androidService.ObterTodos().subscribe(resultado =>{
+      this.android = resultado;
+    })
+
+    this.rota = this.route.snapshot.params.id;
+    this.service.GetAmbientesBackEndById(this.rota).subscribe( resultado =>{
+      const variavel : Ambiente = resultado;
 
       this.formulario = new FormGroup({
+        id : new FormControl(variavel.id,[Validators.required]),
         ambiente : new FormControl(variavel.ambiente,[Validators.required]),
         chamado : new FormControl(variavel.chamado,[Validators.required]),
         descricao : new FormControl(variavel.descricao,[Validators.required]),
@@ -40,11 +65,30 @@ export class AlterarambientesComponent implements OnInit {
 
   }
 
-  VerificarParametroDeRota(){
-    console.log('botao pressionado');
-    console.log(this.retorno);
-
-  }
+  AlterarAmbiente(){
+    this.erros =[];
+    const parametros = this.formulario.value;
+      this.service.PutAmbienteBackEnd(parametros,this.rota).subscribe(resultado =>{
+      this.snackBar.open("Ambiente atualizado com sucess" ,"Atualização", {
+        duration:2000,
+        horizontalPosition:'center',
+        verticalPosition:'bottom'
+      })
+      this.router.navigate(['ambientes']);
+    },erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
+      }
+      else{
+        this.erros.push(erro.error)
+      }
+    }
+  )
+}
 
   get propriedade(){
     return this.formulario.controls;
