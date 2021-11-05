@@ -16,9 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 
 import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
@@ -48,7 +48,8 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
     MatSnackBarModule,
     MatDialogModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [
     ConfiguracoesService

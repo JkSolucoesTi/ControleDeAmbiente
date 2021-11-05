@@ -5,10 +5,6 @@
   <mat-card-subtitle>O ambiente deve ser cadastrado corretamente</mat-card-subtitle>
 </div>
     <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
-      <mat-form-field appearance="fill">
-        <mat-label>Id</mat-label>
-        <input type="text" matInput placeholder="Id" formControlName="id" readonly>
-      </mat-form-field>
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nome do Ambiente</mat-label>
@@ -37,29 +33,35 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pela API</mat-label>
-          <input type="text" matInput placeholder="API" formControlName="api">
-          <mat-error *ngIf="propriedade.descricao.touched && propriedade.descricao.invalid" >
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pela API</mat-label>
+          <mat-select formControlName="api">            
+            <mat-option *ngFor="let responsavel of api" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="propriedade.api.touched && propriedade.api.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento da API
          </mat-error>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pelo IOS</mat-label>
-          <input type="text" matInput placeholder="IOS" formControlName="ios">
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pelo IOS</mat-label>
+          <mat-select formControlName="ios">            
+            <mat-option *ngFor="let responsavel of ios" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
           <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Responsável pelo Android</mat-label>
-          <input type="text" matInput placeholder="Android" formControlName="android">
-          <mat-error *ngIf="propriedade.android.touched && propriedade.android.invalid" >
-            <sup>*</sup> Preencher o responsável pelo desenvolvimento do Android
+        <mat-form-field appearance="fill" >
+          <mat-label>Selecione o responsável pelo Android</mat-label>
+          <mat-select formControlName="android">            
+            <mat-option *ngFor="let responsavel of android" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
+            <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
       </div>

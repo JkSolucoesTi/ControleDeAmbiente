@@ -6,6 +6,10 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
 
 const routes: Routes = [
   {
+    path:"",component:AmbientesComponent
+  }
+  ,
+  {
     path:"ambientes",component:AmbientesComponent
   }
   ,

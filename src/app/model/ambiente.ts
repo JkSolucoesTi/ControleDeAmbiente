@@ -6,5 +6,4 @@ export class Ambiente{
   api!:string;
   ios!:string;
   android!:string;
-
 }

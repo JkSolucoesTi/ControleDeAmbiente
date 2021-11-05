@@ -2,7 +2,6 @@ import { Ambiente } from '../../model/ambiente';
 import { ConfiguracoesService } from '../../service/configuracoes.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
@@ -16,7 +15,7 @@ export class AmbientesComponent implements OnInit {
   dataSource = new MatTableDataSource<Ambiente>();
   displayedColumns : string[] =[];
   erros!:string [];
-  
+
 
   constructor(private ambiente: ConfiguracoesService,
               private dialog: MatDialog)
@@ -26,23 +25,19 @@ export class AmbientesComponent implements OnInit {
     this.erros = [];
     this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
       this.dataSource.data = resultado;
-    },
-    erro => {
-      console.log(erro)
-      if(erro.status === 0)
-      {
-        this.erros.push('Não foi possível a conexão com a API');
+    },erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
       }
-      if(erro.status === 400){
-        for(const campos in erro.error.errors){
-          if(erro.error.errors.hasOwnProperty(campos)){
-            this.erros.push(erro.error.errors[campos])
-          }
-        }
+      else{
+        this.erros.push('Estamos com problemas para acessar o dados dos ambientes')
       }
-    } 
+    }
   )
-    
     this.displayedColumns = this.ExibirColunas();
   }
 
@@ -61,7 +56,7 @@ export class AmbientesComponent implements OnInit {
         this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
           this.dataSource.data = resultado;
           console.log(resultado);
-        })        
+        })
       }
     })
     this.displayedColumns = this.ExibirColunas();
@@ -78,6 +73,7 @@ export class DialogLiberarAmbientComponent {
               private snackBar : MatSnackBar) {}
 
     ambienteLiberado!:any;
+    erros!:string [];
 
     LiberarAmbiente(ambienteId:any,ambiente:any):void{
     console.log(ambienteId,ambiente);
@@ -89,14 +85,25 @@ export class DialogLiberarAmbientComponent {
     this.ambienteLiberado.ios = "";
     this.ambienteLiberado.android = "";
 
-    this.service.PutAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{      
+    this.service.PutAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{
       this.snackBar.open("Ambiente liberado com sucesso","Liberar",{
         duration:2000,
         horizontalPosition:'right',
         verticalPosition:'top'
-      } )
-    })
-
+      })
+    },erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
+      }
+      else{
+        this.erros.push(erro.error)
+      }
+    }
+    )
   }
 }
 
