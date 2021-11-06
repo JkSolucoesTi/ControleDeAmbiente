@@ -18,7 +18,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
@@ -49,7 +51,8 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
     MatDialogModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [
     ConfiguracoesService

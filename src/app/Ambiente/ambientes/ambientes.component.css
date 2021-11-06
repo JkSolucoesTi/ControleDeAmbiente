@@ -9,3 +9,18 @@ table{
 button{
   margin-left: 10px;
 }
+
+.table {
+  background: rgba(243, 243, 245, 0.5); 
+}
+
+.mat-header-cell{
+  font-size: 18px;
+  color: black;
+  background-color: rgb(173, 180, 250);
+}
+
+.mat-cell{
+  font-size: 16px;
+  color: black;
+}

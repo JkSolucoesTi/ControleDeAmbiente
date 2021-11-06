@@ -9,8 +9,19 @@
     width: 100%;
 }
 
+.mat-card-cvr{
+  width: 100%;
+  text-align:center;
+  margin-right: 500px;
+}
+
 mat-card {
+    width:100%;
     max-width: 550px;
     min-width: 300px;
+    text-align: center;
+    background: rgba(243, 243, 245, 0.5); 
+    display: inline-block;
 }
+
   

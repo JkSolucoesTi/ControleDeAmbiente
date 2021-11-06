@@ -69,7 +69,7 @@ export class AlterarambientesComponent implements OnInit {
     this.erros =[];
     const parametros = this.formulario.value;
       this.service.PutAmbienteBackEnd(parametros,this.rota).subscribe(resultado =>{
-      this.snackBar.open("Ambiente atualizado com sucess" ,"Atualização", {
+      this.snackBar.open("Ambiente atualizado com sucesso" ,"Atualização", {
         duration:2000,
         horizontalPosition:'center',
         verticalPosition:'bottom'
