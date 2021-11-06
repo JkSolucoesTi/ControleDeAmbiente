@@ -1,10 +1,9 @@
-<br>
+<div class="mat-card-cvr">
 <mat-card>
-<div class="titulo">
-  <mat-card-title>Alterar Ambiente Mobile</mat-card-title>
-  <mat-card-subtitle>O ambiente deve ser cadastrado corretamente</mat-card-subtitle>
+<div>
+  <mat-card-subtitle>Alteração das informações do ambiente moblie</mat-card-subtitle>
 </div>
-    <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
+<form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Nome do Ambiente</mat-label>
@@ -67,9 +66,23 @@
       </div>
       <mat-divider></mat-divider>
       <mat-card-actions align="end" style="padding-top:20px;margin-right: 30px;">
-        <button mat-button mat-raised-button color="accent" [routerLink]="['/ambientes']" >Voltar</button>
-        <button type="submit" mat-button mat-raised-button color="primary" [disabled]="formulario.invalid">Alterar</button>
+        <button 
+        mat-button 
+        mat-mini-fab 
+        color="accent" 
+        [routerLink]="['/ambientes']">
+        <mat-icon>backspace</mat-icon>
+      </button>
+        <button 
+        type="submit" 
+        mat-button 
+        mat-mini-fab 
+        color="primary" 
+        [disabled]="formulario.invalid"
+        >
+        <mat-icon>edit</mat-icon>
+      </button>
       </mat-card-actions>
-      <mat-divider></mat-divider>
     </form>
   </mat-card>
+</div>

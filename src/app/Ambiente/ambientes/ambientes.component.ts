@@ -16,7 +16,6 @@ export class AmbientesComponent implements OnInit {
   displayedColumns : string[] =[];
   erros!:string [];
 
-
   constructor(private ambiente: ConfiguracoesService,
               private dialog: MatDialog)
               { }
@@ -55,12 +54,12 @@ export class AmbientesComponent implements OnInit {
       if(resultado === true){
         this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
           this.dataSource.data = resultado;
-          console.log(resultado);
-        })
+        });
       }
-    })
+    });
     this.displayedColumns = this.ExibirColunas();
   }
+
 }
 
 @Component({
@@ -86,10 +85,10 @@ export class DialogLiberarAmbientComponent {
     this.ambienteLiberado.android = "";
 
     this.service.PutAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{
-      this.snackBar.open("Ambiente liberado com sucesso","Liberar",{
+      this.snackBar.open("Ambiente liberado com sucesso","Ambiente",{
         duration:2000,
-        horizontalPosition:'right',
-        verticalPosition:'top'
+        horizontalPosition:'center',
+        verticalPosition:'bottom'
       })
     },erro => {
       if(erro.status === '400'){
