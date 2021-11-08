@@ -52,14 +52,13 @@ export class AmbientesComponent implements OnInit {
       }
     }).afterClosed().subscribe(resultado => {
       if(resultado === true){
-        this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
-          this.dataSource.data = resultado;
+        this.ambiente.GetAmbientesBackEnd().subscribe((dados) => {
+          this.dataSource.data = dados;
         });
       }
     });
     this.displayedColumns = this.ExibirColunas();
   }
-
 }
 
 @Component({

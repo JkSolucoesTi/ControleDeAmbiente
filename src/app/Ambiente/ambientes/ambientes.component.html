@@ -1,12 +1,12 @@
 <div *ngIf="erros.length > 0">
   <div class="divErros">
     <h4 *ngFor="let erro of erros">
-      {{erro}}
+      <mat-icon>error</mat-icon> {{erro}} <mat-icon>error</mat-icon>
     </h4>
   </div>
 </div>
 
-<div class="col-6">
+<div class="col-6" *ngIf="erros.length == 0">
   <button mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >
     Adicionar Ambiente
   <mat-icon>fiber_new</mat-icon>
@@ -53,10 +53,10 @@
       color="primary"
       [routerLink]="['/ambientes/alterar/',dataSource.id]">
       <mat-icon>edit</mat-icon>
-    </button>    
-    <button 
-    mat-mini-fab 
-    color="accent" 
+    </button>
+    <button
+    mat-mini-fab
+    color="accent"
     (click)="AbrirDialog(dataSource.id,dataSource.ambiente)">
     <mat-icon>new_releases</mat-icon>
   </button>
