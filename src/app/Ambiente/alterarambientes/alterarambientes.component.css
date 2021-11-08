@@ -20,8 +20,11 @@ mat-card {
     max-width: 550px;
     min-width: 300px;
     text-align: center;
-    background: rgba(243, 243, 245, 0.5); 
+    background: rgba(243, 243, 245, 0.5);
     display: inline-block;
 }
 
-  
+mat-card-subtitle.mat-card-subtitle{
+  font-size: 18px;
+  color: blue;
+}
