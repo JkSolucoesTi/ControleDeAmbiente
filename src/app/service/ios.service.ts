@@ -8,7 +8,7 @@ import { Ios } from '../model/ios';
 })
 export class IosService {
 
-  apiUrl = "http://localhost:3000/ios"
+  apiUrl = "http://localhost:62405/api/desenvolvedores/ios"
 
   constructor(private iosService : HttpClient) { }
 

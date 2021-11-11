@@ -24,6 +24,7 @@ export class AmbientesComponent implements OnInit {
     this.erros = [];
     this.ambiente.GetAmbientesBackEnd().subscribe(resultado => {
       this.dataSource.data = resultado;
+      console.log(resultado);
     },erro => {
       if(erro.status === '400'){
        for(const campos in erro.error.errors){
@@ -51,13 +52,15 @@ export class AmbientesComponent implements OnInit {
         ambiente:ambiente
       }
     }).afterClosed().subscribe(resultado => {
-      if(resultado === true){
-        this.ambiente.GetAmbientesBackEnd().subscribe((dados) => {
+      if(resultado === true)
+      {
+        this.ambiente.GetAmbientesBackEnd().subscribe((dados) =>
+        {
           this.dataSource.data = dados;
+          this.displayedColumns = this.ExibirColunas();
         });
       }
     });
-    this.displayedColumns = this.ExibirColunas();
   }
 }
 
@@ -76,12 +79,8 @@ export class DialogLiberarAmbientComponent {
     LiberarAmbiente(ambienteId:any,ambiente:any):void{
     console.log(ambienteId,ambiente);
     this.ambienteLiberado = new Ambiente();
-    this.ambienteLiberado.id = ambienteId.toString();
     this.ambienteLiberado.ambiente = ambiente.toString();
     this.ambienteLiberado.descricao = 'Ambiente Disponível';
-    this.ambienteLiberado.api = "";
-    this.ambienteLiberado.ios = "";
-    this.ambienteLiberado.android = "";
 
     this.service.PutAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{
       this.snackBar.open("Ambiente liberado com sucesso","Ambiente",{

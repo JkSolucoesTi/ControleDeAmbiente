@@ -35,9 +35,9 @@ export class AlterarambientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
     this.erros =[];
-    
+
     this.apiService.ObterTodos().subscribe(resultado =>{
       this.api = resultado;
     })
@@ -54,12 +54,12 @@ export class AlterarambientesComponent implements OnInit {
 
       this.formulario = new FormGroup({
         id : new FormControl(variavel.id,[Validators.required]),
-        ambiente : new FormControl(variavel.ambiente,[Validators.required]),
+        ambiente : new FormControl(variavel.nome,[Validators.required]),
         chamado : new FormControl(variavel.chamado,[Validators.required]),
         descricao : new FormControl(variavel.descricao,[Validators.required]),
-        api : new FormControl(variavel.api,[Validators.required]),
-        ios : new FormControl(variavel.ios,[Validators.required]),
-        android : new FormControl(variavel.android,[Validators.required])
+        api : new FormControl(variavel.api.nome,[Validators.required]),
+        ios : new FormControl(variavel.ios.nome,[Validators.required]),
+        android : new FormControl(variavel.android.nome,[Validators.required])
       });
     });
 

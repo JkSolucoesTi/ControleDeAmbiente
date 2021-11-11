@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -52,7 +52,8 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [
     ConfiguracoesService

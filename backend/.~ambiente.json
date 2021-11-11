@@ -82,13 +82,9 @@
       "android": ""
     },
     {
-      "id": "11",
       "ambiente": "Dev11",
-      "chamado": "hjklçlçlçlçlçlçlçlçlçlçlçlç",
-      "descricao": "Ambiente disponível",
-      "api": "Marcelo",
-      "ios": "Ios1",
-      "android": "Adauto"
+      "descricao": "Ambiente Disponível",
+      "id": "11"
     }
   ],
   "android": [

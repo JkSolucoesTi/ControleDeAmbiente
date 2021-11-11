@@ -6,11 +6,11 @@ import { Ambiente } from '../model/ambiente';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ConfiguracoesService {
 
   uri:string = "http://localhost:3000/Ambiente/";
-  uriP:string = "http://localhost:3000/ambiente";
-
+  api:string = "http://localhost:62405/api/ambientes"
   constructor(private http : HttpClient) { }
 
   GetAmbientes(path:string):Observable<Ambiente[]> {
@@ -19,11 +19,11 @@ export class ConfiguracoesService {
 
   GetAmbientesBackEnd(): Observable<Ambiente[]>
   {
-    return this.http.get<Ambiente[]>(this.uri);
+    return this.http.get<Ambiente[]>(this.api);
   }
 /*GET/posts/1 */
   GetAmbientesBackEndById(idAmbiente:string):Observable<any>{
-    const rota = `${this.uri}${idAmbiente}`
+    const rota = `${this.api}/PegarPorId/${idAmbiente}`
     return this.http.get<Ambiente>(rota);
   }
 

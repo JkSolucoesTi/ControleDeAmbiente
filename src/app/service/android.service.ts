@@ -8,12 +8,12 @@ import { Android } from '../model/android';
 })
 export class AndroidService {
 
-  apiUrl = "http://localhost:3000/android";
+  apiUrl = "http://localhost:62405/api/desenvolvedores/android";
 
   constructor(private androidService : HttpClient) { }
 
   ObterTodos():Observable<Android[]>{
-    return this.androidService.get<Android[]>(this.apiUrl);    
+    return this.androidService.get<Android[]>(this.apiUrl);
   }
 
 }
