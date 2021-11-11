@@ -1,9 +1,13 @@
+import { Android } from "./android";
+import { Api } from "./api";
+import { Ios } from "./ios";
+
 export class Ambiente{
   id!:string;
-  ambiente!:string;
+  nome!:string;
   chamado!:string;
   descricao!:string;
-  api!:string;
-  ios!:string;
-  android!:string;
+  api!:Api;
+  ios!:Ios;
+  android!:Android;
 }

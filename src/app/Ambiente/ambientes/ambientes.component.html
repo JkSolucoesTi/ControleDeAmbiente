@@ -17,7 +17,7 @@
 
   <ng-container matColumnDef="ambiente">
     <th mat-header-cell *matHeaderCellDef>Ambiente</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.ambiente}} </td>
+    <td mat-cell *matCellDef="let dataSource"> {{dataSource.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="chamado">
@@ -32,17 +32,17 @@
 
   <ng-container matColumnDef="api">
     <th mat-header-cell *matHeaderCellDef>API</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.api}} </td>
+    <td mat-cell *matCellDef="let dataSource"> {{dataSource.api.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="ios">
     <th mat-header-cell *matHeaderCellDef>IOS</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.ios}} </td>
+    <td mat-cell *matCellDef="let dataSource"> {{dataSource.ios.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="android">
     <th mat-header-cell *matHeaderCellDef>Android</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.android}} </td>
+    <td mat-cell *matCellDef="let dataSource"> {{dataSource.android.nome}} </td>
   </ng-container>
 
    <ng-container matColumnDef="acoes">
@@ -54,7 +54,7 @@
       [routerLink]="['/ambientes/alterar/',dataSource.id]">
       <mat-icon>edit</mat-icon>
     </button>
-    <button
+    <button *ngIf="dataSource.chamado"
     mat-mini-fab
     color="accent"
     (click)="AbrirDialog(dataSource.id,dataSource.ambiente)">
