@@ -79,11 +79,11 @@ export class DialogLiberarAmbientComponent {
     LiberarAmbiente(ambienteId:any,ambiente:any):void{
     console.log(ambienteId,ambiente);
     this.ambienteLiberado = new Ambiente();
-    this.ambienteLiberado.ambiente = ambiente.toString();
-    this.ambienteLiberado.descricao = 'Ambiente Disponível';
+    this.ambienteLiberado.id = ambienteId;
+    this.ambienteLiberado.ambiente = ambiente;
 
-    this.service.PutAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{
-      this.snackBar.open("Ambiente liberado com sucesso","Ambiente",{
+    this.service.PutLioberarAmbienteBackEnd(this.ambienteLiberado,ambienteId).subscribe(resultado =>{
+      this.snackBar.open(resultado.mensagem,"Ambiente",{
         duration:2000,
         horizontalPosition:'center',
         verticalPosition:'bottom'

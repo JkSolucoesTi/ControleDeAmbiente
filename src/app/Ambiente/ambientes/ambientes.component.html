@@ -1,19 +1,26 @@
 <div *ngIf="erros.length > 0">
-  <div class="divErros">
+  <div class="divErros" style="margin-top: 10px;">
     <h4 *ngFor="let erro of erros">
-      <mat-icon>error</mat-icon> {{erro}} <mat-icon>error</mat-icon>
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      {{erro}}
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
     </h4>
   </div>
 </div>
 
 <div class="col-6" *ngIf="erros.length == 0">
-  <button mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >
+  <button *ngIf="dataSource.data.length && erros.length == 0" mat-button color="primary" [routerLink]="['/ambientes/adicionar/']" >
     Adicionar Ambiente
   <mat-icon>fiber_new</mat-icon>
   </button>
 </div>
 <mat-divider></mat-divider>
-<table mat-table  class="mat-elevation-z8" [dataSource]="dataSource" class="table">
+
+<div style="align-items: center;">
+<mat-progress-spinner *ngIf="!dataSource.data.length && erros.length == 0" mode="indeterminate" style="margin: 0 auto;">
+</mat-progress-spinner>
+</div>
+<table mat-table  class="mat-elevation-z8" [dataSource]="dataSource" class="table" *ngIf="dataSource" >
 
   <ng-container matColumnDef="ambiente">
     <th mat-header-cell *matHeaderCellDef>Ambiente</th>
@@ -57,7 +64,7 @@
     <button *ngIf="dataSource.chamado"
     mat-mini-fab
     color="accent"
-    (click)="AbrirDialog(dataSource.id,dataSource.ambiente)">
+    (click)="AbrirDialog(dataSource.id,dataSource.nome)">
     <mat-icon>new_releases</mat-icon>
   </button>
     </td>

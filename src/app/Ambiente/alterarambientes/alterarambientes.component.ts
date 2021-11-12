@@ -46,20 +46,21 @@ export class AlterarambientesComponent implements OnInit {
     })
     this.androidService.ObterTodos().subscribe(resultado =>{
       this.android = resultado;
+      console.log(this.android);
     })
 
     this.rota = this.route.snapshot.params.id;
     this.service.GetAmbientesBackEndById(this.rota).subscribe( resultado =>{
       const variavel : Ambiente = resultado;
-
+      console.log(variavel.android.nome);
       this.formulario = new FormGroup({
         id : new FormControl(variavel.id,[Validators.required]),
-        ambiente : new FormControl(variavel.nome,[Validators.required]),
+        nome : new FormControl(variavel.nome,[Validators.required]),
         chamado : new FormControl(variavel.chamado,[Validators.required]),
         descricao : new FormControl(variavel.descricao,[Validators.required]),
-        api : new FormControl(variavel.api.nome,[Validators.required]),
-        ios : new FormControl(variavel.ios.nome,[Validators.required]),
-        android : new FormControl(variavel.android.nome,[Validators.required])
+        apiId : new FormControl(variavel.api.id,[Validators.required]),
+        iosId : new FormControl(variavel.ios.id,[Validators.required]),
+        androidId : new FormControl(variavel.android.id,[Validators.required])
       });
     });
 

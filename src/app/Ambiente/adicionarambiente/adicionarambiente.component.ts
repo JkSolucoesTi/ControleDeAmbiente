@@ -44,12 +44,12 @@ export class AdicionarambienteComponent implements OnInit {
     });
 
     this.formulario = new FormGroup({
-      ambiente : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      nome : new FormControl('',[Validators.required,Validators.minLength(1)]),
       chamado : new FormControl('',[Validators.required,Validators.minLength(1)]),
       descricao : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      api : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      ios : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      android : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
     })
   }
 
@@ -60,8 +60,9 @@ get propriedade(){
 Adicionar(){
   this.erros=[];
   this.novoAmbiente = this.formulario.value;
+  console.log(this.novoAmbiente);
   this.http.PostAmbienteBackEnd(this.novoAmbiente).subscribe(resultado =>{
-    this.snackBar.open("Ambiente inserido com sucesso" ,"Atualização", {
+    this.snackBar.open(resultado.mensagem ,"Novo Ambiente", {
       duration:2000,
       horizontalPosition:'center',
       verticalPosition:'bottom'
