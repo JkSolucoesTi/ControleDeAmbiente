@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ambiente } from '../model/ambiente';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +34,17 @@ export class ConfiguracoesService {
   }
 
   PostAmbienteBackEnd(ambiente:Ambiente):Observable<any>{
-    return this.http.post<Ambiente>(this.uri,ambiente);
+    return this.http.post<Ambiente>(this.api,ambiente,httpOptions);
   }
 
   PutAmbienteBackEnd(ambiente:Ambiente,idAmbiente:string):Observable<any>{
-    const rota = `${this.uri}/${idAmbiente}`;
-    return this.http.put<Ambiente>(rota,ambiente);
+    const rota = `${this.api}/${idAmbiente}`;
+    return this.http.put<Ambiente>(rota,ambiente,httpOptions);
+  }
+
+  PutLioberarAmbienteBackEnd(ambiente:Ambiente,idAmbiente:string):Observable<any>{
+    const rota = `${this.api}/LiberarAmbiente/${idAmbiente}`;
+    return this.http.put<Ambiente>(rota,ambiente,httpOptions);
   }
 
 }

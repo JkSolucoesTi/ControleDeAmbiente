@@ -1,14 +1,18 @@
 <div class="mat-card-cvr">
+  <div style="align-items: center;">
+    <mat-progress-spinner *ngIf="!formulario" mode="indeterminate" style="margin: 0 auto;">
+    </mat-progress-spinner>
+    </div>
 <mat-card>
 <div>
   <mat-card-subtitle>Alterar ambiente Mobile</mat-card-subtitle>
 </div>
 <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AlterarAmbiente()">
       <div>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" aria-readonly="true">
           <mat-label>Nome do Ambiente</mat-label>
-          <input type="text" matInput placeholder="Ambiente" formControlName="ambiente">
-          <mat-error *ngIf="propriedade.ambiente.touched && propriedade.ambiente.invalid" >
+          <input type="text" matInput placeholder="Ambiente" formControlName="nome">
+          <mat-error *ngIf="propriedade.nome.touched && propriedade.nome.invalid" >
              <sup>*</sup> Preencher o nome do ambiente
           </mat-error>
         </mat-form-field>
@@ -34,10 +38,10 @@
       <div>
         <mat-form-field appearance="fill" >
           <mat-label>Selecione o responsável pela API</mat-label>
-          <mat-select formControlName="api">
-            <mat-option *ngFor="let responsavel of api" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          <mat-select formControlName="apiId">
+            <mat-option *ngFor="let responsavel of api" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
           </mat-select>
-          <mat-error *ngIf="propriedade.api.touched && propriedade.api.invalid" >
+          <mat-error *ngIf="propriedade.apiId.touched && propriedade.apiId.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento da API
          </mat-error>
         </mat-form-field>
@@ -45,10 +49,12 @@
       <div>
         <mat-form-field appearance="fill" >
           <mat-label>Selecione o responsável pelo IOS</mat-label>
-          <mat-select formControlName="ios">
-            <mat-option *ngFor="let responsavel of ios" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          <mat-select formControlName="iosId">
+            <mat-option *ngFor="let responsavel of ios" [value]="responsavel.id">
+              {{responsavel.nome}}
+            </mat-option>
           </mat-select>
-          <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
+          <mat-error *ngIf="propriedade.iosId.touched && propriedade.iosId.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
@@ -56,10 +62,10 @@
       <div>
         <mat-form-field appearance="fill" >
           <mat-label>Selecione o responsável pelo Android</mat-label>
-          <mat-select formControlName="android">
-            <mat-option *ngFor="let responsavel of android" [value]="responsavel.nome">{{responsavel.nome}}</mat-option>
+          <mat-select formControlName="androidId">
+            <mat-option *ngFor="let responsavel of android" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
           </mat-select>
-          <mat-error *ngIf="propriedade.ios.touched && propriedade.ios.invalid" >
+          <mat-error *ngIf="propriedade.androidId.touched && propriedade.androidId.invalid" >
             <sup>*</sup> Preencher o responsável pelo desenvolvimento do IOS
          </mat-error>
         </mat-form-field>
