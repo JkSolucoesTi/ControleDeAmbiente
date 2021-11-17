@@ -24,34 +24,58 @@
 
   <ng-container matColumnDef="ambiente">
     <th mat-header-cell *matHeaderCellDef>Ambiente</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.nome}} </td>
+    <td mat-cell 
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' "    
+    *matCellDef="let dataSource"> {{dataSource.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="chamado">
     <th mat-header-cell *matHeaderCellDef>Chamado</th>
-    <td mat-cell *matCellDef="let dataSource">{{dataSource.chamado}}</td>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    >{{dataSource.chamado}}</td>
   </ng-container>
 
   <ng-container matColumnDef="descricao">
     <th mat-header-cell *matHeaderCellDef>Descrição</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.descricao}} </td>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    > {{dataSource.descricao}} </td>
   </ng-container>
 
   <ng-container matColumnDef="api">
     <th mat-header-cell *matHeaderCellDef>API</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.api.nome}} </td>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    > {{dataSource.api.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="ios">
     <th mat-header-cell *matHeaderCellDef>IOS</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.ios.nome}} </td>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    > {{dataSource.ios.nome}} </td>
   </ng-container>
 
   <ng-container matColumnDef="android">
     <th mat-header-cell *matHeaderCellDef>Android</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.android.nome}} </td>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    > {{dataSource.android.nome}} </td>
   </ng-container>
-
+  <ng-container matColumnDef="business">
+    <th mat-header-cell *matHeaderCellDef>Business</th>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' " 
+    > {{dataSource.negocio.nome}} </td>
+  </ng-container>
    <ng-container matColumnDef="acoes">
      <th mat-header-cell *matHeaderCellDef>Ações</th>
      <td mat-cell *matCellDef="let dataSource">

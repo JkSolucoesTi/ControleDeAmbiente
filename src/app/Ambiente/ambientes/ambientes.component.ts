@@ -4,6 +4,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ambientes',
@@ -17,7 +19,8 @@ export class AmbientesComponent implements OnInit {
   erros!:string [];
 
   constructor(private ambiente: ConfiguracoesService,
-              private dialog: MatDialog)
+              private dialog: MatDialog,
+              private router : Router)
               { }
 
   ngOnInit(): void {
@@ -42,7 +45,7 @@ export class AmbientesComponent implements OnInit {
   }
 
   ExibirColunas() :string[] {
-    return  ['ambiente', 'chamado', 'descricao', 'api' , "ios" ,"android","acoes"];
+    return  ['ambiente', 'chamado', 'descricao', 'api' , "ios" ,"android","business","acoes"];
   }
 
   AbrirDialog(ambienteId:any,ambiente:any){
@@ -58,6 +61,7 @@ export class AmbientesComponent implements OnInit {
         {
           this.dataSource.data = dados;
           this.displayedColumns = this.ExibirColunas();
+          this.router.navigate(['/ambientes']);
         });
       }
     });

@@ -10,6 +10,8 @@ import { Android } from 'src/app/model/android';
 import { ConfiguracoesService } from 'src/app/service/configuracoes.service';
 import { Api } from 'src/app/model/api';
 import { Ios } from 'src/app/model/ios';
+import { Negocio } from 'src/app/model/negocio';
+import { NegocioService } from 'src/app/service/negocio.service';
 
 @Component({
   selector: 'app-adicionarambiente',
@@ -24,11 +26,13 @@ export class AdicionarambienteComponent implements OnInit {
   android!:Android[];
   api!:Api[];
   ios!:Ios[];
+  negocio!:Negocio[];
 
   constructor(private http : ConfiguracoesService,
               private androidService : AndroidService,
               private iosService: IosService,
               private apiService: ApiService,
+              private negocioService : NegocioService,
               private snackBar: MatSnackBar,
               private router : Router) { }
 
@@ -42,6 +46,9 @@ export class AdicionarambienteComponent implements OnInit {
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
     });
+    this.negocioService.ObterTodos().subscribe(dados =>{
+      this.negocio = dados;
+    });
 
     this.formulario = new FormGroup({
       nome : new FormControl('',[Validators.required,Validators.minLength(1)]),
@@ -50,6 +57,7 @@ export class AdicionarambienteComponent implements OnInit {
       apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      negocioId : new FormControl('',[Validators.required, Validators.minLength(1)])
     })
   }
 

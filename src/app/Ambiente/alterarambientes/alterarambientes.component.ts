@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Api } from 'src/app/model/api';
 import { Ios } from 'src/app/model/ios';
 import { Android } from 'src/app/model/android';
+import { NegocioService } from 'src/app/service/negocio.service';
+import { Negocio } from 'src/app/model/negocio';
 
 @Component({
   selector: 'app-alterarambientes',
@@ -24,6 +26,7 @@ export class AlterarambientesComponent implements OnInit {
   api!:Api[];
   ios!:Ios[];
   android!:Android[];
+  negocio!:Negocio[];
 
   constructor(private router : Router,
               private route : ActivatedRoute ,
@@ -31,6 +34,7 @@ export class AlterarambientesComponent implements OnInit {
               private androidService : AndroidService,
               private iosService:IosService,
               private apiService:ApiService,
+              private negocioService:NegocioService,
               private snackBar: MatSnackBar) {
   }
 
@@ -40,14 +44,18 @@ export class AlterarambientesComponent implements OnInit {
 
     this.apiService.ObterTodos().subscribe(resultado =>{
       this.api = resultado;
-    })
+    });
     this.iosService.ObterTodos().subscribe(resultado =>{
       this.ios = resultado;
-    })
+    });
     this.androidService.ObterTodos().subscribe(resultado =>{
       this.android = resultado;
       console.log(this.android);
+    });
+    this.negocioService.ObterTodos().subscribe(resultado =>{
+      this.negocio = resultado;     
     })
+
 
     this.rota = this.route.snapshot.params.id;
     this.service.GetAmbientesBackEndById(this.rota).subscribe( resultado =>{
@@ -60,7 +68,8 @@ export class AlterarambientesComponent implements OnInit {
         descricao : new FormControl(variavel.descricao,[Validators.required]),
         apiId : new FormControl(variavel.api.id,[Validators.required]),
         iosId : new FormControl(variavel.ios.id,[Validators.required]),
-        androidId : new FormControl(variavel.android.id,[Validators.required])
+        androidId : new FormControl(variavel.android.id,[Validators.required]),
+        negocioId : new FormControl(variavel.negocio.id,[Validators.required])
       });
     });
 
