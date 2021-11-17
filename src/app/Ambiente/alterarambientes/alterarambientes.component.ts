@@ -2,7 +2,7 @@ import { ApiService } from './../../service/api.service';
 import { IosService } from './../../service/ios.service';
 import { AndroidService } from './../../service/android.service';
 import { Ambiente } from '../../model/ambiente';
-import { ConfiguracoesService } from '../../service/configuracoes.service';
+import { AmbienteService } from '../../service/ambientes.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup , FormControl, Validators } from '@angular/forms';
@@ -30,7 +30,7 @@ export class AlterarambientesComponent implements OnInit {
 
   constructor(private router : Router,
               private route : ActivatedRoute ,
-              private service : ConfiguracoesService,
+              private service : AmbienteService,
               private androidService : AndroidService,
               private iosService:IosService,
               private apiService:ApiService,

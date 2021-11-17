@@ -1,4 +1,4 @@
-import { ConfiguracoesService } from './service/configuracoes.service';
+import { AmbienteService } from './service/ambientes.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -56,7 +56,7 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
     MatToolbarModule
   ],
   providers: [
-    ConfiguracoesService
+    AmbienteService
   ],
   bootstrap: [AppComponent]
 })

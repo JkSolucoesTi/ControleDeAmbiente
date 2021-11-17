@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Android } from 'src/app/model/android';
-import { ConfiguracoesService } from 'src/app/service/configuracoes.service';
+import { AmbienteService } from 'src/app/service/ambientes.service';
 import { Api } from 'src/app/model/api';
 import { Ios } from 'src/app/model/ios';
 import { Negocio } from 'src/app/model/negocio';
@@ -28,7 +28,7 @@ export class AdicionarambienteComponent implements OnInit {
   ios!:Ios[];
   negocio!:Negocio[];
 
-  constructor(private http : ConfiguracoesService,
+  constructor(private http : AmbienteService,
               private androidService : AndroidService,
               private iosService: IosService,
               private apiService: ApiService,

@@ -1,5 +1,5 @@
 import { Ambiente } from '../../model/ambiente';
-import { ConfiguracoesService } from '../../service/configuracoes.service';
+import { AmbienteService } from '../../service/ambientes.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +18,7 @@ export class AmbientesComponent implements OnInit {
   displayedColumns : string[] =[];
   erros!:string [];
 
-  constructor(private ambiente: ConfiguracoesService,
+  constructor(private ambiente: AmbienteService,
               private dialog: MatDialog,
               private router : Router)
               { }
@@ -74,7 +74,7 @@ export class AmbientesComponent implements OnInit {
 })
 export class DialogLiberarAmbientComponent {
   constructor( @Inject (MAT_DIALOG_DATA) public data: any ,
-              private service : ConfiguracoesService,
+              private service : AmbienteService,
               private snackBar : MatSnackBar) {}
 
     ambienteLiberado!:any;
