@@ -19,7 +19,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class AmbientesDetalheComponent {
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-  columnsToDisplay2 =['name', 'weight', 'symbol', 'position','description']
+  columnsToDisplay2 =['name', 'weight', 'symbol', 'position']
   expandedElement!: PeriodicElement | null;
 }
 
@@ -37,8 +37,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     name: 'Hydrogen',
     weight: 1.0079,
     symbol: 'H',
-    description: `Hydrogen is a chemical element with symbol H and atomic number 1. With a standard
-        atomic weight of 1.008, hydrogen is the lightest element on the periodic table.`,
+    description: `H periodic table.`,
   },
   {
     position: 2,
