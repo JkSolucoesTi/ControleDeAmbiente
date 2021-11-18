@@ -25,6 +25,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
+import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambientes-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
     AmbientesComponent,
     AlterarambientesComponent,
     AdicionarambienteComponent,
-    DialogLiberarAmbientComponent
+    DialogLiberarAmbientComponent,
+    AmbientesDetalheComponent
   ],
   imports: [
     BrowserModule,
