@@ -45,7 +45,7 @@ export class AmbientesComponent implements OnInit {
   }
 
   ExibirColunas() :string[] {
-    return  ['ambiente', 'chamado', 'descricao', 'api' , "ios" ,"android","business","acoes"];
+    return  ['ambiente', 'chamado', 'descricao', 'web' , "ios" ,"android","business","acoes"];
   }
 
   AbrirDialog(ambienteId:any,ambiente:any){

@@ -15,4 +15,10 @@ export class IosService {
   ObterTodos():Observable<Ios[]>{
     return this.iosService.get<Ios[]>(this.apiUrl);
   }
+
+  ObterPorId(id:number):Observable<Ios>{
+    const url = `${this.apiUrl}/${id}`
+    return this.iosService.get<Ios>(url);
+  }
+
 }

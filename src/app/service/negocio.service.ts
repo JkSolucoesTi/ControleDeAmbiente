@@ -18,4 +18,9 @@ export class NegocioService {
   ObterTodos():Observable<Negocio[]>{
     return this.negocioService.get<Negocio[]>(this.apiUrl);
   }
+
+  ObterPorId(id:number):Observable<Negocio>{
+    const url = `${this.apiUrl}/${id}`
+    return this.negocioService.get<Negocio>(url);
+  }
 }

@@ -19,6 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTabsModule} from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -26,6 +28,15 @@ import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/am
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
 import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambientes-detalhe.component';
+import {MatListModule} from '@angular/material/list';
+import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
+import { HeaderComponent } from './Dashboard/header/header.component';
+import { ListarDesenvolvedorComponent } from './Desenvolvedor/listar-desenvolvedor/listar-desenvolvedor.component';
+import { AdicionarDesenvolvedorComponent } from './Desenvolvedor/adicionar-desenvolvedor/adicionar-desenvolvedor.component';
+import { EditarDesenvolvedorComponent } from './Desenvolvedor/editar-desenvolvedor/editar-desenvolvedor.component';
+import { ListarBusinessComponent } from './Business/listar-business/listar-business.component';
+import { EditarBusinessComponent } from './Business/editar-business/editar-business.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +45,15 @@ import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambiente
     AlterarambientesComponent,
     AdicionarambienteComponent,
     DialogLiberarAmbientComponent,
-    AmbientesDetalheComponent
+    AmbientesDetalheComponent,
+    HeaderComponent,
+    DashboardComponent,    
+    ListarDesenvolvedorComponent,
+    AdicionarDesenvolvedorComponent,
+    EditarDesenvolvedorComponent,
+    ListarBusinessComponent,
+    EditarBusinessComponent
+
   ],
   imports: [
     BrowserModule,
@@ -55,7 +74,10 @@ import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambiente
     MatProgressSpinnerModule,
     MatSelectModule,
     MatIconModule,
-    MatToolbarModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTabsModule
   ],
   providers: [
     AmbienteService

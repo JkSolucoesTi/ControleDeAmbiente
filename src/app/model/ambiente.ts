@@ -1,5 +1,5 @@
 import { Android } from "./android";
-import { Api } from "./api";
+import { Web } from "./web";
 import { Ios } from "./ios";
 import { Negocio } from "./negocio";
 
@@ -8,7 +8,7 @@ export class Ambiente{
   nome!:string;
   chamado!:string;
   descricao!:string;
-  api!:Api;
+  web!:Web;
   ios!:Ios;
   android!:Android;
   negocio!:Negocio;

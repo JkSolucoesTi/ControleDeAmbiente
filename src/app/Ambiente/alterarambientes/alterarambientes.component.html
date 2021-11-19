@@ -37,12 +37,12 @@
       </div>
       <div>
         <mat-form-field appearance="fill" >
-          <mat-label>Selecione o responsável pela API</mat-label>
-          <mat-select formControlName="apiId">
-            <mat-option *ngFor="let responsavel of api" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
+          <mat-label>Selecione o responsável pela Web</mat-label>
+          <mat-select formControlName="webId">
+            <mat-option *ngFor="let responsavel of web" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
           </mat-select>
-          <mat-error *ngIf="propriedade.apiId.touched && propriedade.apiId.invalid" >
-            <sup>*</sup> Preencher o responsável pelo desenvolvimento da API
+          <mat-error *ngIf="propriedade.webId.touched && propriedade.webId.invalid" >
+            <sup>*</sup> Preencher o responsável pelo desenvolvimento da Web
          </mat-error>
         </mat-form-field>
       </div>

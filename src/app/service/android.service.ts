@@ -16,4 +16,9 @@ export class AndroidService {
     return this.androidService.get<Android[]>(this.apiUrl);
   }
 
+  ObterPorId(id:number):Observable<Android>{
+    const url = `${this.apiUrl}/${id}`
+    return this.androidService.get<Android>(url);
+  }
+
 }
