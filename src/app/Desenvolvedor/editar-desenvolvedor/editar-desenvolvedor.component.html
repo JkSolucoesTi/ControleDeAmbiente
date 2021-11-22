@@ -5,7 +5,7 @@
       <mat-card-title>Editar informações do Desenvolvedor</mat-card-title>
     <mat-card-subtitle>{{dados.nome}}</mat-card-subtitle>
   </div>
-  <form [formGroup]="formulario" *ngIf="formulario" class="formulario">
+  <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AtualizarDesenvolvedor()">
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Nome</mat-label>
@@ -42,12 +42,11 @@
           [routerLink]="['/desenvolvedores']">
           <mat-icon>backspace</mat-icon>
         </button>
-          <button
+          <button [disabled]="!formulario.valid"
           type="submit"
           mat-button
           mat-mini-fab
           color="primary"
-        
           >
           <mat-icon>edit</mat-icon>
         </button>

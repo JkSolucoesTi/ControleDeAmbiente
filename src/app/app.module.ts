@@ -36,6 +36,10 @@ import { AdicionarDesenvolvedorComponent } from './Desenvolvedor/adicionar-desen
 import { EditarDesenvolvedorComponent } from './Desenvolvedor/editar-desenvolvedor/editar-desenvolvedor.component';
 import { ListarBusinessComponent } from './Business/listar-business/listar-business.component';
 import { EditarBusinessComponent } from './Business/editar-business/editar-business.component';
+import { ListarApiComponent } from './Api/listar-api/listar-api.component';
+import { EditarApiComponent } from './Api/editar-api/editar-api.component';
+import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
+import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
 
 
 @NgModule({
@@ -47,12 +51,16 @@ import { EditarBusinessComponent } from './Business/editar-business/editar-busin
     DialogLiberarAmbientComponent,
     AmbientesDetalheComponent,
     HeaderComponent,
-    DashboardComponent,    
+    DashboardComponent,
     ListarDesenvolvedorComponent,
     AdicionarDesenvolvedorComponent,
     EditarDesenvolvedorComponent,
     ListarBusinessComponent,
-    EditarBusinessComponent
+    EditarBusinessComponent,
+    ListarApiComponent,
+    EditarApiComponent,
+    AdicionarBusinessComponent,
+    AdicionarApiComponent
 
   ],
   imports: [

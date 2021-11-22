@@ -1,23 +1,34 @@
-<mat-tab-group color="primary">
-    <mat-tab label="Web" selected>   
 
-    <table mat-table  
-     class="mat-elevation-z8" 
-     [dataSource]="dataSourceWeb" 
+<div style="margin-top: 10px;text-align: center;">
+  <h2>Cadastro de Desenvolvedores</h2>
+</div>
+<mat-divider></mat-divider>
+
+<div style="align-items: center;">
+  <mat-progress-spinner *ngIf="!dataSourceWeb" mode="indeterminate" style="margin: 0 auto;">
+  </mat-progress-spinner>
+  </div>
+
+<mat-tab-group color="primary">
+    <mat-tab label="Web" selected>
+
+    <table mat-table
+     class="mat-elevation-z8"
+     [dataSource]="dataSourceWeb"
      class="table">
 
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell 
+        <td mat-cell
         *matCellDef="let dataSourceWeb"> {{dataSourceWeb.nome}} </td>
       </ng-container>
-    
+
       <ng-container matColumnDef="login">
         <th mat-header-cell *matHeaderCellDef>Login</th>
         <td mat-cell *matCellDef="let dataSourceWeb"
         >{{dataSourceWeb.usuario}}</td>
       </ng-container>
-    
+
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef>Email</th>
         <td mat-cell *matCellDef="let dataSourceWeb"
@@ -34,36 +45,46 @@
           >
           <mat-icon>edit</mat-icon>
         </button>
-        <button 
+        <button
         mat-mini-fab
         color="accent">
         <mat-icon>delete</mat-icon>
       </button>
         </td>
       </ng-container>
-     
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;">    
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
       </tr>
-    </table>                   
+    </table>
+    <mat-divider></mat-divider>
+    <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+      <button mat-mini-fab
+      color="primary"
+      [routerLink]="['/desenvolvedores/adicionar','web']"
+      >
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+    <mat-divider></mat-divider>
     </mat-tab>
 
-    <mat-tab label="Ios">        
+    <mat-tab label="Ios">
 
       <table mat-table  class="mat-elevation-z8" [dataSource]="dataSourceIos" class="table">
 
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
-          <td mat-cell 
+          <td mat-cell
           *matCellDef="let dataSourceIos"> {{dataSourceIos.nome}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="login">
           <th mat-header-cell *matHeaderCellDef>Login</th>
           <td mat-cell *matCellDef="let dataSourceIos"
           >{{dataSourceIos.usuario}}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let dataSourceIos"
@@ -80,37 +101,47 @@
             >
             <mat-icon>edit</mat-icon>
           </button>
-          <button 
+          <button
           mat-mini-fab
           color="accent">
           <mat-icon>delete</mat-icon>
         </button>
           </td>
 
-  
+
         </ng-container>
-       
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>           
+      </table>
+
+      <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+        <button mat-mini-fab
+         [routerLink]="['/desenvolvedores/adicionar','ios']"
+        color="primary">
+        <mat-icon>add</mat-icon>
+      </button>
+      </div>
+      <mat-divider></mat-divider>
+
     </mat-tab>
 
-    <mat-tab label="Android">        
-      
+    <mat-tab label="Android">
+
       <table mat-table  class="mat-elevation-z8" [dataSource]="dataSourceAndroid" class="table">
 
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef>Nome</th>
-          <td mat-cell 
+          <td mat-cell
           *matCellDef="let dataSourceAndroid"> {{dataSourceAndroid.nome}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="login">
           <th mat-header-cell *matHeaderCellDef>Login</th>
           <td mat-cell *matCellDef="let dataSourceAndroid"
           >{{dataSourceAndroid.usuario}}</td>
         </ng-container>
-      
+
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let dataSourceAndroid"
@@ -127,18 +158,27 @@
             >
             <mat-icon>edit</mat-icon>
           </button>
-          <button 
+          <button
           mat-mini-fab
           color="accent">
           <mat-icon>delete</mat-icon>
         </button>
           </td>
-  
+
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>    
-          
+      </table>
+
+      <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+        <button mat-mini-fab
+        color="primary"
+        [routerLink]="['/desenvolvedores/adicionar','android']"
+        >
+        <mat-icon>add</mat-icon>
+      </button>
+      </div>
+      <mat-divider></mat-divider>
     </mat-tab>
   </mat-tab-group>

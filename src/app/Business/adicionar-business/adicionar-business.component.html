@@ -1,26 +1,25 @@
+
 <div class="mat-card-cvr">
-    <div>
-<mat-card>
-    <div>
-      <mat-card-title>Editar informações do Analista</mat-card-title>
-    <mat-card-subtitle>{{negocio.nome}}</mat-card-subtitle>
+  <mat-card>
+  <div class="titulo">
+    <mat-card-subtitle>Novo Analista de Negocios </mat-card-subtitle>
   </div>
-  <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AtualizarBusiness()">
+      <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AdicionarBusiness()">
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Nome</mat-label>
             <input type="text" matInput placeholder="Nome" formControlName="nome">
             <mat-error *ngIf="propriedade.nome.touched && propriedade.nome.invalid" >
-               <sup>*</sup> Preencher o nome do Desenvolvedor
+               <sup>*</sup> Preencher o nome do Analista
             </mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Email" formControlName="email">
+            <input type="email" matInput placeholder="Emai." formControlName="email">
             <mat-error *ngIf="propriedade.email.touched && propriedade.email.invalid">
-              <sup>*</sup> Preencher com seu Email
+              <sup>*</sup> Preencher com o Email do Analista
            </mat-error>
           </mat-form-field>
         </div>
@@ -30,21 +29,20 @@
           mat-button
           mat-mini-fab
           color="accent"
-          [routerLink]="['/business']">
-          <mat-icon>backspace</mat-icon>
-        </button>
+          [routerLink]="['/business']"
+           >
+           <mat-icon>backspace</mat-icon>
+          </button>
           <button
           type="submit"
           mat-button
           mat-mini-fab
           color="primary"
-          [disabled]="formulario.invalid"
-
-          >
-          <mat-icon>edit</mat-icon>
+          [disabled]="formulario.invalid">
+          <mat-icon>add</mat-icon>
         </button>
         </mat-card-actions>
+        <mat-divider></mat-divider>
       </form>
     </mat-card>
-    </div>
-</div>
+  </div>

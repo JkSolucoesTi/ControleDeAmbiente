@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Android } from 'src/app/model/android';
 import { Ios } from 'src/app/model/ios';
 import { Web } from 'src/app/model/web';
@@ -17,56 +18,134 @@ export class EditarDesenvolvedorComponent implements OnInit {
 
   dados!:any;
   formulario:any;
-
+  tipoDev :string = "";
+  parametro !: number;
+  erros!:string[];
 
   constructor(private rota:ActivatedRoute,
+              private router : Router,
               private androidService:AndroidService,
               private iosService:IosService,
-              private webService:WebService) { }
+              private webService:WebService,
+              private snackBar : MatSnackBar) { }
 
-  ngOnInit(): void {   
-   
-    const id = this.rota.snapshot.params.id;
-    const dev = this.rota.snapshot.params.dev;
-    if(dev ==="ios"){
-      this.iosService.ObterPorId(id).subscribe(resultado =>{
+  ngOnInit(): void {
+
+    this.parametro = this.rota.snapshot.params.id;
+    this.tipoDev = this.rota.snapshot.params.dev;
+    if(this.tipoDev ==="ios"){
+      this.iosService.ObterPorId(this.parametro).subscribe(resultado =>{
         this.dados as Ios;
         this.dados = resultado;
-        
+
         this.formulario = new FormGroup({
-          nome : new FormControl(this.dados.nome),
-          usuario : new FormControl(this.dados.usuario),
-          email : new FormControl(this.dados.email)
-        })        
+          id : new FormControl(this.dados.id),
+          nome : new FormControl(this.dados.nome,Validators.required),
+          usuario : new FormControl(this.dados.usuario,Validators.required),
+          email : new FormControl(this.dados.email,[Validators.required,Validators.email])
+        })
       })
     }
-    if(dev ==="web"){
-      this.webService.ObterPorId(id).subscribe(resultado =>{
+    if(this.tipoDev ==="web"){
+      this.webService.ObterPorId(this.parametro).subscribe(resultado =>{
         this.dados as Web;
         this.dados = resultado;
         console.log(resultado);
           this.formulario = new FormGroup({
-            nome : new FormControl(this.dados.nome),
-            usuario : new FormControl(this.dados.usuario),
-            email : new FormControl(this.dados.email)
-        })    
+            id : new FormControl(this.dados.id),
+            nome : new FormControl(this.dados.nome,Validators.required),
+            usuario : new FormControl(this.dados.usuario,Validators.required),
+            email : new FormControl(this.dados.email,[Validators.required,Validators.email])
+        })
       })
     }
-    if(dev ==="android"){
-      this.androidService.ObterPorId(id).subscribe(resultado =>{
+    if(this.tipoDev ==="android"){
+      this.androidService.ObterPorId(this.parametro).subscribe(resultado =>{
        this.dados as Android;
        this.dados = resultado;
        this.formulario = new FormGroup({
-        nome : new FormControl(this.dados.nome),
-        usuario : new FormControl(this.dados.usuario),
-        email : new FormControl(this.dados.email)
-      })    
+        id : new FormControl(this.dados.id),
+        nome : new FormControl(this.dados.nome,Validators.required),
+        usuario : new FormControl(this.dados.usuario,Validators.required),
+        email : new FormControl(this.dados.email,[Validators.required,Validators.email])
       })
-    }       
+      })
+    }
   }
 
 get propriedade(){
     return this.formulario.controls;
+  }
+
+  AtualizarDesenvolvedor(){
+    this.erros = [];
+    const parametros = this.formulario.value;
+    if(this.tipoDev == "web")
+    {
+      this.webService.Atualizar(parametros,this.parametro).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Sucesso" , {
+            duration : 1000,
+            verticalPosition:'bottom',
+            horizontalPosition:'center'
+          })
+          this.router.navigate(['desenvolvedores']);
+      },erro => {
+        if(erro.status === '400'){
+         for(const campos in erro.error.errors){
+           if(erro.error.errors.hasOwnProperty(campos)){
+             this.erros.push(erro.error.errors[campos])
+           }
+         }
+        }
+        else{
+          this.erros.push(erro.error)
+        }
+      })
+    }
+    if(this.tipoDev == "ios")
+    {
+      this.iosService.Atualizar(parametros,this.parametro).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Sucesso" , {
+            duration : 1000,
+            verticalPosition:'bottom',
+            horizontalPosition:'center'
+          });
+          this.router.navigate(['desenvolvedores']);
+      },erro => {
+        if(erro.status === '400'){
+         for(const campos in erro.error.errors){
+           if(erro.error.errors.hasOwnProperty(campos)){
+             this.erros.push(erro.error.errors[campos])
+           }
+         }
+        }
+        else{
+          this.erros.push(erro.error)
+        }
+      })
+    }
+    if(this.tipoDev == "android")
+    {
+      this.androidService.Atualizar(parametros,this.parametro).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Sucesso" , {
+            duration : 1000,
+            verticalPosition:'bottom',
+            horizontalPosition:'center'
+          });
+          this.router.navigate(['desenvolvedores']);
+      },erro => {
+        if(erro.status === '400'){
+         for(const campos in erro.error.errors){
+           if(erro.error.errors.hasOwnProperty(campos)){
+             this.erros.push(erro.error.errors[campos])
+           }
+         }
+        }
+        else{
+          this.erros.push(erro.error)
+        }
+      })
+    }
   }
 
 }
