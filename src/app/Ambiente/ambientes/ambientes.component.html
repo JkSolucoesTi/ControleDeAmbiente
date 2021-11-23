@@ -44,6 +44,14 @@
     > {{dataSource.descricao}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="api">
+    <th mat-header-cell *matHeaderCellDef>API</th>
+    <td mat-cell *matCellDef="let dataSource"
+    [class.ambienteDisponivel]="dataSource.descricao == 'Ambiente Disponível' "
+    [class.ambienteOcupado]="dataSource.descricao != 'Ambiente Disponível' "
+    > {{dataSource.api.nome}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="web">
     <th mat-header-cell *matHeaderCellDef>Web</th>
     <td mat-cell *matCellDef="let dataSource"

@@ -4,7 +4,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -45,7 +44,7 @@ export class AmbientesComponent implements OnInit {
   }
 
   ExibirColunas() :string[] {
-    return  ['ambiente', 'chamado', 'descricao', 'web' , "ios" ,"android","business","acoes"];
+    return  ['ambiente', 'chamado', 'descricao', 'api','web' , "ios" ,"android","business","acoes"];
   }
 
   AbrirDialog(ambienteId:any,ambiente:any){

@@ -1,3 +1,4 @@
+import { ApiService } from './../../service/api.service';
 import { WebService } from '../../service/web.service';
 import { IosService } from './../../service/ios.service';
 import { AndroidService } from './../../service/android.service';
@@ -12,6 +13,7 @@ import { Ios } from 'src/app/model/ios';
 import { Android } from 'src/app/model/android';
 import { NegocioService } from 'src/app/service/negocio.service';
 import { Negocio } from 'src/app/model/negocio';
+import { Api } from 'src/app/model/api';
 
 @Component({
   selector: 'app-alterarambientes',
@@ -23,6 +25,7 @@ export class AlterarambientesComponent implements OnInit {
   rota :string ="";
   formulario:any;
   erros!:string[];
+  api!:Api[];
   web!:Web[];
   ios!:Ios[];
   android!:Android[];
@@ -35,6 +38,7 @@ export class AlterarambientesComponent implements OnInit {
               private iosService:IosService,
               private webService:WebService,
               private negocioService:NegocioService,
+              private apiService:ApiService,
               private snackBar: MatSnackBar) {
   }
 
@@ -52,8 +56,12 @@ export class AlterarambientesComponent implements OnInit {
       this.android = resultado;
     });
     this.negocioService.ObterTodos().subscribe(resultado =>{
-      this.negocio = resultado;     
+      this.negocio = resultado;
+    });
+    this.apiService.ObterTodos().subscribe(resultado =>{
+      this.api = resultado;
     })
+
 
 
     this.rota = this.route.snapshot.params.id;
@@ -68,7 +76,8 @@ export class AlterarambientesComponent implements OnInit {
         webId : new FormControl(variavel.web.id,[Validators.required]),
         iosId : new FormControl(variavel.ios.id,[Validators.required]),
         androidId : new FormControl(variavel.android.id,[Validators.required]),
-        negocioId : new FormControl(variavel.negocio.id,[Validators.required])
+        negocioId : new FormControl(variavel.negocio.id,[Validators.required]),
+        apiId : new FormControl(variavel.api.id,[Validators.required]),
       });
     });
 
