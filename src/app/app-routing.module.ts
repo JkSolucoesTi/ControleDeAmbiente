@@ -1,12 +1,11 @@
+import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
+import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
+import { ListarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarDesenvolvedorComponent } from './Desenvolvedor/adicionar-desenvolvedor/adicionar-desenvolvedor.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
-import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
-import { AmbientesComponent } from './Ambiente/ambientes/ambientes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
-import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambientes-detalhe.component';
 import { ListarDesenvolvedorComponent } from './Desenvolvedor/listar-desenvolvedor/listar-desenvolvedor.component';
 import { ListarBusinessComponent } from './Business/listar-business/listar-business.component';
 import { EditarDesenvolvedorComponent } from './Desenvolvedor/editar-desenvolvedor/editar-desenvolvedor.component';
@@ -21,18 +20,15 @@ const routes: Routes = [
     component:DashboardComponent,
     children:[
       {
-        path:"ambientes",component:AmbientesComponent
-      },
-      {
-        path:"ambientes-detalhes",component:AmbientesDetalheComponent
+        path:"chamados",component:ListarChamadoComponent
       }
       ,
       {
-        path:"ambientes/adicionar",component:AdicionarambienteComponent
+        path:"chamados/adicionar",component:AdicionarChamadoComponent
       }
       ,
       {
-        path:"ambientes/alterar/:id",component:AlterarambientesComponent
+        path:"chamados/alterar/:id",component:EditarChamadoComponent
       }
       ,
       {

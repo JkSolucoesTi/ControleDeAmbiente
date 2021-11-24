@@ -19,9 +19,14 @@ export class AmbienteService {
   api:string = "http://localhost:62405/api/ambientes"
   constructor(private http : HttpClient) { }
 
+  ObterTodos():Observable<Ambiente[]>{
+    return this.http.get<Ambiente[]>(this.api);
+  }
+
   GetAmbientes(path:string):Observable<Ambiente[]> {
     return this.http.get<Ambiente[]>(path);
   }
+
 
   GetAmbientesBackEnd(): Observable<Ambiente[]>
   {

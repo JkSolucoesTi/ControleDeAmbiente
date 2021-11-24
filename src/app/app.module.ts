@@ -27,7 +27,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
-import { AmbientesDetalheComponent } from './Ambiente/ambientes-detalhe/ambientes-detalhe.component';
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './Dashboard/header/header.component';
@@ -40,6 +39,9 @@ import { ListarApiComponent } from './Api/listar-api/listar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
+import { ListarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
+import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
+import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
 
 
 @NgModule({
@@ -49,7 +51,6 @@ import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.compone
     AlterarambientesComponent,
     AdicionarambienteComponent,
     DialogLiberarAmbientComponent,
-    AmbientesDetalheComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,
@@ -60,7 +61,10 @@ import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.compone
     ListarApiComponent,
     EditarApiComponent,
     AdicionarBusinessComponent,
-    AdicionarApiComponent
+    AdicionarApiComponent,
+    ListarChamadoComponent,
+    EditarChamadoComponent,
+    AdicionarChamadoComponent
 
   ],
   imports: [
