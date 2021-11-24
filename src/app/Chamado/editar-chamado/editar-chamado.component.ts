@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar-chamado',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarChamadoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activetad: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const rota1 = this.activetad.snapshot.params.ambienteId;
+    const rota2 = this.activetad.snapshot.params.apiId;
+    console.log(rota1,rota2);
   }
 
 }

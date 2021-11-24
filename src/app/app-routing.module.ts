@@ -28,7 +28,7 @@ const routes: Routes = [
       }
       ,
       {
-        path:"chamados/alterar/:id",component:EditarChamadoComponent
+        path:"chamados/alterar/:ambienteId/:apiId",component:EditarChamadoComponent
       }
       ,
       {

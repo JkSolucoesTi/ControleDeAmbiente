@@ -15,71 +15,575 @@
 </div>
 
 <div style="align-items: center;">
-  <mat-progress-spinner *ngIf="!dataSource.data.length && erros.length == 0" mode="indeterminate" style="margin: 0 auto;">
+  <mat-progress-spinner *ngIf="!dataSource1.data.length && erros.length == 0" mode="indeterminate" style="margin: 0 auto;">
   </mat-progress-spinner>
   </div>
 
-<table mat-table  class="mat-elevation-z8" [dataSource]="dataSource" class="table" *ngIf="dataSource">
+  <mat-tab-group color="primary">
+    <mat-tab label="DEV 01" (click)="AmbienteClicado()">
+      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" class="table" *ngIf="dataSource1">     
+        <ng-container matColumnDef="numero">
+          <th mat-header-cell *matHeaderCellDef>Numero</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.numero}} </td>
+        </ng-container>      
+        <ng-container matColumnDef="api">
+          <th mat-header-cell *matHeaderCellDef>API</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.api.nome}} </td>
+        </ng-container>      
+        <ng-container matColumnDef="web">
+          <th mat-header-cell *matHeaderCellDef>Web</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.web.nome}} </td>
+        </ng-container>      
+        <ng-container matColumnDef="ios">
+          <th mat-header-cell *matHeaderCellDef>IOS</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.ios.nome}} </td>
+        </ng-container>      
+        <ng-container matColumnDef="android">
+          <th mat-header-cell *matHeaderCellDef>Android</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.android.nome}} </td>
+        </ng-container>
+        <ng-container matColumnDef="business">
+          <th mat-header-cell *matHeaderCellDef>Business</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.negocio.nome}} </td>
+        </ng-container>      
+         <ng-container matColumnDef="acoes">
+           <th mat-header-cell *matHeaderCellDef>Ações</th>
+           <td mat-cell *matCellDef="let dataSource1">
+            <button
+            mat-mini-fab
+            color="primary"
+            [routerLink]="['/chamados/alterar/',dataSource1.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button 
+          mat-mini-fab
+          color="accent"
+          >
+          <mat-icon>delete</mat-icon>
+        </button>
+          </td>
+         </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-divider></mat-divider>
+    </mat-tab>
+      <mat-tab label="DEV 02">
+        <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource2" class="table" *ngIf="dataSource2">     
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef>Numero</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.numero}} </td>
+          </ng-container>      
+          <ng-container matColumnDef="api">
+            <th mat-header-cell *matHeaderCellDef>API</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.api.nome}} </td>
+          </ng-container>      
+          <ng-container matColumnDef="web">
+            <th mat-header-cell *matHeaderCellDef>Web</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.web.nome}} </td>
+          </ng-container>      
+          <ng-container matColumnDef="ios">
+            <th mat-header-cell *matHeaderCellDef>IOS</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.ios.nome}} </td>
+          </ng-container>      
+          <ng-container matColumnDef="android">
+            <th mat-header-cell *matHeaderCellDef>Android</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.android.nome}} </td>
+          </ng-container>
+          <ng-container matColumnDef="business">
+            <th mat-header-cell *matHeaderCellDef>Business</th>
+            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.negocio.nome}} </td>
+          </ng-container>      
+           <ng-container matColumnDef="acoes">
+             <th mat-header-cell *matHeaderCellDef>Ações</th>
+             <td mat-cell *matCellDef="let dataSource2">
+              <button
+              mat-mini-fab
+              color="primary"
+              [routerLink]="['/chamados/alterar/',dataSource2.id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button 
+            mat-mini-fab
+            color="accent"
+            >
+            <mat-icon>delete</mat-icon>
+          </button>
+            </td>
+           </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      <mat-divider></mat-divider>
+      </mat-tab>    
+        <mat-tab label="DEV 03">
+          <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource3" class="table" *ngIf="dataSource3">     
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef>Numero</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.numero}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="api">
+              <th mat-header-cell *matHeaderCellDef>API</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.api.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="web">
+              <th mat-header-cell *matHeaderCellDef>Web</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.web.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="ios">
+              <th mat-header-cell *matHeaderCellDef>IOS</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.ios.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="android">
+              <th mat-header-cell *matHeaderCellDef>Android</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.android.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="business">
+              <th mat-header-cell *matHeaderCellDef>Business</th>
+              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.negocio.nome}} </td>
+            </ng-container>      
+             <ng-container matColumnDef="acoes">
+               <th mat-header-cell *matHeaderCellDef>Ações</th>
+               <td mat-cell *matCellDef="let dataSource3">
+                <button
+                mat-mini-fab
+                color="primary"
+                [routerLink]="['/chamados/alterar/',dataSource3.id]">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button 
+              mat-mini-fab
+              color="accent"
+              >
+              <mat-icon>delete</mat-icon>
+            </button>
+              </td>
+             </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        <mat-divider></mat-divider>
+        </mat-tab>
 
-  <ng-container matColumnDef="ambiente">
-    <th mat-header-cell *matHeaderCellDef>Ambiente</th>
-    <td mat-cell *matCellDef="let dataSource">{{dataSource.ambiente.nome}}</td>
-  </ng-container>
+        <mat-tab label="DEV 04">
+          <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource4" class="table" *ngIf="dataSource4">     
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef>Numero</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.numero}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="api">
+              <th mat-header-cell *matHeaderCellDef>API</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.api.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="web">
+              <th mat-header-cell *matHeaderCellDef>Web</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.web.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="ios">
+              <th mat-header-cell *matHeaderCellDef>IOS</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.ios.nome}} </td>
+            </ng-container>      
+            <ng-container matColumnDef="android">
+              <th mat-header-cell *matHeaderCellDef>Android</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.android.nome}} </td>
+            </ng-container>
+            <ng-container matColumnDef="business">
+              <th mat-header-cell *matHeaderCellDef>Business</th>
+              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.negocio.nome}} </td>
+            </ng-container>      
+             <ng-container matColumnDef="acoes">
+               <th mat-header-cell *matHeaderCellDef>Ações</th>
+               <td mat-cell *matCellDef="let dataSource4">
+                <button
+                mat-mini-fab
+                color="primary"
+                [routerLink]="['/chamados/alterar/',dataSource4.id]">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button 
+              mat-mini-fab
+              color="accent"
+              >
+              <mat-icon>delete</mat-icon>
+            </button>
+              </td>
+             </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-divider></mat-divider>
+          </mat-tab>
 
-  <ng-container matColumnDef="numero">
-    <th mat-header-cell *matHeaderCellDef>Numero</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.numero}} </td>
-  </ng-container>
+          <mat-tab label="DEV 05">
+            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource5" class="table" *ngIf="dataSource5">     
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.numero}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="api">
+                <th mat-header-cell *matHeaderCellDef>API</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.api.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef>Web</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.web.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="ios">
+                <th mat-header-cell *matHeaderCellDef>IOS</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.ios.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="android">
+                <th mat-header-cell *matHeaderCellDef>Android</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.android.nome}} </td>
+              </ng-container>
+              <ng-container matColumnDef="business">
+                <th mat-header-cell *matHeaderCellDef>Business</th>
+                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.negocio.nome}} </td>
+              </ng-container>      
+               <ng-container matColumnDef="acoes">
+                 <th mat-header-cell *matHeaderCellDef>Ações</th>
+                 <td mat-cell *matCellDef="let dataSource5">
+                  <button
+                  mat-mini-fab
+                  color="primary"
+                  [routerLink]="['/chamados/alterar/',dataSource5.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button 
+                mat-mini-fab
+                color="accent"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+               </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-divider></mat-divider>
+            </mat-tab>
 
-  <ng-container matColumnDef="api">
-    <th mat-header-cell *matHeaderCellDef>API</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.api.nome}} </td>
-  </ng-container>
+            <mat-tab label="DEV 06">
 
-  <ng-container matColumnDef="web">
-    <th mat-header-cell *matHeaderCellDef>Web</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.web.nome}} </td>
-  </ng-container>
+              <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource6" class="table" *ngIf="dataSource6">     
+                <ng-container matColumnDef="numero">
+                  <th mat-header-cell *matHeaderCellDef>Numero</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.numero}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="api">
+                  <th mat-header-cell *matHeaderCellDef>API</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.api.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="web">
+                  <th mat-header-cell *matHeaderCellDef>Web</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.web.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="ios">
+                  <th mat-header-cell *matHeaderCellDef>IOS</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.ios.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="android">
+                  <th mat-header-cell *matHeaderCellDef>Android</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.android.nome}} </td>
+                </ng-container>
+                <ng-container matColumnDef="business">
+                  <th mat-header-cell *matHeaderCellDef>Business</th>
+                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.negocio.nome}} </td>
+                </ng-container>      
+                 <ng-container matColumnDef="acoes">
+                   <th mat-header-cell *matHeaderCellDef>Ações</th>
+                   <td mat-cell *matCellDef="let dataSource6">
+                    <button
+                    mat-mini-fab
+                    color="primary"
+                    [routerLink]="['/chamados/alterar/',dataSource6.id]">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button 
+                  mat-mini-fab
+                  color="accent"
+                  >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                  </td>
+                 </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <mat-divider></mat-divider>
+            </mat-tab>
 
-  <ng-container matColumnDef="ios">
-    <th mat-header-cell *matHeaderCellDef>IOS</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.ios.nome}} </td>
-  </ng-container>
+            <mat-tab label="DEV 07">
 
-  <ng-container matColumnDef="android">
-    <th mat-header-cell *matHeaderCellDef>Android</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.android.nome}} </td>
-  </ng-container>
-  <ng-container matColumnDef="business">
-    <th mat-header-cell *matHeaderCellDef>Business</th>
-    <td mat-cell *matCellDef="let dataSource"> {{dataSource.negocio.nome}} </td>
-  </ng-container>
+              <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource7" class="table" *ngIf="dataSource7">     
+                <ng-container matColumnDef="numero">
+                  <th mat-header-cell *matHeaderCellDef>Numero</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.numero}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="api">
+                  <th mat-header-cell *matHeaderCellDef>API</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.api.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="web">
+                  <th mat-header-cell *matHeaderCellDef>Web</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.web.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="ios">
+                  <th mat-header-cell *matHeaderCellDef>IOS</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.ios.nome}} </td>
+                </ng-container>      
+                <ng-container matColumnDef="android">
+                  <th mat-header-cell *matHeaderCellDef>Android</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.android.nome}} </td>
+                </ng-container>
+                <ng-container matColumnDef="business">
+                  <th mat-header-cell *matHeaderCellDef>Business</th>
+                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.negocio.nome}} </td>
+                </ng-container>      
+                 <ng-container matColumnDef="acoes">
+                   <th mat-header-cell *matHeaderCellDef>Ações</th>
+                   <td mat-cell *matCellDef="let dataSource7">
+                    <button
+                    mat-mini-fab
+                    color="primary"
+                    [routerLink]="['/chamados/alterar/',dataSource7.id]">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button 
+                  mat-mini-fab
+                  color="accent"
+                  >
+                  <mat-icon>delete</mat-icon>
+                </button>
+                  </td>
+                 </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            <mat-divider></mat-divider>
+           </mat-tab>
 
-   <ng-container matColumnDef="acoes">
-     <th mat-header-cell *matHeaderCellDef>Ações</th>
-     <td mat-cell *matCellDef="let dataSource">
-      <button
-      mat-mini-fab
-      color="primary"
-      [routerLink]="['/chamados/alterar/',dataSource.id]">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button *ngIf="dataSource.chamado"
-    mat-mini-fab
-    color="accent"
-    >
-    <mat-icon>new_releases</mat-icon>
-  </button>
-    </td>
-   </ng-container>
+           <mat-tab label="DEV 08">
+            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource8" class="table" *ngIf="dataSource8">     
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.numero}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="api">
+                <th mat-header-cell *matHeaderCellDef>API</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.api.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef>Web</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.web.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="ios">
+                <th mat-header-cell *matHeaderCellDef>IOS</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.ios.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="android">
+                <th mat-header-cell *matHeaderCellDef>Android</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.android.nome}} </td>
+              </ng-container>
+              <ng-container matColumnDef="business">
+                <th mat-header-cell *matHeaderCellDef>Business</th>
+                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.negocio.nome}} </td>
+              </ng-container>      
+               <ng-container matColumnDef="acoes">
+                 <th mat-header-cell *matHeaderCellDef>Ações</th>
+                 <td mat-cell *matCellDef="let dataSource8">
+                  <button
+                  mat-mini-fab
+                  color="primary"
+                  [routerLink]="['/chamados/alterar/',dataSource8.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button 
+                mat-mini-fab
+                color="accent"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+               </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-divider></mat-divider>
+           </mat-tab>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-divider></mat-divider>
-<div class="container">
-  <br>
-  <div style="text-align: center;">
-  <h3>Os ambientes devem ser atualizados de acordo com as informações de cada atividade</h3>
-</div>
-</div>
+           <mat-tab label="DEV 09">
+
+            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource9" class="table" *ngIf="dataSource9">     
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.numero}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="api">
+                <th mat-header-cell *matHeaderCellDef>API</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.api.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef>Web</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.web.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="ios">
+                <th mat-header-cell *matHeaderCellDef>IOS</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.ios.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="android">
+                <th mat-header-cell *matHeaderCellDef>Android</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.android.nome}} </td>
+              </ng-container>
+              <ng-container matColumnDef="business">
+                <th mat-header-cell *matHeaderCellDef>Business</th>
+                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.negocio.nome}} </td>
+              </ng-container>      
+               <ng-container matColumnDef="acoes">
+                 <th mat-header-cell *matHeaderCellDef>Ações</th>
+                 <td mat-cell *matCellDef="let dataSource9">
+                  <button
+                  mat-mini-fab
+                  color="primary"
+                  [routerLink]="['/chamados/alterar/',dataSource9.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button 
+                mat-mini-fab
+                color="accent"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+               </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-divider></mat-divider>
+           </mat-tab>
+
+           <mat-tab label="DEV 10">
+            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource10" class="table" *ngIf="dataSource10">     
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.numero}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="api">
+                <th mat-header-cell *matHeaderCellDef>API</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.api.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef>Web</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.web.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="ios">
+                <th mat-header-cell *matHeaderCellDef>IOS</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.ios.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="android">
+                <th mat-header-cell *matHeaderCellDef>Android</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.android.nome}} </td>
+              </ng-container>
+              <ng-container matColumnDef="business">
+                <th mat-header-cell *matHeaderCellDef>Business</th>
+                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.negocio.nome}} </td>
+              </ng-container>      
+               <ng-container matColumnDef="acoes">
+                 <th mat-header-cell *matHeaderCellDef>Ações</th>
+                 <td mat-cell *matCellDef="let dataSource10">
+                  <button
+                  mat-mini-fab
+                  color="primary"
+                  [routerLink]="['/chamados/alterar/',dataSource10.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                mat-mini-fab
+                color="accent"
+                [routerLink]="['/chamados/alterar', dataSource10.ambiente.id , dataSource10.api.id]"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+               </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-divider></mat-divider>
+           </mat-tab>
+
+           <mat-tab label="DEV 11">
+
+            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource11" class="table" *ngIf="dataSource11">     
+              <ng-container matColumnDef="numero">
+                <th mat-header-cell *matHeaderCellDef>Numero</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.numero}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="api">
+                <th mat-header-cell *matHeaderCellDef>API</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.api.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef>Web</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.web.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="ios">
+                <th mat-header-cell *matHeaderCellDef>IOS</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.ios.nome}} </td>
+              </ng-container>      
+              <ng-container matColumnDef="android">
+                <th mat-header-cell *matHeaderCellDef>Android</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.android.nome}} </td>
+              </ng-container>
+              <ng-container matColumnDef="business">
+                <th mat-header-cell *matHeaderCellDef>Business</th>
+                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.negocio.nome}} </td>
+              </ng-container>      
+               <ng-container matColumnDef="acoes">
+                 <th mat-header-cell *matHeaderCellDef>Ações</th>
+                 <td mat-cell *matCellDef="let dataSource11">
+                  <button
+                  mat-mini-fab
+                  color="primary"
+                  [routerLink]="['/chamados/alterar/',dataSource11.id]">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                mat-mini-fab
+                color="accent"
+                [routerLink]="['/chamados/alterar', dataSource11.ambiente.id , dataSource11.api.id]"
+                >
+                <mat-icon>delete</mat-icon>
+              </button>
+                </td>
+               </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-divider></mat-divider>
+           </mat-tab>
+        </mat-tab-group>
+
+        <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+          <button mat-mini-fab
+          color="primary"
+          [routerLink]="['/chamados/adicionar']"
+          >
+          <mat-icon>add</mat-icon>
+        </button>
+        </div>
+        <mat-divider></mat-divider>
