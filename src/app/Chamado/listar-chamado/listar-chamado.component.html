@@ -20,7 +20,7 @@
   </div>
 
   <mat-tab-group color="primary">
-    <mat-tab label="DEV 01" (click)="AmbienteClicado()">
+    <mat-tab label="DEV 01">
       <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" class="table" *ngIf="dataSource1">     
         <ng-container matColumnDef="numero">
           <th mat-header-cell *matHeaderCellDef>Numero</th>
@@ -58,10 +58,11 @@
           <button 
           mat-mini-fab
           color="accent"
+          (click)="AbrirDialog(dataSource1.id,dataSource1)"
           >
           <mat-icon>delete</mat-icon>
         </button>
-          </td>
+          </td> 
          </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

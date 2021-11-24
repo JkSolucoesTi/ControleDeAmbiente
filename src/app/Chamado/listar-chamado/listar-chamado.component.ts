@@ -1,9 +1,12 @@
 import { ChamadoService } from './../../service/chamado.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Chamado } from 'src/app/model/chamado';
 import { Ambiente } from 'src/app/model/ambiente';
 import { AmbienteService } from 'src/app/service/ambientes.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-chamado',
@@ -29,7 +32,9 @@ export class ListarChamadoComponent implements OnInit {
   erros!:string[];
   ambiente!:Ambiente[];
 
-  constructor(private chamadoService:ChamadoService) { }
+  constructor(private chamadoService:ChamadoService,
+              private dialog: MatDialog,
+              private router : Router) { }
 
   ngOnInit(): void {
     this.erros = [];   
@@ -62,12 +67,35 @@ export class ListarChamadoComponent implements OnInit {
     return ['numero','api','web','ios','android','business','acoes']
   }
 
-  ObterAmbiente(){
-    console.log('teste');
+  AbrirDialog(ambienteId:any,apiId:any){
+    this.dialog.open(DialogLiberarAmbientComponent,{
+      data:{
+        ambienteId:ambienteId,
+        apiId:apiId
+      }
+    }).afterClosed().subscribe(resultado => {
+      if(resultado === true)
+      {
+          this.displayedColumns = this.ExibirColunas();
+          this.router.navigate(['/chamados']);
+      }
+    });
   }
 
-  AmbienteClicado(){
-    console.log('testes')
-  }
+}
 
+@Component({
+  selector: 'app-dialog-liberar-ambiente',
+  templateUrl: 'dialog-liberar-ambiente.component.html',
+})
+export class DialogLiberarAmbientComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public data: any ,
+              private service : AmbienteService,
+              private snackBar : MatSnackBar) {}
+
+              LiberarAmbiente(){
+                console.log(this.data);
+
+  }
+            
 }

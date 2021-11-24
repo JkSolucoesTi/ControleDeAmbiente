@@ -27,4 +27,10 @@ export class ChamadoService {
     return this.chamadoService.post<Chamado>(apiUrl,chamado);
   }
 
+  ExcluirAmbiente(chamadoId:string):Observable<any>{
+    const apiUrl = `${this.api}/Liberar/${chamadoId}`;
+    return this.chamadoService.delete<Chamado>(apiUrl);
+
+  }
+
 }

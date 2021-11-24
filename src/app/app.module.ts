@@ -24,7 +24,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
-import { AmbientesComponent, DialogLiberarAmbientComponent } from './Ambiente/ambientes/ambientes.component';
+import { AmbientesComponent} from './Ambiente/ambientes/ambientes.component';
 import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
 import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
 import {MatListModule} from '@angular/material/list';
@@ -39,7 +39,7 @@ import { ListarApiComponent } from './Api/listar-api/listar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
-import { ListarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
+import { ListarChamadoComponent , DialogLiberarAmbientComponent } from './Chamado/listar-chamado/listar-chamado.component';
 import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
 import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
 
@@ -65,7 +65,6 @@ import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar
     ListarChamadoComponent,
     EditarChamadoComponent,
     AdicionarChamadoComponent
-
   ],
   imports: [
     BrowserModule,
