@@ -3,7 +3,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Chamado } from 'src/app/model/chamado';
 import { Ambiente } from 'src/app/model/ambiente';
-import { AmbienteService } from 'src/app/service/ambientes.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarChamadoComponent implements OnInit {
 
+  dataSource = new MatTableDataSource<Chamado>();
   dataSource1 = new MatTableDataSource<Chamado>();
   dataSource2 = new MatTableDataSource<Chamado>();
   dataSource3 = new MatTableDataSource<Chamado>();
@@ -37,8 +37,9 @@ export class ListarChamadoComponent implements OnInit {
               private router : Router) { }
 
   ngOnInit(): void {
-    this.erros = [];   
+    this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {
+      this.dataSource.data = resultado;
       this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
       this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
       this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
@@ -57,6 +58,8 @@ export class ListarChamadoComponent implements OnInit {
             this.erros.push(erro.error.errors(campo))
           }
         }
+      }else{
+        this.erros.push("Estamos com problemas para acessas os dados do ambiente");
       }
     }
     );
@@ -74,14 +77,23 @@ export class ListarChamadoComponent implements OnInit {
         apiId:apiId
       }
     }).afterClosed().subscribe(resultado => {
-      if(resultado === true)
-      {
-          this.displayedColumns = this.ExibirColunas();
-          this.router.navigate(['/chamados']);
-      }
+          this.chamadoService.ObterTodos().subscribe(resultado =>{
+            this.dataSource.data = resultado;
+            this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
+            this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
+            this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
+            this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
+            this.dataSource5.data = resultado.filter(x => x.ambiente.nome === 'DEV 05');
+            this.dataSource6.data = resultado.filter(x => x.ambiente.nome === 'DEV 06');
+            this.dataSource7.data = resultado.filter(x => x.ambiente.nome === 'DEV 07');
+            this.dataSource8.data = resultado.filter(x => x.ambiente.nome === 'DEV 08');
+            this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
+            this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
+            this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
+          });
     });
+    this.displayedColumns = this.ExibirColunas();
   }
-
 }
 
 @Component({
@@ -90,12 +102,23 @@ export class ListarChamadoComponent implements OnInit {
 })
 export class DialogLiberarAmbientComponent {
   constructor( @Inject (MAT_DIALOG_DATA) public data: any ,
-              private service : AmbienteService,
+              private chamadoService : ChamadoService,
+              private router : Router,
               private snackBar : MatSnackBar) {}
 
-              LiberarAmbiente(){
-                console.log(this.data);
+   LiberarAmbiente(ambienteId:string,apiId:string){
+     console.log(ambienteId,apiId)
+     this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
+      this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
+        duration : 2000,
+        horizontalPosition:'center',
+        verticalPosition:'bottom'
+      });
+     })
+    }
 
+
+  ExibirColunas():string[]{
+    return ['numero','api','web','ios','android','business','acoes']
   }
-            
 }

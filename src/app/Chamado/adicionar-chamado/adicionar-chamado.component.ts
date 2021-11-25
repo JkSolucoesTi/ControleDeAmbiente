@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Android } from 'src/app/model/android';
 import { Api } from 'src/app/model/api';
@@ -36,7 +38,9 @@ export class AdicionarChamadoComponent implements OnInit {
     private webService: WebService,
     private iosService: IosService,
     private androidService: AndroidService,
-    private negocioService: NegocioService
+    private negocioService: NegocioService,
+    private router: Router,
+    private snackBar:MatSnackBar
               ) { }
 
   ngOnInit(): void {
@@ -83,8 +87,15 @@ export class AdicionarChamadoComponent implements OnInit {
     console.log(parametros);
     this.chamadoService.AdicionarAmbiente(parametros).subscribe(resultado => {
       if(resultado.codigo == 2){
-        console.log(resultado);
         this.erros.push(resultado.mensagem);
+      }
+      else{
+        this.snackBar.open(resultado.mensagem,"Ambiente",{
+          duration:1000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        });
+        this.router.navigateByUrl('chamados');
       }
     })
   }

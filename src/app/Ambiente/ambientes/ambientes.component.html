@@ -18,8 +18,8 @@
 <mat-progress-spinner *ngIf="!dataSource.data.length && erros.length == 0" mode="indeterminate" style="margin: 0 auto;">
 </mat-progress-spinner>
 </div>
-<table mat-table  class="mat-elevation-z8" [dataSource]="dataSource" class="table" *ngIf="dataSource" >
 
+<table mat-table  class="mat-elevation-z8" [dataSource]="dataSource" class="table" *ngIf="dataSource" >
   <ng-container matColumnDef="ambiente">
     <th mat-header-cell *matHeaderCellDef>Ambiente</th>
     <td mat-cell

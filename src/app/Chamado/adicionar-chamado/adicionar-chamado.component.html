@@ -1,3 +1,13 @@
+<div *ngIf="erros.length > 0">
+  <div class="divErros" style="margin-top: 10px;">
+    <h4 *ngFor="let erro of erros">
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      {{erro}}
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+    </h4>
+  </div>
+</div>
+
 <div class="mat-card-cvr">
     <mat-card>
     <div class="titulo">
@@ -5,7 +15,7 @@
     </div>
         <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="Adicionar()">
           <div>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Numero do Chamado</mat-label>
               <input type="text" matInput placeholder="Nº do Chamado" formControlName="numero">
               <mat-error *ngIf="propriedade.numero.touched && propriedade.numero.invalid" >
@@ -14,19 +24,16 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 48%;">
               <mat-label>Selecione o Ambiente</mat-label>
               <mat-select formControlName="ambienteId">
                 <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
               </mat-select>
               <mat-error *ngIf="propriedade.ambienteId.touched && propriedade.ambienteId.invalid" >
-                <sup>*</sup> Selecionar o Ambiente                
+                <sup>*</sup> Selecionar o Ambiente
              </mat-error>
             </mat-form-field>
-          </div>
-
-          <div>
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Selecione a API</mat-label>
               <mat-select formControlName="apiId">
                 <mat-option *ngFor="let responsavel of api" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
@@ -36,9 +43,8 @@
              </mat-error>
             </mat-form-field>
           </div>
-
           <div>
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Selecione o responsável pela WEB</mat-label>
               <mat-select formControlName="webId">
                 <mat-option *ngFor="let responsavel of web" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
@@ -48,9 +54,8 @@
              </mat-error>
             </mat-form-field>
           </div>
-
-          <div>
-            <mat-form-field appearance="fill" >
+           <div>
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Selecione o responsável pelo IOS</mat-label>
               <mat-select formControlName="iosId">
                 <mat-option *ngFor="let responsavel of ios" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
@@ -61,7 +66,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Selecione o responsável pelo Android</mat-label>
               <mat-select formControlName="androidId">
                 <mat-option *ngFor="let responsavel of android" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
@@ -72,7 +77,7 @@
             </mat-form-field>
           </div>
           <div>
-            <mat-form-field appearance="fill" >
+            <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Selecione o responsável pelo Negocio</mat-label>
               <mat-select formControlName="negocioId">
                 <mat-option *ngFor="let responsavel of negocio" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
@@ -96,7 +101,7 @@
             type="submit"
             mat-button
             mat-mini-fab
-            color="primary"       
+            color="primary"
             [disabled]="formulario.invalid"    >
             <mat-icon>add</mat-icon>
           </button>
@@ -105,12 +110,4 @@
         </form>
       </mat-card>
     </div>
-    <div *ngIf="erros.length > 0">
-      <div class="divErros" style="margin-top: 10px;">
-        <h4 *ngFor="let erro of erros">
-          <mat-icon style="vertical-align: bottom;">error</mat-icon>
-          {{erro}}
-          <mat-icon style="vertical-align: bottom;">error</mat-icon>
-        </h4>
-      </div>
-    </div>
+
