@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AdicionarBusinessComponent implements OnInit {
 
   formulario!:any;
-  erros!:string[];
+  erros:string[]=[];
 
 
   constructor(private router:Router,
@@ -47,7 +47,7 @@ export class AdicionarBusinessComponent implements OnInit {
           }
         }
       }else{
-        this.erros.push(erro.error);
+        this.erros.push("Não foi possível adicionar o Analista de Negócios");
       }
     }
     )

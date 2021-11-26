@@ -21,8 +21,8 @@ export class ListarDesenvolvedorComponent implements OnInit {
   web!:Web[];
   ios!:Ios[];
   android!:Android[];
-
   displayedColumns : string[] =[];
+  erros:string[]=[];
  
   constructor(private webService: WebService,
               private iosService: IosService,
@@ -32,19 +32,56 @@ export class ListarDesenvolvedorComponent implements OnInit {
 
     this.webService.ObterTodos().subscribe(resultado =>{
      this.web = resultado;
-      this.dataSourceWeb.data =  this.web.splice(1);
+      this.dataSourceWeb.data =  this.web.splice(1);      
       
-      console.log(resultado);
-    });
+    } ,erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
+      }
+      else{
+        this.erros.push('Não foi possível listar os desenvolvedores Web')
+      }
+    }
+    )
+  
+    
     this.iosService.ObterTodos().subscribe(resultado =>{
       this.ios = resultado;
       this.dataSourceIos.data =  this.ios.splice(1);
 
-    });
+    } ,erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
+      }
+      else{
+        this.erros.push('Não foi possível listar os desenvolvedores IOS')
+      }
+    }
+    )
     this.androidService.ObterTodos().subscribe(resultado =>{
       this.android = resultado;
       this.dataSourceAndroid.data = this.android.splice(1);
-    });
+    } ,erro => {
+      if(erro.status === '400'){
+       for(const campos in erro.error.errors){
+         if(erro.error.errors.hasOwnProperty(campos)){
+           this.erros.push(erro.error.errors[campos])
+         }
+       }
+      }
+      else{
+        this.erros.push('Não foi possível listar os desenvolvedores Android')
+      }
+    }
+    )
 
     this.displayedColumns = this.ExibirColunas();
   }

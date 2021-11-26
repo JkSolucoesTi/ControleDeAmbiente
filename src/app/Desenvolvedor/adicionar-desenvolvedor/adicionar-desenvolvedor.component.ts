@@ -14,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AdicionarDesenvolvedorComponent implements OnInit {
 
   tipo!:string;
-  erros!:string[];
+  erros:string[] =[];
   rota!:string;
   formulario!:any;
 
@@ -61,7 +61,7 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
             }
           }
         }else{
-          this.erros.push(erro.error.errors);
+          this.erros.push('Não foi possivel adicionar o desenvolvedor Web');
         }
       }
       )
@@ -84,7 +84,7 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
             }
           }
         }else{
-          this.erros.push(erro.error.errors);
+          this.erros.push('Não foi possivel adicionar o desenvolvedor  IOS');
         }
       }
       )
@@ -108,7 +108,7 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
             }
           }
         }else{
-          this.erros.push(erro.error.errors);
+          this.erros.push('Não foi possivel adicionar o desenvolvedor Android');
         }
       }
       )

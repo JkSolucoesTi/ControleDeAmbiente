@@ -59,7 +59,7 @@ export class EditarBusinessComponent implements OnInit {
        }
       }
       else{
-        this.erros.push(erro.error)
+        this.erros.push("Não foi possível editar o Analista de Negócios")
       }
     })
   }

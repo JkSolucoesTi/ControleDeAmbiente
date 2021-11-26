@@ -59,7 +59,7 @@ export class ListarChamadoComponent implements OnInit {
           }
         }
       }else{
-        this.erros.push("Estamos com problemas para acessas os dados do ambiente");
+        this.erros.push("Estamos com problemas para acessas os dados dos ambientes");
       }
     }
     );

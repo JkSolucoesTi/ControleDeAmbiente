@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditarApiComponent implements OnInit {
 
-  erros!:string [];
+  erros:string []=[];
   rota!: number;
   formulario!:any;
   api!:Api;
@@ -57,7 +57,7 @@ export class EditarApiComponent implements OnInit {
         }
       }
     }else{
-      this.erros.push(erro.error);
+      this.erros.push("Não foi possível editar a API");
     }
 
   }

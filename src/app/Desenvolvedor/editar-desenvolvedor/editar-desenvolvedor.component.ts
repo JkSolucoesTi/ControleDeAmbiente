@@ -20,7 +20,7 @@ export class EditarDesenvolvedorComponent implements OnInit {
   formulario:any;
   tipoDev :string = "";
   parametro !: number;
-  erros!:string[];
+  erros:string[]=[];
 
   constructor(private rota:ActivatedRoute,
               private router : Router,
@@ -98,7 +98,7 @@ get propriedade(){
          }
         }
         else{
-          this.erros.push(erro.error)
+          this.erros.push('Não foi possível adicionar o desenvolvedor')
         }
       })
     }
@@ -120,7 +120,7 @@ get propriedade(){
          }
         }
         else{
-          this.erros.push(erro.error)
+          this.erros.push('Não foi possível adicionar o desenvolvedor')
         }
       })
     }
@@ -142,7 +142,7 @@ get propriedade(){
          }
         }
         else{
-          this.erros.push(erro.error)
+          this.erros.push('Não foi possível adicionar o desenvolvedor')
         }
       })
     }

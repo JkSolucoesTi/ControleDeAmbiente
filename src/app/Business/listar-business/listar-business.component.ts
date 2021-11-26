@@ -13,6 +13,7 @@ export class ListarBusinessComponent implements OnInit {
   negocio!:Negocio[];
   dataSourceBusiness = new MatTableDataSource<Negocio>();
   displayedColumns!:string[];
+  erros:string[]=[];
 
   constructor(private negocioService: NegocioService) { }
 
@@ -20,7 +21,18 @@ export class ListarBusinessComponent implements OnInit {
     this.negocioService.ObterTodos().subscribe(resultado => {
       this.negocio = resultado;
       this.dataSourceBusiness.data = this.negocio.splice(1);
-    })
+    },erro =>{
+      if(erro ==='400'){
+        for(const campo in erro.error.errors){
+          if(erro.error.errors[campo]){
+            this.erros.push(erro.error.errors(campo))
+          }
+        }
+      }else{
+        this.erros.push("Não foi possível lista os Analista de Negocios");
+      }
+    }
+    )
 
     this.displayedColumns=this.ExibirColunas();
   }

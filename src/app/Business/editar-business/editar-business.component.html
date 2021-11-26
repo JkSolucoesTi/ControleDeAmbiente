@@ -1,6 +1,16 @@
+<div *ngIf="erros.length > 0">
+  <div class="divErros" style="margin-top: 10px;">
+    <h4 *ngFor="let erro of erros">
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      {{erro}}
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+    </h4>
+  </div>
+</div>
+
 <div class="mat-card-cvr">
     <div>
-<mat-card>
+    <mat-card>
     <div>
       <mat-card-title>Editar informações do Analista</mat-card-title>
     <mat-card-subtitle>{{negocio.nome}}</mat-card-subtitle>

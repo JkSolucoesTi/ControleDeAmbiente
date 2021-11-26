@@ -1,8 +1,19 @@
 
+
 <div style="margin-top: 10px;text-align: center;">
   <h2>Cadastro de API's</h2>
 </div>
 <mat-divider></mat-divider>
+
+<div *ngIf="erros.length > 0">
+  <div class="divErros" style="margin-top: 10px;">
+    <h4 *ngFor="let erro of erros">
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      {{erro}}
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+    </h4>
+  </div>
+</div>
 
 <table mat-table
 class="mat-elevation-z8"

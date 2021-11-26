@@ -48,7 +48,7 @@ export class AdicionarApiComponent implements OnInit {
           }
         }
       }else{
-        this.erros.push(erro.errors);
+        this.erros.push("Não foi possível adicionar a API");
       }
     }
     )

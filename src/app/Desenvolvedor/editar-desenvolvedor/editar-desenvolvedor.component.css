@@ -30,3 +30,8 @@ mat-card-subtitle.mat-card-subtitle{
   font-size: 18px;
   color: blue;
 }
+
+.divErros{
+  color: red;
+  text-align: center;
+}
