@@ -1,6 +1,8 @@
 import { Android } from "./android";
-import { Api } from "./api";
+import { Web } from "./web";
 import { Ios } from "./ios";
+import { Negocio } from "./negocio";
+import { Api } from "./api";
 
 export class Ambiente{
   id!:string;
@@ -8,6 +10,8 @@ export class Ambiente{
   chamado!:string;
   descricao!:string;
   api!:Api;
+  web!:Web;
   ios!:Ios;
   android!:Android;
+  negocio!:Negocio;
 }
