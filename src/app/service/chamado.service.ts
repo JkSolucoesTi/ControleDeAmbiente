@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Chamado } from '../model/chamado';
 
 const httpOptions = {
-  header : new HttpHeaders({
+  headers : new HttpHeaders({
     'Content-Type':  'application/json'
   })
 }
@@ -22,6 +22,11 @@ export class ChamadoService {
     return this.chamadoService.get<Chamado[]>(this.api);
   }
 
+  ObterPorAmbienteAPI(ambienteId:string,apiId:string):Observable<any>{
+    const apiUrl = `${this.api}/Alterar/${ambienteId}/${apiId}`;
+    return this.chamadoService.get<Chamado>(apiUrl);
+  }
+
   AdicionarAmbiente(chamado:Chamado):Observable<any>{
     const apiUrl = `${this.api}/Adicionar`;
     return this.chamadoService.post<Chamado>(apiUrl,chamado);
@@ -30,6 +35,11 @@ export class ChamadoService {
   LiberarAmbiente(ambienteId:string,apiId:string):Observable<any>{
     const apiUrl = `${this.api}/Liberar/${ambienteId}/${apiId}`;
     return this.chamadoService.delete<Chamado>(apiUrl);
+  }
+
+  Atualizar(chamado : Chamado , chamadoId : number):Observable<any>{
+    const url = `${this.api}/Alterar/${chamadoId}`;
+    return this.chamadoService.put(url,chamado,httpOptions);
   }
 
 }
