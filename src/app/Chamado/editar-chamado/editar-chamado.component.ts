@@ -32,6 +32,7 @@ export class EditarChamadoComponent implements OnInit {
   android!:Android[];
   negocio!:Negocio[];
   erros:string[]=[];
+  ambienteOld!:Ambiente;
 
   constructor(
     private activetad: ActivatedRoute,
@@ -70,6 +71,7 @@ export class EditarChamadoComponent implements OnInit {
     const rota2 = this.activetad.snapshot.params.apiId;
 
     this.chamadoService.ObterPorAmbienteAPI(rota1,rota2).subscribe(resultado =>{
+      this.ambienteOld = resultado;
       this.formulario = new FormGroup({
         id : new FormControl(resultado.id),
         numero : new FormControl(resultado.numero,[Validators.required,Validators.maxLength(15)]),
@@ -92,11 +94,17 @@ export class EditarChamadoComponent implements OnInit {
     this.erros= [];
     const parametros = this.formulario.value;
     this.chamadoService.Atualizar(parametros,parametros.id).subscribe(resultado => {
+      if(resultado.codigo == 2){
+        this.erros.push(resultado.mensagem);
+      }
+      else{
         this.snackBar.open(resultado.mensagem,"Editar Ambiente",{
           duration:1000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
-        })
+        });
+        this.router.navigate(['chamados']);
+       }
       },erro => {
           if(erro.status === '400'){
            for(const campos in erro.error.errors){
@@ -108,6 +116,7 @@ export class EditarChamadoComponent implements OnInit {
           else{
             this.erros.push("Não foi possível editar o Chamado")
           }
-        })
+        });
+
       }
 }
