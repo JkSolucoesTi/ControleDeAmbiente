@@ -25,7 +25,9 @@
     <table mat-table
      class="mat-elevation-z8"
      [dataSource]="dataSourceWeb"
-     class="table">
+     class="table"
+     *ngIf="dataSourceWeb"
+     >
 
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -57,7 +59,9 @@
         </button>
         <button
         mat-mini-fab
-        color="accent">
+        color="accent"
+        (click)="AbrirDialog(dataSourceWeb.id,dataSourceWeb.nome,'web')"
+        >
         <mat-icon>delete</mat-icon>
       </button>
         </td>
@@ -113,7 +117,9 @@
           </button>
           <button
           mat-mini-fab
-          color="accent">
+          color="accent"
+          (click)="AbrirDialog(dataSourceIos.id,dataSourceIos.nome,'ios')"
+          >
           <mat-icon>delete</mat-icon>
         </button>
           </td>
@@ -170,7 +176,9 @@
           </button>
           <button
           mat-mini-fab
-          color="accent">
+          color="accent"
+          (click)="AbrirDialog(dataSourceAndroid.id,dataSourceAndroid.nome,'android')"
+          >
           <mat-icon>delete</mat-icon>
         </button>
           </td>

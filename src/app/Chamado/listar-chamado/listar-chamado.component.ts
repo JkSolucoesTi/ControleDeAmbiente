@@ -117,7 +117,6 @@ export class DialogLiberarAmbientComponent {
      })
     }
 
-
   ExibirColunas():string[]{
     return ['numero','api','web','ios','android','business','acoes']
   }

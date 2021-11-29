@@ -36,4 +36,9 @@ export class IosService {
     const url = `${this.apiUrl}/Adicionar`;
     return this.iosService.post<Ios>(url,ios);
   }
+
+  Excluir(iosId:string):Observable<any>{
+    const url = `${this.apiUrl}/${iosId}`;
+    return this.iosService.delete<number>(url);
+  }
 }

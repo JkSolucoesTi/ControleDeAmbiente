@@ -39,4 +39,9 @@ export class NegocioService {
     const url = `${this.apiUrl}/Adicionar`;
     return this.negocioService.post<Negocio>(url,negocio);
   }
+
+  Excluir(negocioId:string):Observable<any>{
+    const url = `${this.apiUrl}/${negocioId}`
+    return this.negocioService.delete<Negocio>(url);
+  }
 }

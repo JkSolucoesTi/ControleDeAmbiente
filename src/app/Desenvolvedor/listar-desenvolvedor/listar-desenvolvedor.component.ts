@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Ios } from './../../model/ios';
+import { Router } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Android } from 'src/app/model/android';
-import { Ios } from 'src/app/model/ios';
 import { Web } from 'src/app/model/web';
 import { AndroidService } from 'src/app/service/android.service';
 import { IosService } from 'src/app/service/ios.service';
 import { WebService } from 'src/app/service/web.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-desenvolvedor',
@@ -23,17 +26,19 @@ export class ListarDesenvolvedorComponent implements OnInit {
   android!:Android[];
   displayedColumns : string[] =[];
   erros:string[]=[];
- 
+
   constructor(private webService: WebService,
               private iosService: IosService,
-              private androidService: AndroidService) { }
+              private androidService: AndroidService,
+              private route:Router,
+              private dialog : MatDialog) { }
 
   ngOnInit(): void {
 
     this.webService.ObterTodos().subscribe(resultado =>{
      this.web = resultado;
-      this.dataSourceWeb.data =  this.web.splice(1);      
-      
+      this.dataSourceWeb.data =  this.web.filter(x => x.nome != "Sem alocação");
+
     } ,erro => {
       if(erro.status === '400'){
        for(const campos in erro.error.errors){
@@ -47,11 +52,9 @@ export class ListarDesenvolvedorComponent implements OnInit {
       }
     }
     )
-  
-    
     this.iosService.ObterTodos().subscribe(resultado =>{
       this.ios = resultado;
-      this.dataSourceIos.data =  this.ios.splice(1);
+      this.dataSourceIos.data =  this.ios.filter(x => x.nome != "Sem alocação");
 
     } ,erro => {
       if(erro.status === '400'){
@@ -68,7 +71,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
     )
     this.androidService.ObterTodos().subscribe(resultado =>{
       this.android = resultado;
-      this.dataSourceAndroid.data = this.android.splice(1);
+      this.dataSourceAndroid.data = this.android.filter(x => x.nome != "Sem alocação");
     } ,erro => {
       if(erro.status === '400'){
        for(const campos in erro.error.errors){
@@ -86,8 +89,106 @@ export class ListarDesenvolvedorComponent implements OnInit {
     this.displayedColumns = this.ExibirColunas();
   }
 
+  AbrirDialog(desenvolvedorId:string, desenvolvedorNome:string, tipoDesenvolvedor:string){
+    if(tipoDesenvolvedor == "web"){
+      this.dialog.open(DialogExcluirDesenvolvedorComponent,{
+        data:{
+          desenvolvedorId: desenvolvedorId,
+          desenvolvedorNome : desenvolvedorNome,
+          desenvolvedorTipo : tipoDesenvolvedor
+        }
+      }).afterClosed().subscribe(resultado => {
+        this.webService.ObterTodos().subscribe(resultado => {                
+          this.web = resultado;
+          this.dataSourceWeb.data =  this.web.filter(x => x.nome != "Sem alocação");    
+        });        
+        this.displayedColumns = this.ExibirColunas();
+      });    
+    }
+    if(tipoDesenvolvedor == "ios"){
+      this.dialog.open(DialogExcluirDesenvolvedorComponent,{
+        data:{
+          desenvolvedorId: desenvolvedorId,
+          desenvolvedorNome : desenvolvedorNome,
+          desenvolvedorTipo : tipoDesenvolvedor
+        }
+      }).afterClosed().subscribe(resultado => {
+        this.iosService.ObterTodos().subscribe(resultado => {
+          this.ios = resultado;
+          this.dataSourceIos.data =  this.ios.filter(x => x.nome != "Sem alocação");
+    
+        });
+        this.displayedColumns = this.ExibirColunas();
+      });
+    }
+    if(tipoDesenvolvedor == "android"){
+      this.dialog.open(DialogExcluirDesenvolvedorComponent,{
+        data:{
+          desenvolvedorId: desenvolvedorId,
+          desenvolvedorNome : desenvolvedorNome,
+          desenvolvedorTipo : tipoDesenvolvedor
+        }
+      }).afterClosed().subscribe(resultado => {
+        this.androidService.ObterTodos().subscribe(resultado => {
+          this.android = resultado;
+          this.dataSourceAndroid.data =  this.android.filter(x => x.nome != "Sem alocação");
+    
+        });
+        this.displayedColumns = this.ExibirColunas();
+      });
+    }
+  }
+
   ExibirColunas() :string[] {
     return  ['nome', 'login', 'email', 'acoes'];
   }
- 
 }
+
+@Component({
+  selector:"",
+  templateUrl:"./DialogExcluirDesenvolvedorComponent.html",
+})
+export class DialogExcluirDesenvolvedorComponent{
+  constructor(@Inject (MAT_DIALOG_DATA) public data:any ,
+              private snackBar: MatSnackBar,
+              private webServce:WebService,
+              private iosService:IosService,
+              private androidService:AndroidService){
+  }
+
+  LiberarAmbiente(desenvolvedorId:string,desenvolvedorTipo:string){
+    if(desenvolvedorTipo == 'web')
+    {
+      this.webServce.Excluir(desenvolvedorId).subscribe(resultado =>{
+        this.snackBar.open(resultado.mensagem,"Exclusão",{
+          duration: 2000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        })
+      });
+    }
+    if(desenvolvedorTipo == 'ios')
+    {
+      this.iosService.Excluir(desenvolvedorId).subscribe(resultado =>{
+        this.snackBar.open(resultado.mensagem,"Exclusão",{
+          duration: 2000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        })
+      });
+    }
+    if(desenvolvedorTipo == 'android')
+    {
+      this.androidService.Excluir(desenvolvedorId).subscribe(resultado =>{
+        this.snackBar.open(resultado.mensagem,"Exclusão",{
+          duration: 2000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        })
+      });
+    }
+  }
+}
+
+
+

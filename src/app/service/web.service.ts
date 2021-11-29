@@ -38,4 +38,9 @@ export class WebService {
     return this.webService.post<Web>(url,web);
   }
 
+  Excluir(webId:string):Observable<any>{
+    const url = `${this.apiUrl}/${webId}`;
+    return this.webService.delete<number>(url);
+  }
+
 }

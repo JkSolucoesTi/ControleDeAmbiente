@@ -30,12 +30,12 @@ import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicion
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './Dashboard/header/header.component';
-import { ListarDesenvolvedorComponent } from './Desenvolvedor/listar-desenvolvedor/listar-desenvolvedor.component';
+import { ListarDesenvolvedorComponent , DialogExcluirDesenvolvedorComponent } from './Desenvolvedor/listar-desenvolvedor/listar-desenvolvedor.component';
 import { AdicionarDesenvolvedorComponent } from './Desenvolvedor/adicionar-desenvolvedor/adicionar-desenvolvedor.component';
 import { EditarDesenvolvedorComponent } from './Desenvolvedor/editar-desenvolvedor/editar-desenvolvedor.component';
-import { ListarBusinessComponent } from './Business/listar-business/listar-business.component';
+import { ListarBusinessComponent , DialogExcluirBusinessComponent } from './Business/listar-business/listar-business.component';
 import { EditarBusinessComponent } from './Business/editar-business/editar-business.component';
-import { ListarApiComponent } from './Api/listar-api/listar-api.component';
+import { ListarApiComponent , DialogExcluirApiComponent} from './Api/listar-api/listar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
@@ -51,6 +51,9 @@ import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar
     AlterarambientesComponent,
     AdicionarambienteComponent,
     DialogLiberarAmbientComponent,
+    DialogExcluirDesenvolvedorComponent,
+    DialogExcluirBusinessComponent,
+    DialogExcluirApiComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,

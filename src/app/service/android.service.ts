@@ -38,4 +38,11 @@ export class AndroidService {
     return this.androidService.post<Android>(url,android);
   }
 
+  Excluir(androidId:string):Observable<any>{
+    const url = `${this.apiUrl}/${androidId}`;
+    return this.androidService.delete<number>(url);
+  }
+
+
+
 }

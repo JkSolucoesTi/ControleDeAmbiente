@@ -36,4 +36,9 @@ export class ApiService {
     const url =`${this.apiUrl}/Adicionar`;
     return this.apiService.post<Api>(url,api);
   }
+
+  Excluir(apiId:string):Observable<any>{
+    const url = `${this.apiUrl}/${apiId}`;
+    return this.apiService.delete<Api>(url);
+  }
 }

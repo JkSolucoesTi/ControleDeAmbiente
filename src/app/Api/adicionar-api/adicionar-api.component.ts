@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AdicionarApiComponent implements OnInit {
 
-  erros!:string[];
+  erros:string[]=[];
   formulario!:any;
 
 
