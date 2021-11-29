@@ -1,0 +1,18 @@
+<h2 style="color:blue">Liberar Ambiente</h2>
+<mat-dialog-content>
+    <p style="color: blue;align-items: center;" >Deseja prosseguir com a liberaração do ambiente - {{data.ambienteId}}<mat-icon style="vertical-align: bottom; color: red;">error</mat-icon></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button style="background-color: red;"
+    mat-mini-fab
+    mat-dialog-close>
+    <mat-icon>not_interested</mat-icon>
+    </button>
+    <button
+    mat-mini-fab
+    color="primary"
+    [mat-dialog-close]="true"
+    (click)="LiberarAmbiente(data.ambienteId,data.apiId)">
+    <mat-icon>thumb_up</mat-icon>
+</button>
+</mat-dialog-actions>

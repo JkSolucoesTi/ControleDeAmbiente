@@ -1,4 +1,4 @@
-import { ApiService } from './../../service/api.service';
+import { WebService } from '../../service/web.service';
 import { IosService } from './../../service/ios.service';
 import { AndroidService } from './../../service/android.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Android } from 'src/app/model/android';
 import { AmbienteService } from 'src/app/service/ambientes.service';
-import { Api } from 'src/app/model/api';
+import { Web } from 'src/app/model/web';
 import { Ios } from 'src/app/model/ios';
 import { Negocio } from 'src/app/model/negocio';
 import { NegocioService } from 'src/app/service/negocio.service';
@@ -24,14 +24,14 @@ export class AdicionarambienteComponent implements OnInit {
   erros!:string[];
   novoAmbiente!:Ambiente;
   android!:Android[];
-  api!:Api[];
+  web!:Web[];
   ios!:Ios[];
   negocio!:Negocio[];
 
   constructor(private http : AmbienteService,
               private androidService : AndroidService,
               private iosService: IosService,
-              private apiService: ApiService,
+              private webService: WebService,
               private negocioService : NegocioService,
               private snackBar: MatSnackBar,
               private router : Router) { }
@@ -43,8 +43,8 @@ export class AdicionarambienteComponent implements OnInit {
     this.iosService.ObterTodos().subscribe(dados =>{
       this.ios = dados;
     });
-    this.apiService.ObterTodos().subscribe(dados =>{
-      this.api = dados;
+    this.webService.ObterTodos().subscribe(dados =>{
+      this.web = dados;
     });
     this.negocioService.ObterTodos().subscribe(dados =>{
       this.negocio = dados;
@@ -54,7 +54,7 @@ export class AdicionarambienteComponent implements OnInit {
       nome : new FormControl('',[Validators.required,Validators.minLength(1)]),
       chamado : new FormControl('',[Validators.required,Validators.minLength(1)]),
       descricao : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      webId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       negocioId : new FormControl('',[Validators.required, Validators.minLength(1)])

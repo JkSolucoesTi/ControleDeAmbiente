@@ -1,0 +1,34 @@
+<app-header></app-header>
+<mat-sidenav-container class="side">
+    <mat-sidenav mode="side" opened>
+   <mat-list>
+    <mat-list-item routerLink="chamados">
+        <div>
+            <mat-icon>tv</mat-icon>  Ambientes
+        </div>
+    </mat-list-item>
+       <mat-divider></mat-divider>
+       <mat-list-item routerLink="business">
+           <div>
+            <mat-icon>business</mat-icon>  Business
+        </div>
+     </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="desenvolvedores">
+        <div>
+         <mat-icon>developer_mode</mat-icon>  Desenvolvedores
+        </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="api">
+      <div>
+        <mat-icon>storage</mat-icon>  API
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+   </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,4 +1,5 @@
-export class Api {
-  id!: string;
+export class Api{
+  id!:number;
   nome!:string;
+  descricao!:string;
 }

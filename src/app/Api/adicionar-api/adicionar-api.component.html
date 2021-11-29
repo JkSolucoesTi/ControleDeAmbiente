@@ -1,0 +1,56 @@
+<div *ngIf="erros.length > 0">
+  <div class="divErros" style="margin-top: 10px;">
+    <h4 *ngFor="let erro of erros">
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      {{erro}}
+      <mat-icon style="vertical-align: bottom;">error</mat-icon>
+    </h4>
+  </div>
+</div>
+<div class="mat-card-cvr">
+  <mat-card>
+  <div class="titulo">
+    <mat-card-subtitle>Nova API</mat-card-subtitle>
+  </div>
+      <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AdicionarApi()">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input type="text" matInput placeholder="Nome" formControlName="nome">
+            <mat-error *ngIf="propriedade.nome.touched && propriedade.nome.invalid" >
+               <sup>*</sup> Preencher o nome da API
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Descrição</mat-label>
+            <input type="text" matInput placeholder="Descrição." formControlName="descricao">
+            <mat-error *ngIf="propriedade.descricao.touched && propriedade.descricao.invalid">
+              <sup>*</sup> Preencher com a descrição da API
+           </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card-actions align="end" style="padding-top:20px;margin-right: 30px;">
+          <button
+          mat-button
+          mat-mini-fab
+          color="accent"
+          [routerLink]="['/api']"
+           >
+           <mat-icon>backspace</mat-icon>
+          </button>
+          <button
+          type="submit"
+          mat-button
+          mat-mini-fab
+          color="primary"
+          [disabled]="formulario.invalid">
+          <mat-icon>add</mat-icon>
+        </button>
+        </mat-card-actions>
+        <mat-divider></mat-divider>
+      </form>
+    </mat-card>
+  </div>

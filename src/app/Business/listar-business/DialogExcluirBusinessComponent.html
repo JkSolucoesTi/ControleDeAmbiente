@@ -1,6 +1,6 @@
-<h2 style="color:blue">Liberar Ambiente</h2>
+<h2 style="color:blue">Analista de Negocio</h2>
 <mat-dialog-content>
-    <p style="color: blue;align-items: center;" >Deseja prosseguir com a liberaração o ambiente - {{data.ambiente}}<mat-icon style="vertical-align: bottom; color: red;">error</mat-icon></p>
+    <p style="color: blue;align-items: center;" >Deseja prosseguir com a exclusão do analista de negogcio - {{data.businessNome}}<mat-icon style="vertical-align: bottom; color: red;">error</mat-icon></p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button style="background-color: red;"
@@ -12,7 +12,7 @@
     mat-mini-fab
     color="primary"
     [mat-dialog-close]="true"
-    (click)="LiberarAmbiente(data.ambienteId,data.ambiente)">
+    (click)="ExcluirNegocio(data.businessId)">
     <mat-icon>thumb_up</mat-icon>
 </button>
 </mat-dialog-actions>
