@@ -1,5 +1,5 @@
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component,Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component,Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Api } from 'src/app/model/api';
 import { ApiService } from 'src/app/service/api.service';
@@ -18,7 +18,8 @@ export class ListarApiComponent implements OnInit {
   erros:string[]=[];
 
   constructor(private apiService : ApiService,
-              private dialog : MatDialog) { }
+              private dialog : MatDialog,
+              private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.apiService.ObterTodos().subscribe(resultado =>{
@@ -48,10 +49,13 @@ export class ListarApiComponent implements OnInit {
         nomeApi : nomeApi
       }
     }).afterClosed().subscribe(resultado => {
+      if(resultado === true){
       this.apiService.ObterTodos().subscribe((resultado) => {      
         this.dataSource.data = resultado;
+        this.changeDetectorRefs.detectChanges();
       });
       this.displayedColumns = this.ExibirColunas();
+    }      
     });
   }
 }
@@ -69,7 +73,7 @@ export class DialogExcluirApiComponent{
   ExcluirApi(apiId:string){
     this.apiService.Excluir(apiId).subscribe(resultado =>{
       this.snackBar.open(resultado.mensagem,"Exclluir",{
-        duration: 2000,
+        duration: 1000,
         horizontalPosition:'center',
         verticalPosition:'bottom'
       })

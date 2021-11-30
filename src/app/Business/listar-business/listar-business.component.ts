@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Negocio } from 'src/app/model/negocio';
 import { NegocioService } from 'src/app/service/negocio.service';
@@ -20,7 +20,7 @@ export class ListarBusinessComponent implements OnInit {
 
   constructor(private negocioService: NegocioService,
               private dialog : MatDialog,
-              private route :Router) { }
+              private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.negocioService.ObterTodos().subscribe(resultado => {
@@ -46,11 +46,14 @@ export class ListarBusinessComponent implements OnInit {
         businessId:businessId,
         businessNome : businessNome
       }
-    }).afterClosed().subscribe(resultado => {      
-        this.negocioService.ObterTodos().subscribe((resultado) => {   
-        this.dataSourceBusiness.data = [];               
+    }).afterClosed().subscribe(resultado => {     
+      if(resultado === true){ 
+        this.negocioService.ObterTodos().subscribe((resultado) => {              
         this.dataSourceBusiness.data = resultado.filter(x => x.nome != "Sem alocação");;
+        this.dataSourceBusiness.paginator = null;
+        this.changeDetectorRefs.detectChanges();
       });      
+    }
     }); 
     this.displayedColumns = this.ExibirColunas();
   }
@@ -73,7 +76,7 @@ export class DialogExcluirBusinessComponent{
   ExcluirNegocio(businessId:string){
     this.negocioService.Excluir(businessId).subscribe(resultado => {
       this.snackBar.open(resultado.mensagem,"Excluir",{
-        duration:2000,
+        duration:1000,
         horizontalPosition:'center',
         verticalPosition:'bottom'
       });

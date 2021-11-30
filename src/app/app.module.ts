@@ -42,6 +42,11 @@ import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.compone
 import { ListarChamadoComponent , DialogLiberarAmbientComponent } from './Chamado/listar-chamado/listar-chamado.component';
 import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
 import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
+import { ChamadoService } from './service/chamado.service';
+import { AndroidService } from './service/android.service';
+import { WebService } from './service/web.service';
+import { IosService } from './service/ios.service';
+import { NegocioService } from './service/negocio.service';
 
 
 @NgModule({
@@ -94,7 +99,12 @@ import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar
     MatTabsModule
   ],
   providers: [
-    AmbienteService
+    ChamadoService,
+    AmbienteService,
+    AndroidService,
+    WebService,
+    IosService,
+    NegocioService
   ],
   bootstrap: [AppComponent]
 })

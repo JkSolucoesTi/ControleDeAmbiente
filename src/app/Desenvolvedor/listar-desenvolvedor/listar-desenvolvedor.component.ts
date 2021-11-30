@@ -1,7 +1,7 @@
 import { Ios } from './../../model/ios';
 import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Android } from 'src/app/model/android';
 import { Web } from 'src/app/model/web';
@@ -30,7 +30,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
   constructor(private webService: WebService,
               private iosService: IosService,
               private androidService: AndroidService,
-              private route:Router,
+              private changeDetectorRefs: ChangeDetectorRef,
               private dialog : MatDialog) { }
 
   ngOnInit(): void {
@@ -90,7 +90,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
   }
 
   AbrirDialog(desenvolvedorId:string, desenvolvedorNome:string, tipoDesenvolvedor:string){
-    if(tipoDesenvolvedor == "web"){
+    if(tipoDesenvolvedor === "web"){
       this.dialog.open(DialogExcluirDesenvolvedorComponent,{
         data:{
           desenvolvedorId: desenvolvedorId,
@@ -98,14 +98,16 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
-        this.webService.ObterTodos().subscribe((resultado) => {                
-          this.web = resultado;
-          this.dataSourceWeb.data =  this.web.filter(x => x.nome != "Sem alocação");    
+        if(resultado === true){
+        this.webService.ObterTodos().subscribe((resultado) => {                         
+          this.dataSourceWeb.data =  resultado.filter(x => x.nome != "Sem alocação");    
+          this.changeDetectorRefs.detectChanges();
         });        
         this.displayedColumns = this.ExibirColunas();
+      }
       });    
     }
-    if(tipoDesenvolvedor == "ios"){
+    if(tipoDesenvolvedor === "ios"){
       this.dialog.open(DialogExcluirDesenvolvedorComponent,{
         data:{
           desenvolvedorId: desenvolvedorId,
@@ -113,15 +115,16 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
+        if(resultado === true){
         this.iosService.ObterTodos().subscribe((resultado) => {
-          this.ios = resultado;
-          this.dataSourceIos.data =  this.ios.filter(x => x.nome != "Sem alocação");
-    
+          this.dataSourceIos.data =  resultado.filter(x => x.nome != "Sem alocação");    
+          this.changeDetectorRefs.detectChanges();
         });
         this.displayedColumns = this.ExibirColunas();
+      }
       });
     }
-    if(tipoDesenvolvedor == "android"){
+    if(tipoDesenvolvedor === "android"){
       this.dialog.open(DialogExcluirDesenvolvedorComponent,{
         data:{
           desenvolvedorId: desenvolvedorId,
@@ -129,11 +132,13 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
+        if(resultado === true){
         this.androidService.ObterTodos().subscribe((resultado) => {
-          this.android = resultado;
-          this.dataSourceAndroid.data =  this.android.filter(x => x.nome != "Sem alocação");    
+          this.dataSourceAndroid.data =  resultado.filter(x => x.nome != "Sem alocação");
+          this.changeDetectorRefs.detectChanges();
         });
         this.displayedColumns = this.ExibirColunas();
+      }
       });
     }
   }
@@ -156,27 +161,27 @@ export class DialogExcluirDesenvolvedorComponent{
   }
 
   LiberarAmbiente(desenvolvedorId:string,desenvolvedorTipo:string){
-    if(desenvolvedorTipo == 'web')
+    if(desenvolvedorTipo === 'web')
     {
       this.webServce.Excluir(desenvolvedorId).subscribe(resultado =>{
         this.snackBar.open(resultado.mensagem,"Exclusão",{
-          duration: 2000,
+          duration: 1000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
         });
       });
     }
-    if(desenvolvedorTipo == 'ios')
+    if(desenvolvedorTipo === 'ios')
     {
       this.iosService.Excluir(desenvolvedorId).subscribe(resultado =>{
         this.snackBar.open(resultado.mensagem,"Exclusão",{
-          duration: 2000,
+          duration: 1000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
         });
       });
     }
-    if(desenvolvedorTipo == 'android')
+    if(desenvolvedorTipo === 'android')
     {
       this.androidService.Excluir(desenvolvedorId).subscribe(resultado =>{
         this.snackBar.open(resultado.mensagem,"Exclusão",{
