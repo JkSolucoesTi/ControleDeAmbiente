@@ -48,8 +48,7 @@ export class ListarApiComponent implements OnInit {
         nomeApi : nomeApi
       }
     }).afterClosed().subscribe(resultado => {
-      this.apiService.ObterTodos().subscribe(resultado => {
-        this.dataSource.data = [];
+      this.apiService.ObterTodos().subscribe((resultado) => {      
         this.dataSource.data = resultado;
       });
       this.displayedColumns = this.ExibirColunas();

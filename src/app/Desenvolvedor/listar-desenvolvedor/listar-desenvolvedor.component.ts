@@ -98,7 +98,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
-        this.webService.ObterTodos().subscribe(resultado => {                
+        this.webService.ObterTodos().subscribe((resultado) => {                
           this.web = resultado;
           this.dataSourceWeb.data =  this.web.filter(x => x.nome != "Sem alocação");    
         });        
@@ -113,7 +113,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
-        this.iosService.ObterTodos().subscribe(resultado => {
+        this.iosService.ObterTodos().subscribe((resultado) => {
           this.ios = resultado;
           this.dataSourceIos.data =  this.ios.filter(x => x.nome != "Sem alocação");
     
@@ -129,10 +129,9 @@ export class ListarDesenvolvedorComponent implements OnInit {
           desenvolvedorTipo : tipoDesenvolvedor
         }
       }).afterClosed().subscribe(resultado => {
-        this.androidService.ObterTodos().subscribe(resultado => {
+        this.androidService.ObterTodos().subscribe((resultado) => {
           this.android = resultado;
-          this.dataSourceAndroid.data =  this.android.filter(x => x.nome != "Sem alocação");
-    
+          this.dataSourceAndroid.data =  this.android.filter(x => x.nome != "Sem alocação");    
         });
         this.displayedColumns = this.ExibirColunas();
       });
@@ -164,7 +163,7 @@ export class DialogExcluirDesenvolvedorComponent{
           duration: 2000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
-        })
+        });
       });
     }
     if(desenvolvedorTipo == 'ios')
@@ -174,17 +173,17 @@ export class DialogExcluirDesenvolvedorComponent{
           duration: 2000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
-        })
+        });
       });
     }
     if(desenvolvedorTipo == 'android')
     {
       this.androidService.Excluir(desenvolvedorId).subscribe(resultado =>{
         this.snackBar.open(resultado.mensagem,"Exclusão",{
-          duration: 2000,
+          duration: 1000,
           horizontalPosition:'center',
           verticalPosition:'bottom'
-        })
+        });
       });
     }
   }

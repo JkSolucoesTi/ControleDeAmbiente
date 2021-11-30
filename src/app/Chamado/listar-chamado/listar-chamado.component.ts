@@ -77,7 +77,7 @@ export class ListarChamadoComponent implements OnInit {
         apiId:apiId
       }
     }).afterClosed().subscribe(resultado => {
-          this.chamadoService.ObterTodos().subscribe(resultado =>{
+          this.chamadoService.ObterTodos().subscribe((resultado) =>{
             this.dataSource.data = resultado;
             this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
             this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');

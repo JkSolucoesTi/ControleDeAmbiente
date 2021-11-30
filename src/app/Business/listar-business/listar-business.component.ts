@@ -47,7 +47,7 @@ export class ListarBusinessComponent implements OnInit {
         businessNome : businessNome
       }
     }).afterClosed().subscribe(resultado => {      
-        this.negocioService.ObterTodos().subscribe(resultado => {   
+        this.negocioService.ObterTodos().subscribe((resultado) => {   
         this.dataSourceBusiness.data = [];               
         this.dataSourceBusiness.data = resultado.filter(x => x.nome != "Sem alocação");;
       });      
