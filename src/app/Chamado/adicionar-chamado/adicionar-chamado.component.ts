@@ -33,7 +33,7 @@ export class AdicionarChamadoComponent implements OnInit {
   erros:string[]=[];
 
   constructor(private chamadoService:ChamadoService,
-    private ambienteService:AmbienteService,
+    private ambienteService: AmbienteService,
     private apiService: ApiService,
     private webService: WebService,
     private iosService: IosService,
@@ -44,11 +44,9 @@ export class AdicionarChamadoComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-
-
     this.ambienteService.ObterTodos().subscribe(dados =>{
       this.ambiente = dados;
-    });
+    })
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
     });

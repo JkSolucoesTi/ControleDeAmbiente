@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Android } from '../model/android';
+import { EndPoint } from '../model/endpoint';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,10 +16,10 @@ const httpOptions = {
 })
 export class AndroidService {
 
-  apiUrl = "http://localhost:62405/api/desenvolvedores/android";
+  constructor(private androidService : HttpClient, private endpoint : EndPoint) { }
 
-  constructor(private androidService : HttpClient) { }
-
+  apiUrl = `${this.endpoint.ambiente}/api/desenvolvedores/android`
+    
   ObterTodos():Observable<Android[]>{
     return this.androidService.get<Android[]>(this.apiUrl);
   }

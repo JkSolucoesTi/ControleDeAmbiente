@@ -19,7 +19,7 @@ export class ListarApiComponent implements OnInit {
 
   constructor(private apiService : ApiService,
               private dialog : MatDialog,
-              private changeDetectorRefs: ChangeDetectorRef) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.apiService.ObterTodos().subscribe(resultado =>{
@@ -50,9 +50,25 @@ export class ListarApiComponent implements OnInit {
       }
     }).afterClosed().subscribe(resultado => {
       if(resultado === true){
-      this.apiService.ObterTodos().subscribe((resultado) => {      
-        this.dataSource.data = resultado;
-        this.changeDetectorRefs.detectChanges();
+        this.apiService.Excluir(apiId).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Exclluir",{
+            duration: 1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+          this.apiService.ObterTodos().subscribe((resultado) => {      
+            this.dataSource.data = resultado;    
+        });
+      },erro => {
+        if(erro === 400){
+          this.snackBar.open(erro.mensagem,"Exclusao",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+        }else{
+          this.erros.push("Ocorreu algum problem ao excluir a API")
+        }
       });
       this.displayedColumns = this.ExibirColunas();
     }      
@@ -66,17 +82,8 @@ export class ListarApiComponent implements OnInit {
 })
 
 export class DialogExcluirApiComponent{
-  constructor(@Inject (MAT_DIALOG_DATA) public data:any,
-              private snackBar:MatSnackBar,
-              private apiService: ApiService){}
+  constructor(@Inject (MAT_DIALOG_DATA) public data:any){}
 
   ExcluirApi(apiId:string){
-    this.apiService.Excluir(apiId).subscribe(resultado =>{
-      this.snackBar.open(resultado.mensagem,"Exclluir",{
-        duration: 1000,
-        horizontalPosition:'center',
-        verticalPosition:'bottom'
-      })
-    })
   }
 }

@@ -1,4 +1,3 @@
-import { AmbienteService } from './service/ambientes.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,11 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
-import { AmbientesComponent} from './Ambiente/ambientes/ambientes.component';
-import { AlterarambientesComponent } from './Ambiente/alterarambientes/alterarambientes.component';
-import { AdicionarambienteComponent } from './Ambiente/adicionarambiente/adicionarambiente.component';
+import { EndPoint } from './model/endpoint';
 import {MatListModule} from '@angular/material/list';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
 import { HeaderComponent } from './Dashboard/header/header.component';
@@ -39,7 +34,7 @@ import { ListarApiComponent , DialogExcluirApiComponent} from './Api/listar-api/
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
-import { ListarChamadoComponent , DialogLiberarAmbientComponent } from './Chamado/listar-chamado/listar-chamado.component';
+import { ListarChamadoComponent , DialogLiberarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
 import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
 import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
 import { ChamadoService } from './service/chamado.service';
@@ -48,17 +43,13 @@ import { WebService } from './service/web.service';
 import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    AmbientesComponent,
-    AlterarambientesComponent,
-    AdicionarambienteComponent,
-    DialogLiberarAmbientComponent,
     DialogExcluirDesenvolvedorComponent,
     DialogExcluirBusinessComponent,
     DialogExcluirApiComponent,
+    DialogLiberarChamadoComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,
@@ -100,11 +91,11 @@ import { NegocioService } from './service/negocio.service';
   ],
   providers: [
     ChamadoService,
-    AmbienteService,
     AndroidService,
     WebService,
     IosService,
-    NegocioService
+    NegocioService,
+    EndPoint
   ],
   bootstrap: [AppComponent]
 })

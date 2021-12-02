@@ -32,7 +32,7 @@ export class ListarChamadoComponent implements OnInit {
 
   constructor(private chamadoService:ChamadoService,
               private dialog: MatDialog,
-              private changeDetectorRefs: ChangeDetectorRef
+              private snackBar: MatSnackBar
              ) { }
 
   ngOnInit(): void {
@@ -69,13 +69,19 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   AbrirDialog(ambienteId:any,apiId:any){
-    this.dialog.open(DialogLiberarAmbientComponent,{
+    this.dialog.open(DialogLiberarChamadoComponent,{
       data:{
         ambienteId:ambienteId,
         apiId:apiId
       }
     }).afterClosed().subscribe(resultado => {
       if(resultado === true){
+        this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
+            duration : 2000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
           this.chamadoService.ObterTodos().subscribe((resultado) =>{
             this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');            
             this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
@@ -88,9 +94,19 @@ export class ListarChamadoComponent implements OnInit {
             this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
             this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
             this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
-            this.changeDetectorRefs.detectChanges();
           });
+         })
         }
+    },erro => {
+      if(erro === 400){
+        this.snackBar.open(erro.mensagem,"Exclusao",{
+          duration:1000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        });
+      }else{
+        this.erros.push("Houve algum problema ao liberar o ambiente selecionado");
+      }
     });
     this.displayedColumns = this.ExibirColunas();
   }
@@ -98,24 +114,12 @@ export class ListarChamadoComponent implements OnInit {
 
 @Component({
   selector: 'app-dialog-liberar-ambiente',
-  templateUrl: 'dialog-liberar-ambiente.component.html',
+  templateUrl: 'dialog-liberar-chamado.component.html',
 })
-export class DialogLiberarAmbientComponent {
-  constructor( @Inject (MAT_DIALOG_DATA) public data: any ,
-              private chamadoService : ChamadoService,
-              private snackBar : MatSnackBar) {}
+export class DialogLiberarChamadoComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public data: any) {}
 
-   LiberarAmbiente(ambienteId:string,apiId:string){
-     console.log(ambienteId,apiId)
-     this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
-    if(resultado){
-      this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
-        duration : 2000,
-        horizontalPosition:'center',
-        verticalPosition:'bottom'
-      });
-    }
-     })
+   LiberarAmbiente(ambienteId:string,apiId:string){     
     }
 
   ExibirColunas():string[]{

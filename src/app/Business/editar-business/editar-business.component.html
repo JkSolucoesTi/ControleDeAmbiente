@@ -13,7 +13,7 @@
     <mat-card>
     <div>
       <mat-card-title>Editar informações do Analista</mat-card-title>
-    <mat-card-subtitle>{{negocio.nome}}</mat-card-subtitle>
+    <mat-card-subtitle>{{negocio?.nome}}</mat-card-subtitle>
   </div>
   <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AtualizarBusiness()">
         <div>

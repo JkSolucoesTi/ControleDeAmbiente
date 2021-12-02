@@ -20,7 +20,7 @@ export class ListarBusinessComponent implements OnInit {
 
   constructor(private negocioService: NegocioService,
               private dialog : MatDialog,
-              private changeDetectorRefs: ChangeDetectorRef) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.negocioService.ObterTodos().subscribe(resultado => {
@@ -48,11 +48,27 @@ export class ListarBusinessComponent implements OnInit {
       }
     }).afterClosed().subscribe(resultado => {     
       if(resultado === true){ 
-        this.negocioService.ObterTodos().subscribe((resultado) => {              
-        this.dataSourceBusiness.data = resultado.filter(x => x.nome != "Sem alocação");;
-        this.dataSourceBusiness.paginator = null;
-        this.changeDetectorRefs.detectChanges();
-      });      
+        this.negocioService.Excluir(businessId).subscribe(resultado => {
+          this.snackBar.open(resultado.mensagem,"Excluir",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+            this.negocioService.ObterTodos().subscribe((resultado) => {              
+            this.dataSourceBusiness.data = resultado.filter(x => x.nome != "Sem alocação");;
+        });
+      },erro =>{
+        if(erro === 400){
+          this.snackBar.open(erro.mensagem,"Exclusao",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+        }else{
+          this.erros.push("Ocorreu algum problema ao excluir o Analista de Negocio")
+        }
+      }     
+      );      
     }
     }); 
     this.displayedColumns = this.ExibirColunas();
@@ -74,12 +90,5 @@ export class DialogExcluirBusinessComponent{
   }
 
   ExcluirNegocio(businessId:string){
-    this.negocioService.Excluir(businessId).subscribe(resultado => {
-      this.snackBar.open(resultado.mensagem,"Excluir",{
-        duration:1000,
-        horizontalPosition:'center',
-        verticalPosition:'bottom'
-      });
-    });
   }
 }

@@ -13,7 +13,7 @@
 <mat-card>
   <div>
     <mat-card-title>Editar informações da APÌ</mat-card-title>
-    <mat-card-subtitle>{{api.nome}}</mat-card-subtitle>
+    <mat-card-subtitle>{{api?.nome}}</mat-card-subtitle>
 </div>
 <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="AtualizarApi()">
       <div>

@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chamado } from '../model/chamado';
+import { EndPoint } from '../model/endpoint';
 
 const httpOptions = {
   headers : new HttpHeaders({
@@ -14,9 +15,9 @@ const httpOptions = {
 })
 export class ChamadoService {
 
-  api:string = "http://localhost:62405/api/chamados"
+  constructor(private chamadoService:HttpClient , private endpoint : EndPoint) { }
 
-  constructor(private chamadoService:HttpClient) { }
+  api:string = `${this.endpoint.ambiente}/api/chamados`
 
   ObterTodos():Observable<Chamado[]>{
     return this.chamadoService.get<Chamado[]>(this.api);
@@ -37,8 +38,8 @@ export class ChamadoService {
     return this.chamadoService.delete<Chamado>(apiUrl);
   }
 
-  Atualizar(chamado : Chamado , chamadoId : number):Observable<any>{
-    const url = `${this.api}/Alterar/${chamadoId}`;
+  Atualizar(chamado : Chamado , ambienteIdOld:string,apiIdOld:number,chamadoId : number):Observable<any>{
+    const url = `${this.api}/Alterar/${ambienteIdOld}/${apiIdOld}/${chamadoId}`;
     return this.chamadoService.put(url,chamado,httpOptions);
   }
 

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Api } from '../model/api';
+import { EndPoint } from '../model/endpoint';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,9 +15,10 @@ const httpOptions = {
 })
 export class ApiService {
 
-  apiUrl = "http://localhost:62405/api/api";
+  constructor(private apiService : HttpClient , private endpoint: EndPoint) { }
 
-  constructor(private apiService : HttpClient) { }
+  apiUrl = `${this.endpoint.ambiente}/api/api`
+
 
   ObterTodos():Observable<Api[]>{
     return this.apiService.get<Api[]>(this.apiUrl);
