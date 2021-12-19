@@ -34,7 +34,7 @@ import { ListarApiComponent , DialogExcluirApiComponent} from './Api/listar-api/
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
-import { ListarChamadoComponent , DialogLiberarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
+import { ListarChamadoComponent , DialogLiberarChamadoComponent,DialogDetalheChamadoComponent} from './Chamado/listar-chamado/listar-chamado.component';
 import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
 import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
 import { ChamadoService } from './service/chamado.service';
@@ -42,6 +42,11 @@ import { AndroidService } from './service/android.service';
 import { WebService } from './service/web.service';
 import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
+import { NgxMaskModule , IConfig } from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> ={
+  validation:false,
+}
 
 @NgModule({
   declarations: [
@@ -50,6 +55,7 @@ import { NegocioService } from './service/negocio.service';
     DialogExcluirBusinessComponent,
     DialogExcluirApiComponent,
     DialogLiberarChamadoComponent,
+    DialogDetalheChamadoComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,
@@ -87,7 +93,8 @@ import { NegocioService } from './service/negocio.service';
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [
     ChamadoService,

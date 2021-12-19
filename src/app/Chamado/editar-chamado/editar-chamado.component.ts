@@ -82,7 +82,10 @@ export class EditarChamadoComponent implements OnInit {
         webId : new FormControl(resultado.webId,[Validators.required,Validators.minLength(1)]),
         iosId : new FormControl(resultado.iosId,[Validators.required,Validators.minLength(1)]),
         androidId : new FormControl(resultado.androidId,[Validators.required,Validators.minLength(1)]),
-        negocioId : new FormControl(resultado.negocioId,[Validators.required,Validators.minLength(1)])
+        negocioId : new FormControl(resultado.negocioId,[Validators.required,Validators.minLength(1)]),
+        chamadoWeb : new FormControl(resultado.chamadoWeb,[]),
+        chamadoIos: new FormControl(resultado.chamadoIos,[]),
+        chamadoAndroid : new FormControl(resultado.chamadoAndroid,[])
       });
     })
 

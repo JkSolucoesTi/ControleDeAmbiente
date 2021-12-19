@@ -71,7 +71,10 @@ export class AdicionarChamadoComponent implements OnInit {
       webId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      negocioId : new FormControl('',[Validators.required,Validators.minLength(1)])
+      negocioId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      chamadoWeb : new FormControl('',[]),
+      chamadoIos: new FormControl('',[]),
+      chamadoAndroid : new FormControl('',[])
     })
   }
 

@@ -38,6 +38,7 @@ export class ListarChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {
+      const chamado = resultado;
       this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
       this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
       this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
@@ -65,7 +66,7 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   ExibirColunas():string[]{
-    return ['numero','api','web','ios','android','business','acoes']
+    return ['detalhes','numero','api','web','ios','android','business','acoes']
   }
 
   AbrirDialog(ambienteId:any,apiId:any){
@@ -110,6 +111,29 @@ export class ListarChamadoComponent implements OnInit {
     });
     this.displayedColumns = this.ExibirColunas();
   }
+
+  AbrirDetalhe(numeroChamado:string,nomeAmbiente:string){
+    
+    this.chamadoService.Detahes(numeroChamado,nomeAmbiente).subscribe(resultado =>{
+
+      const valores = resultado;
+      this.dialog.open(DialogDetalheChamadoComponent,{
+        width:'600px',
+        height:'330px',
+        data :{
+          numero : valores.numero,
+          api : valores.api.nome,
+          nomeWeb : valores.web.nome,
+          reqWeb : valores.chamadoWeb,
+          nomeIos : valores.ios.nome,
+          reqIos : valores.chamadoIos,
+          nomeAndroid : valores.android.nome,
+          reqAndroid: valores.chamadoAndroid
+        }
+      }
+      )
+    })
+  }     
 }
 
 @Component({
@@ -125,4 +149,28 @@ export class DialogLiberarChamadoComponent {
   ExibirColunas():string[]{
     return ['numero','api','web','ios','android','business','acoes']
   }
+}
+
+@Component({
+  selector: 'app-dialog-detalhe-chamado',
+  templateUrl: 'dialog-detalhe-chamado.component.html',
+  styleUrls: ['./listar-chamado.component.css']
+})
+export class DialogDetalheChamadoComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public info: any) {}
+
+  ELEMENTOS_DATA : ModalDetalhes[] =
+  [ {desenvolvedor : this.info.nomeWeb, chamado : this.info.reqWeb},
+    {desenvolvedor : this.info.nomeIos, chamado : this.info.reqIos},
+    {desenvolvedor : this.info.nomeAndroid, chamado : this.info.reqAndroid}
+  ]
+  
+  dataSource = this.ELEMENTOS_DATA;
+
+  displayedColumns: string[] =['chamado','desenvolvedor']
+}
+
+export interface ModalDetalhes{
+  chamado:string;
+  desenvolvedor:string;
 }
