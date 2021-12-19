@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ios } from '../model/ios';
+import { EndPoint } from '../model/endpoint'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,9 +15,9 @@ const httpOptions = {
 })
 export class IosService {
 
-  apiUrl = "http://localhost:62405/api/desenvolvedores/ios"
+  constructor(private iosService : HttpClient, private endpoint : EndPoint) { }
 
-  constructor(private iosService : HttpClient) { }
+ apiUrl = `${this.endpoint.ambiente}/api/desenvolvedores/ios`
 
   ObterTodos():Observable<Ios[]>{
     return this.iosService.get<Ios[]>(this.apiUrl);
@@ -35,5 +36,10 @@ export class IosService {
   Adicionar(ios:Ios):Observable<any>{
     const url = `${this.apiUrl}/Adicionar`;
     return this.iosService.post<Ios>(url,ios);
+  }
+
+  Excluir(iosId:string):Observable<any>{
+    const url = `${this.apiUrl}/${iosId}`;
+    return this.iosService.delete<number>(url);
   }
 }

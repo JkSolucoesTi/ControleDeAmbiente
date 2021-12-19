@@ -1,0 +1,18 @@
+<h2 style="color:blue">Excluir API</h2>
+<mat-dialog-content>
+    <p style="color: blue;align-items: center;" >Deseja prosseguir com a exclusão da API - {{data.apiNome}}<mat-icon style="vertical-align: bottom; color: red;">error</mat-icon></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button style="background-color: red;"
+    mat-mini-fab
+    mat-dialog-close>
+    <mat-icon>not_interested</mat-icon>
+    </button>
+    <button
+    mat-mini-fab
+    color="primary"
+    [mat-dialog-close]="true"
+    (click)="ExcluirApi(data.apiId)">
+    <mat-icon>thumb_up</mat-icon>
+</button>
+</mat-dialog-actions>

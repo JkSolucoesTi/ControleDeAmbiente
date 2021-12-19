@@ -16,7 +16,9 @@
 <table mat-table
 class="mat-elevation-z8"
 [dataSource]="dataSourceBusiness"
-class="table">
+class="table"
+*ngIf="dataSourceBusiness"
+>
 
 <ng-container matColumnDef="nome">
     <th mat-header-cell *matHeaderCellDef>Nome</th>
@@ -42,7 +44,9 @@ class="table">
     </button>
     <button
     mat-mini-fab
-    color="accent">
+    color="accent"
+    (click)="AbrirDialog(dataSourceBusiness.id,dataSourceBusiness.nome)"
+    >
     <mat-icon>delete</mat-icon>
   </button>
     </td>

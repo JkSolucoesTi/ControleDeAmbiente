@@ -33,7 +33,7 @@ export class AdicionarChamadoComponent implements OnInit {
   erros:string[]=[];
 
   constructor(private chamadoService:ChamadoService,
-    private ambienteService:AmbienteService,
+    private ambienteService: AmbienteService,
     private apiService: ApiService,
     private webService: WebService,
     private iosService: IosService,
@@ -44,11 +44,9 @@ export class AdicionarChamadoComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-
-
     this.ambienteService.ObterTodos().subscribe(dados =>{
       this.ambiente = dados;
-    });
+    })
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
     });
@@ -73,7 +71,10 @@ export class AdicionarChamadoComponent implements OnInit {
       webId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      negocioId : new FormControl('',[Validators.required,Validators.minLength(1)])
+      negocioId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      chamadoWeb : new FormControl('',[]),
+      chamadoIos: new FormControl('',[]),
+      chamadoAndroid : new FormControl('',[])
     })
   }
 

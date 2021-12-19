@@ -1,0 +1,17 @@
+<div class="modal">
+<mat-dialog-content>
+    <p mat-dialog-title>Detalhes do Chamado - {{info.numero | mask:'S00 000 0000'}}</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="chamado">
+      <th mat-header-cell *matHeaderCellDef> Nº do Chamado </th>
+      <td mat-cell *matCellDef="let element"> {{element.chamado | mask:'S00 000 0000'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="desenvolvedor">
+      <th mat-header-cell *matHeaderCellDef> Desenvolvedor </th>
+      <td mat-cell *matCellDef="let element"> {{element.desenvolvedor}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-dialog-content>
+</div>

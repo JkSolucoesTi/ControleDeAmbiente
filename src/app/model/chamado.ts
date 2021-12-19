@@ -7,7 +7,7 @@ import { Web } from "./web";
 
 export class Chamado{
   id!:string;
-  numer!:string;
+  numero!:string;
   descricao!:string;
   ambiente!:Ambiente;
   api!:Api;
@@ -15,4 +15,7 @@ export class Chamado{
   ios!:Ios;
   android!:Android;
   negocio!:Negocio;
+  chamadoWeb!:string;
+  chamadoIos!:string;
+  chamadoAndroid!:string;
 }

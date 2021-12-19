@@ -12,7 +12,7 @@ import { NegocioService } from 'src/app/service/negocio.service';
 })
 export class EditarBusinessComponent implements OnInit {
 
-  erros!:string[];
+  erros:string[]=[];
   parametro!:any;
   negocio!:Negocio;
   formulario!:any;

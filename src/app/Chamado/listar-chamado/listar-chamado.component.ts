@@ -1,10 +1,9 @@
 import { ChamadoService } from './../../service/chamado.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Chamado } from 'src/app/model/chamado';
 import { Ambiente } from 'src/app/model/ambiente';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -14,7 +13,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ListarChamadoComponent implements OnInit {
 
-  dataSource = new MatTableDataSource<Chamado>();
   dataSource1 = new MatTableDataSource<Chamado>();
   dataSource2 = new MatTableDataSource<Chamado>();
   dataSource3 = new MatTableDataSource<Chamado>();
@@ -34,12 +32,13 @@ export class ListarChamadoComponent implements OnInit {
 
   constructor(private chamadoService:ChamadoService,
               private dialog: MatDialog,
-              private router : Router) { }
+              private snackBar: MatSnackBar
+             ) { }
 
   ngOnInit(): void {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {
-      this.dataSource.data = resultado;
+      const chamado = resultado;
       this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
       this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
       this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
@@ -67,19 +66,25 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   ExibirColunas():string[]{
-    return ['numero','api','web','ios','android','business','acoes']
+    return ['detalhes','numero','api','web','ios','android','business','acoes']
   }
 
   AbrirDialog(ambienteId:any,apiId:any){
-    this.dialog.open(DialogLiberarAmbientComponent,{
+    this.dialog.open(DialogLiberarChamadoComponent,{
       data:{
         ambienteId:ambienteId,
         apiId:apiId
       }
     }).afterClosed().subscribe(resultado => {
-          this.chamadoService.ObterTodos().subscribe(resultado =>{
-            this.dataSource.data = resultado;
-            this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
+      if(resultado === true){
+        this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
+            duration : 2000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+          this.chamadoService.ObterTodos().subscribe((resultado) =>{
+            this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');            
             this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
             this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
             this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
@@ -91,34 +96,81 @@ export class ListarChamadoComponent implements OnInit {
             this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
             this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
           });
+         })
+        }
+    },erro => {
+      if(erro === 400){
+        this.snackBar.open(erro.mensagem,"Exclusao",{
+          duration:1000,
+          horizontalPosition:'center',
+          verticalPosition:'bottom'
+        });
+      }else{
+        this.erros.push("Houve algum problema ao liberar o ambiente selecionado");
+      }
     });
     this.displayedColumns = this.ExibirColunas();
   }
+
+  AbrirDetalhe(numeroChamado:string,nomeAmbiente:string){
+    
+    this.chamadoService.Detahes(numeroChamado,nomeAmbiente).subscribe(resultado =>{
+
+      const valores = resultado;
+      this.dialog.open(DialogDetalheChamadoComponent,{
+        width:'600px',
+        height:'330px',
+        data :{
+          numero : valores.numero,
+          api : valores.api.nome,
+          nomeWeb : valores.web.nome,
+          reqWeb : valores.chamadoWeb,
+          nomeIos : valores.ios.nome,
+          reqIos : valores.chamadoIos,
+          nomeAndroid : valores.android.nome,
+          reqAndroid: valores.chamadoAndroid
+        }
+      }
+      )
+    })
+  }     
 }
 
 @Component({
   selector: 'app-dialog-liberar-ambiente',
-  templateUrl: 'dialog-liberar-ambiente.component.html',
+  templateUrl: 'dialog-liberar-chamado.component.html',
 })
-export class DialogLiberarAmbientComponent {
-  constructor( @Inject (MAT_DIALOG_DATA) public data: any ,
-              private chamadoService : ChamadoService,
-              private router : Router,
-              private snackBar : MatSnackBar) {}
+export class DialogLiberarChamadoComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public data: any) {}
 
-   LiberarAmbiente(ambienteId:string,apiId:string){
-     console.log(ambienteId,apiId)
-     this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
-      this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
-        duration : 2000,
-        horizontalPosition:'center',
-        verticalPosition:'bottom'
-      });
-     })
+   LiberarAmbiente(ambienteId:string,apiId:string){     
     }
-
 
   ExibirColunas():string[]{
     return ['numero','api','web','ios','android','business','acoes']
   }
+}
+
+@Component({
+  selector: 'app-dialog-detalhe-chamado',
+  templateUrl: 'dialog-detalhe-chamado.component.html',
+  styleUrls: ['./listar-chamado.component.css']
+})
+export class DialogDetalheChamadoComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public info: any) {}
+
+  ELEMENTOS_DATA : ModalDetalhes[] =
+  [ {desenvolvedor : this.info.nomeWeb, chamado : this.info.reqWeb},
+    {desenvolvedor : this.info.nomeIos, chamado : this.info.reqIos},
+    {desenvolvedor : this.info.nomeAndroid, chamado : this.info.reqAndroid}
+  ]
+  
+  dataSource = this.ELEMENTOS_DATA;
+
+  displayedColumns: string[] =['chamado','desenvolvedor']
+}
+
+export interface ModalDetalhes{
+  chamado:string;
+  desenvolvedor:string;
 }

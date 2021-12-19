@@ -10,11 +10,12 @@ import { Negocio } from 'src/app/model/negocio';
 import { WebService } from 'src/app/service/web.service';
 import { NegocioService } from 'src/app/service/negocio.service';
 import { AndroidService } from 'src/app/service/android.service';
-import { AmbienteService } from 'src/app/service/ambientes.service';
 import { ApiService } from 'src/app/service/api.service';
 import { IosService } from 'src/app/service/ios.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Chamado } from 'src/app/model/chamado';
+import { AmbienteService } from 'src/app/service/ambientes.service';
 
 @Component({
   selector: 'app-editar-chamado',
@@ -32,12 +33,12 @@ export class EditarChamadoComponent implements OnInit {
   android!:Android[];
   negocio!:Negocio[];
   erros:string[]=[];
-  ambienteOld!:Ambiente;
+  chamadoOld!:Chamado;
 
   constructor(
     private activetad: ActivatedRoute,
+    private ambienteService: AmbienteService,
     private chamadoService:ChamadoService,
-    private ambienteService:AmbienteService,
     private apiService: ApiService,
     private webService: WebService,
     private iosService: IosService,
@@ -46,11 +47,12 @@ export class EditarChamadoComponent implements OnInit {
     private router: Router,
     private snackBar:MatSnackBar
               ) { }
-
+              
   ngOnInit(): void {
-    this.ambienteService.ObterTodos().subscribe(dados =>{
+    this.ambienteService.ObterTodos().subscribe(dados => {
       this.ambiente = dados;
-    });
+    })
+
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
     });
@@ -71,7 +73,7 @@ export class EditarChamadoComponent implements OnInit {
     const rota2 = this.activetad.snapshot.params.apiId;
 
     this.chamadoService.ObterPorAmbienteAPI(rota1,rota2).subscribe(resultado =>{
-      this.ambienteOld = resultado;
+      this.chamadoOld = resultado;
       this.formulario = new FormGroup({
         id : new FormControl(resultado.id),
         numero : new FormControl(resultado.numero,[Validators.required,Validators.maxLength(15)]),
@@ -80,7 +82,10 @@ export class EditarChamadoComponent implements OnInit {
         webId : new FormControl(resultado.webId,[Validators.required,Validators.minLength(1)]),
         iosId : new FormControl(resultado.iosId,[Validators.required,Validators.minLength(1)]),
         androidId : new FormControl(resultado.androidId,[Validators.required,Validators.minLength(1)]),
-        negocioId : new FormControl(resultado.negocioId,[Validators.required,Validators.minLength(1)])
+        negocioId : new FormControl(resultado.negocioId,[Validators.required,Validators.minLength(1)]),
+        chamadoWeb : new FormControl(resultado.chamadoWeb,[]),
+        chamadoIos: new FormControl(resultado.chamadoIos,[]),
+        chamadoAndroid : new FormControl(resultado.chamadoAndroid,[])
       });
     })
 
@@ -93,7 +98,8 @@ export class EditarChamadoComponent implements OnInit {
   Alterar(){
     this.erros= [];
     const parametros = this.formulario.value;
-    this.chamadoService.Atualizar(parametros,parametros.id).subscribe(resultado => {
+    const parametrosOld = this.chamadoOld;
+    this.chamadoService.Atualizar(parametros,parametrosOld.ambiente.id,parametrosOld.api.id,parametros.id).subscribe(resultado => {
       if(resultado.codigo == 2){
         this.erros.push(resultado.mensagem);
       }

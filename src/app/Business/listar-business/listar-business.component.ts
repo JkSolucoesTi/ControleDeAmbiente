@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Negocio } from 'src/app/model/negocio';
 import { NegocioService } from 'src/app/service/negocio.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-listar-business',
@@ -15,12 +18,14 @@ export class ListarBusinessComponent implements OnInit {
   displayedColumns!:string[];
   erros:string[]=[];
 
-  constructor(private negocioService: NegocioService) { }
+  constructor(private negocioService: NegocioService,
+              private dialog : MatDialog,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.negocioService.ObterTodos().subscribe(resultado => {
       this.negocio = resultado;
-      this.dataSourceBusiness.data = this.negocio.splice(1);
+      this.dataSourceBusiness.data = this.negocio.filter(x => x.nome != "Sem alocação");
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -31,14 +36,59 @@ export class ListarBusinessComponent implements OnInit {
       }else{
         this.erros.push("Não foi possível lista os Analista de Negocios");
       }
-    }
-    )
-
+    })
     this.displayedColumns=this.ExibirColunas();
   }
 
+  AbrirDialog(businessId:string ,businessNome:string){
+    this.dialog.open(DialogExcluirBusinessComponent,{
+      data:{
+        businessId:businessId,
+        businessNome : businessNome
+      }
+    }).afterClosed().subscribe(resultado => {     
+      if(resultado === true){ 
+        this.negocioService.Excluir(businessId).subscribe(resultado => {
+          this.snackBar.open(resultado.mensagem,"Excluir",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+            this.negocioService.ObterTodos().subscribe((resultado) => {              
+            this.dataSourceBusiness.data = resultado.filter(x => x.nome != "Sem alocação");;
+        });
+      },erro =>{
+        if(erro === 400){
+          this.snackBar.open(erro.mensagem,"Exclusao",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+        }else{
+          this.erros.push("Ocorreu algum problema ao excluir o Analista de Negocio")
+        }
+      }     
+      );      
+    }
+    }); 
+    this.displayedColumns = this.ExibirColunas();
+  }
   ExibirColunas():string[]{
     return ['nome','email','acoes'];
   }
+}
 
+@Component({
+  selector:"",
+  templateUrl:"./DialogExcluirBusinessComponent.html"
+})
+export class DialogExcluirBusinessComponent{
+
+  constructor(@Inject (MAT_DIALOG_DATA) public data:any ,
+              private negocioService:NegocioService,
+              private snackBar : MatSnackBar){
+  }
+
+  ExcluirNegocio(businessId:string){
+  }
 }
