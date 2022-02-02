@@ -34,7 +34,7 @@ import { ListarApiComponent , DialogExcluirApiComponent} from './Api/listar-api/
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { AdicionarBusinessComponent } from './Business/adicionar-business/adicionar-business.component';
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
-import { ListarChamadoComponent , DialogLiberarChamadoComponent,DialogDetalheChamadoComponent} from './Chamado/listar-chamado/listar-chamado.component';
+import { ListarChamadoComponent } from './Chamado/listar-chamado/listar-chamado.component';
 import { EditarChamadoComponent } from './Chamado/editar-chamado/editar-chamado.component';
 import { AdicionarChamadoComponent } from './Chamado/adicionar-chamado/adicionar-chamado.component';
 import { ChamadoService } from './service/chamado.service';
@@ -54,8 +54,8 @@ const maskConfig: Partial<IConfig> ={
     DialogExcluirDesenvolvedorComponent,
     DialogExcluirBusinessComponent,
     DialogExcluirApiComponent,
-    DialogLiberarChamadoComponent,
-    DialogDetalheChamadoComponent,
+    //DialogLiberarChamadoComponent,
+    //DialogDetalheChamadoComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,

@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chamado } from '../model/chamado';
+import { ChamadoApi} from '../model/ChamadoApi';
 import { EndPoint } from '../model/endpoint';
 
 const httpOptions = {
@@ -21,6 +22,10 @@ export class ChamadoService {
 
   ObterTodos():Observable<Chamado[]>{
     return this.chamadoService.get<Chamado[]>(this.api);
+  }
+
+  ObterChamadosApi():Observable<ChamadoApi[]>{
+    return this.chamadoService.get<ChamadoApi[]>(this.api);
   }
 
   ObterPorAmbienteAPI(ambienteId:string,apiId:string):Observable<any>{

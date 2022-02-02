@@ -1,74 +1,24 @@
-import { ChamadoService } from './../../service/chamado.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { Chamado } from 'src/app/model/chamado';
-import { Ambiente } from 'src/app/model/ambiente';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ChamadoService } from 'src/app/service/chamado.service';
 
 @Component({
   selector: 'app-listar-chamado',
   templateUrl: './listar-chamado.component.html',
   styleUrls: ['./listar-chamado.component.css']
 })
-export class ListarChamadoComponent implements OnInit {
+export class ListarChamadoComponent implements OnInit{
 
-  dataSource1 = new MatTableDataSource<Chamado>();
-  dataSource2 = new MatTableDataSource<Chamado>();
-  dataSource3 = new MatTableDataSource<Chamado>();
-  dataSource4 = new MatTableDataSource<Chamado>();
-  dataSource5 = new MatTableDataSource<Chamado>();
-  dataSource6 = new MatTableDataSource<Chamado>();
-  dataSource7 = new MatTableDataSource<Chamado>();
-  dataSource8 = new MatTableDataSource<Chamado>();
-  dataSource9 = new MatTableDataSource<Chamado>();
-  dataSource10 = new MatTableDataSource<Chamado>();
-  dataSource11 = new MatTableDataSource<Chamado>();
+  constructor(private chamadoService:ChamadoService) { }  
 
-  displayedColumns!:string[];
-  chamado!:Chamado[];
-  erros!:string[];
-  ambiente!:Ambiente[];
-
-  constructor(private chamadoService:ChamadoService,
-              private dialog: MatDialog,
-              private snackBar: MatSnackBar
-             ) { }
-
-  ngOnInit(): void {
-    this.erros = [];
-    this.chamadoService.ObterTodos().subscribe(resultado => {
-      const chamado = resultado;
-      this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
-      this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
-      this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
-      this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
-      this.dataSource5.data = resultado.filter(x => x.ambiente.nome === 'DEV 05');
-      this.dataSource6.data = resultado.filter(x => x.ambiente.nome === 'DEV 06');
-      this.dataSource7.data = resultado.filter(x => x.ambiente.nome === 'DEV 07');
-      this.dataSource8.data = resultado.filter(x => x.ambiente.nome === 'DEV 08');
-      this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
-      this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
-      this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
-    },erro =>{
-      if(erro ==='400'){
-        for(const campo in erro.error.errors){
-          if(erro.error.errors[campo]){
-            this.erros.push(erro.error.errors(campo))
-          }
-        }
-      }else{
-        this.erros.push("Estamos com problemas para acessas os dados dos ambientes");
-      }
-    }
-    );
-    this.displayedColumns = this.ExibirColunas();
+    ngOnInit(){
+      this.chamadoService.ObterChamadosApi().subscribe(resultado => {
+        console.log(resultado);
+      })
   }
+}
 
-  ExibirColunas():string[]{
-    return ['detalhes','numero','api','web','ios','android','business','acoes']
-  }
 
+/*
   AbrirDialog(ambienteId:any,apiId:any){
     this.dialog.open(DialogLiberarChamadoComponent,{
       data:{
@@ -83,18 +33,7 @@ export class ListarChamadoComponent implements OnInit {
             horizontalPosition:'center',
             verticalPosition:'bottom'
           });
-          this.chamadoService.ObterTodos().subscribe((resultado) =>{
-            this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');            
-            this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
-            this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
-            this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
-            this.dataSource5.data = resultado.filter(x => x.ambiente.nome === 'DEV 05');
-            this.dataSource6.data = resultado.filter(x => x.ambiente.nome === 'DEV 06');
-            this.dataSource7.data = resultado.filter(x => x.ambiente.nome === 'DEV 07');
-            this.dataSource8.data = resultado.filter(x => x.ambiente.nome === 'DEV 08');
-            this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
-            this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
-            this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
+          this.chamadoService.ObterChamadosApi().subscribe((resultado) =>{
           });
          })
         }
@@ -135,7 +74,6 @@ export class ListarChamadoComponent implements OnInit {
     })
   }     
 }
-
 @Component({
   selector: 'app-dialog-liberar-ambiente',
   templateUrl: 'dialog-liberar-chamado.component.html',
@@ -174,3 +112,4 @@ export interface ModalDetalhes{
   chamado:string;
   desenvolvedor:string;
 }
+*/
