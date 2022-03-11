@@ -40,6 +40,7 @@ export class ChamadoService {
 
   Atualizar(chamado : Chamado , ambienteIdOld:string,apiIdOld:number,chamadoId : number):Observable<any>{
     const url = `${this.api}/Alterar/${ambienteIdOld}/${apiIdOld}/${chamadoId}`;
+    console.log(url)
     return this.chamadoService.put(url,chamado,httpOptions);
   }
 

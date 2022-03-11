@@ -14,16 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ListarChamadoComponent implements OnInit {
 
   dataSource1 = new MatTableDataSource<Chamado>();
-  dataSource2 = new MatTableDataSource<Chamado>();
-  dataSource3 = new MatTableDataSource<Chamado>();
-  dataSource4 = new MatTableDataSource<Chamado>();
-  dataSource5 = new MatTableDataSource<Chamado>();
-  dataSource6 = new MatTableDataSource<Chamado>();
-  dataSource7 = new MatTableDataSource<Chamado>();
-  dataSource8 = new MatTableDataSource<Chamado>();
-  dataSource9 = new MatTableDataSource<Chamado>();
-  dataSource10 = new MatTableDataSource<Chamado>();
-  dataSource11 = new MatTableDataSource<Chamado>();
 
   displayedColumns!:string[];
   chamado!:Chamado[];
@@ -39,17 +29,7 @@ export class ListarChamadoComponent implements OnInit {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {
       const chamado = resultado;
-      this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');
-      this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
-      this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
-      this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
-      this.dataSource5.data = resultado.filter(x => x.ambiente.nome === 'DEV 05');
-      this.dataSource6.data = resultado.filter(x => x.ambiente.nome === 'DEV 06');
-      this.dataSource7.data = resultado.filter(x => x.ambiente.nome === 'DEV 07');
-      this.dataSource8.data = resultado.filter(x => x.ambiente.nome === 'DEV 08');
-      this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
-      this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
-      this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
+      this.dataSource1.data = resultado.filter(x => x.ativo == true);           
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -66,7 +46,7 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   ExibirColunas():string[]{
-    return ['detalhes','numero','api','web','ios','android','business','acoes']
+    return ['detalhes','ambiente','numero','api','web','ios','android','business','acoes']
   }
 
   AbrirDialog(ambienteId:any,apiId:any){
@@ -84,17 +64,7 @@ export class ListarChamadoComponent implements OnInit {
             verticalPosition:'bottom'
           });
           this.chamadoService.ObterTodos().subscribe((resultado) =>{
-            this.dataSource1.data = resultado.filter(x => x.ambiente.nome === 'DEV 01');            
-            this.dataSource2.data = resultado.filter(x => x.ambiente.nome === 'DEV 02');
-            this.dataSource3.data = resultado.filter(x => x.ambiente.nome === 'DEV 03');
-            this.dataSource4.data = resultado.filter(x => x.ambiente.nome === 'DEV 04');
-            this.dataSource5.data = resultado.filter(x => x.ambiente.nome === 'DEV 05');
-            this.dataSource6.data = resultado.filter(x => x.ambiente.nome === 'DEV 06');
-            this.dataSource7.data = resultado.filter(x => x.ambiente.nome === 'DEV 07');
-            this.dataSource8.data = resultado.filter(x => x.ambiente.nome === 'DEV 08');
-            this.dataSource9.data = resultado.filter(x => x.ambiente.nome === 'DEV 09');
-            this.dataSource10.data = resultado.filter(x => x.ambiente.nome === 'DEV 10');
-            this.dataSource11.data = resultado.filter(x => x.ambiente.nome === 'DEV 11');
+            this.dataSource1.data = resultado.filter(x => x.ativo == true);                     
           });
          })
         }

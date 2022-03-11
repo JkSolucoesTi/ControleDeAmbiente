@@ -46,9 +46,11 @@ export class AdicionarChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.ambienteService.ObterTodos().subscribe(dados =>{
       this.ambiente = dados;
+      console.log(this.ambiente);
     })
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
+      console.log(dados);
     });
     this.webService.ObterTodos().subscribe(dados =>{
       this.web = dados;

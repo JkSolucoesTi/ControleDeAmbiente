@@ -35,6 +35,9 @@ export class EditarChamadoComponent implements OnInit {
   erros:string[]=[];
   chamadoOld!:Chamado;
 
+  rota1!:any;
+  rota2!:any;
+
   constructor(
     private activetad: ActivatedRoute,
     private ambienteService: AmbienteService,
@@ -49,6 +52,9 @@ export class EditarChamadoComponent implements OnInit {
               ) { }
               
   ngOnInit(): void {
+    this.rota1 = this.activetad.snapshot.params.ambienteId;
+    this.rota2 = this.activetad.snapshot.params.apiId;
+
     this.ambienteService.ObterTodos().subscribe(dados => {
       this.ambiente = dados;
     })
@@ -69,13 +75,11 @@ export class EditarChamadoComponent implements OnInit {
       this.negocio = dados;
     });
 
-    const rota1 = this.activetad.snapshot.params.ambienteId;
-    const rota2 = this.activetad.snapshot.params.apiId;
 
-    this.chamadoService.ObterPorAmbienteAPI(rota1,rota2).subscribe(resultado =>{
+    this.chamadoService.ObterPorAmbienteAPI(this.rota1,this.rota2).subscribe(resultado =>{
       this.chamadoOld = resultado;
       this.formulario = new FormGroup({
-        id : new FormControl(resultado.id),
+        chamadoId : new FormControl(resultado.chamadoId),
         numero : new FormControl(resultado.numero,[Validators.required,Validators.maxLength(15)]),
         ambienteId : new FormControl(resultado.ambienteId,[Validators.required,Validators.minLength(1)]),
         apiId : new FormControl(resultado.apiId,[Validators.required,Validators.minLength(1)]),
@@ -98,8 +102,10 @@ export class EditarChamadoComponent implements OnInit {
   Alterar(){
     this.erros= [];
     const parametros = this.formulario.value;
+    console.log(parametros);
     const parametrosOld = this.chamadoOld;
-    this.chamadoService.Atualizar(parametros,parametrosOld.ambiente.id,parametrosOld.api.id,parametros.id).subscribe(resultado => {
+    console.log(this.chamadoOld);
+    this.chamadoService.Atualizar(parametros,this.rota1,this.rota2,parametros.chamadoId).subscribe(resultado => {
       if(resultado.codigo == 2){
         this.erros.push(resultado.mensagem);
       }

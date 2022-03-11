@@ -14,6 +14,17 @@
       <mat-card-subtitle>O ambiente deve ser editado corretamente</mat-card-subtitle>
     </div>
         <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="Alterar()">
+
+          <div>
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Id</mat-label>
+              <input type="text" matInput placeholder="Id" formControlName="chamadoId">
+              <mat-error *ngIf="propriedade.chamadoId.touched && propriedade.chamadoId.invalid" >
+                 <sup>*</sup> Preencher o numero do chamado
+              </mat-error>
+            </mat-form-field>
+          </div>
+
           <div>
             <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Numero do Chamado</mat-label>
@@ -27,7 +38,7 @@
             <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 48%;">
               <mat-label>Selecione o Ambiente</mat-label>
               <mat-select formControlName="ambienteId">
-                <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
+                <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.ambienteId">{{responsavel.nome}}</mat-option>
               </mat-select>
               <mat-error *ngIf="propriedade.ambienteId.touched && propriedade.ambienteId.invalid" >
                 <sup>*</sup> Selecionar o Ambiente

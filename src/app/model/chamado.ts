@@ -18,4 +18,5 @@ export class Chamado{
   chamadoWeb!:string;
   chamadoIos!:string;
   chamadoAndroid!:string;
+  ativo!:boolean;
 }

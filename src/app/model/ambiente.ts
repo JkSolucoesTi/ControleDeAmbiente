@@ -1,4 +1,4 @@
 export class Ambiente{
-  id!:string;
+  ambienteId!:string;
   nome!:string;
 }
