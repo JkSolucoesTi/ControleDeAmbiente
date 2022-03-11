@@ -80,6 +80,7 @@ export class EditarChamadoComponent implements OnInit {
       this.chamadoOld = resultado;
       this.formulario = new FormGroup({
         chamadoId : new FormControl(resultado.chamadoId),
+        descricao : new FormControl(resultado.descricao,[Validators.required,Validators.maxLength(100)]),
         numero : new FormControl(resultado.numero,[Validators.required,Validators.maxLength(15)]),
         ambienteId : new FormControl(resultado.ambienteId,[Validators.required,Validators.minLength(1)]),
         apiId : new FormControl(resultado.apiId,[Validators.required,Validators.minLength(1)]),

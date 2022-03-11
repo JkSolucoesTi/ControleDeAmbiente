@@ -13,12 +13,17 @@ import { EditarBusinessComponent } from './Business/editar-business/editar-busin
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { ListarApiComponent } from './Api/listar-api/listar-api.component';
+import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
 
 const routes: Routes = [
   {
     path:"",
     component:DashboardComponent,
     children:[
+      {
+        path:"ambiente",component:ListarAmbienteComponent
+      }
+      ,
       {
         path:"chamados",component:ListarChamadoComponent
       }

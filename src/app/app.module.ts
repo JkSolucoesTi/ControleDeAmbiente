@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +46,7 @@ import { WebService } from './service/web.service';
 import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
 import { NgxMaskModule , IConfig } from 'ngx-mask';
+import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -71,7 +73,8 @@ const maskConfig: Partial<IConfig> ={
     AdicionarApiComponent,
     ListarChamadoComponent,
     EditarChamadoComponent,
-    AdicionarChamadoComponent
+    AdicionarChamadoComponent,
+    ListarAmbienteComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +101,7 @@ const maskConfig: Partial<IConfig> ={
     MatGridListModule,
     MatMenuModule,
     MatTabsModule,
+    MatCheckboxModule,
     NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [

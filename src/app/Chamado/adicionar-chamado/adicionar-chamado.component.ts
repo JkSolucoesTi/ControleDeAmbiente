@@ -68,6 +68,7 @@ export class AdicionarChamadoComponent implements OnInit {
 
     this.formulario = new FormGroup({
       numero : new FormControl('',[Validators.required,Validators.maxLength(15)]),
+      descricao : new FormControl('',[Validators.required,Validators.maxLength(100)]),
       ambienteId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       webId : new FormControl('',[Validators.required,Validators.minLength(1)]),

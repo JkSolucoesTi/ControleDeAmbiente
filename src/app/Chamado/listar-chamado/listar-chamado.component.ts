@@ -15,6 +15,9 @@ export class ListarChamadoComponent implements OnInit {
 
   dataSource1 = new MatTableDataSource<Chamado>();
 
+  liberar = false;
+  ocupados = false;
+
   displayedColumns!:string[];
   chamado!:Chamado[];
   erros!:string[];
@@ -27,9 +30,8 @@ export class ListarChamadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.erros = [];
-    this.chamadoService.ObterTodos().subscribe(resultado => {
-      const chamado = resultado;
-      this.dataSource1.data = resultado.filter(x => x.ativo == true);           
+    this.chamadoService.ObterTodos().subscribe(resultado => {      
+      this.dataSource1.data = resultado//.filter(x => x.ativo == true);           
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -46,8 +48,30 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   ExibirColunas():string[]{
-    return ['detalhes','ambiente','numero','api','web','ios','android','business','acoes']
+    return ['detalhes','ambiente','requisicao','descricao','acoes']
   }
+
+  Liberados(){
+    if(this.liberar === false){
+      this.liberar = true;     
+      this.dataSource1.filter = "false";      
+    }else{      
+      this.dataSource1.filter = "";
+      this.liberar = false; 
+    }
+  }
+
+  Ocupados()
+  {
+    if(this.ocupados === false){
+      this.ocupados = true;     
+      this.dataSource1.filter = "true";      
+    }else{      
+      this.dataSource1.filter = "";
+      this.ocupados = false; 
+    }
+
+  }  
 
   AbrirDialog(ambienteId:any,apiId:any){
     this.dialog.open(DialogLiberarChamadoComponent,{
@@ -64,7 +88,7 @@ export class ListarChamadoComponent implements OnInit {
             verticalPosition:'bottom'
           });
           this.chamadoService.ObterTodos().subscribe((resultado) =>{
-            this.dataSource1.data = resultado.filter(x => x.ativo == true);                     
+            this.dataSource1.data = resultado//.filter(x => x.ativo == true);                     
           });
          })
         }
@@ -119,6 +143,7 @@ export class DialogLiberarChamadoComponent {
   ExibirColunas():string[]{
     return ['numero','api','web','ios','android','business','acoes']
   }
+
 }
 
 @Component({
