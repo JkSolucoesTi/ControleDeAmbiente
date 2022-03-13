@@ -47,6 +47,8 @@ import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
 import { NgxMaskModule , IConfig } from 'ngx-mask';
 import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
+import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
+import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -74,7 +76,8 @@ const maskConfig: Partial<IConfig> ={
     ListarChamadoComponent,
     EditarChamadoComponent,
     AdicionarChamadoComponent,
-    ListarAmbienteComponent
+    ListarAmbienteComponent,
+    LoginUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +113,8 @@ const maskConfig: Partial<IConfig> ={
     WebService,
     IosService,
     NegocioService,
-    EndPoint
+    EndPoint,
+    UsuarioAutenticadoGuard
   ],
   bootstrap: [AppComponent]
 })

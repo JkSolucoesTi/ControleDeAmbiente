@@ -1,0 +1,27 @@
+<div>
+    <img src="assets/DaycovalVale.jpg" alt="some text" width=100% height=100% style="position: absolute;"/>
+<div class="container" style="  display: flex;justify-content: center;align-items: center;height: 100vh">
+    <mat-card style="max-width: 200px">
+    <mat-card-title>
+        Login
+    </mat-card-title>
+    <form class="example-form">
+        <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Inserir o Email" type="email">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input matInput placeholder="Senha" type="password">
+          </mat-form-field>
+    </div>
+    <div>
+        <button type="button" mat-raised-button color="primary" style="width: 100%;" (click)="LogarUsuario()">Logar</button>
+    </div>               
+      </form>
+</mat-card>
+</div>
+</div>

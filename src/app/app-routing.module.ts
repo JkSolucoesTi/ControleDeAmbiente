@@ -14,11 +14,14 @@ import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.compone
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { ListarApiComponent } from './Api/listar-api/listar-api.component';
 import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
+import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
+import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
 
 const routes: Routes = [
   {
     path:"",
     component:DashboardComponent,
+    canActivate:[UsuarioAutenticadoGuard],
     children:[
       {
         path:"ambiente",component:ListarAmbienteComponent
@@ -71,8 +74,12 @@ const routes: Routes = [
       {
         path:"api/adicionar",component:AdicionarApiComponent
       }
-    ]
-  }
+      ,
+      ]
+    },
+      {
+        path:"login", component:LoginUsuarioComponent
+      }  
 ];
 
 @NgModule({

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +11,15 @@ export class UsuarioAutenticadoGuard implements CanActivate {
   }
 
   canActivate():boolean{
-    const usuario = localStorage.getItem('EmailUsuario');
+    const usuario = localStorage.getItem('NomeUSuario');
 
-    if(usuario){
-      /*alteração do vitor */
+    if(usuario){     
+      console.log('permitido');
       return true;
     }
-        
-    this.router.navigate(['usuario/login']);
+    
+    console.log('Não permitido');
+    this.router.navigate(['login']);
     return false;
   }
   

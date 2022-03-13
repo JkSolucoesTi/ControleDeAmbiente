@@ -30,7 +30,6 @@ export class ListarAmbienteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
     this.dataSource.data = this.ambientes;
     this.displayedColumns = this.ExibirColunas();
   }
