@@ -1,9 +1,10 @@
+import { Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { ChamadoService } from './../../service/chamado.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Chamado } from 'src/app/model/chamado';
 import { Ambiente } from 'src/app/model/ambiente';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -14,6 +15,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ListarChamadoComponent implements OnInit {
 
   dataSource1 = new MatTableDataSource<Chamado>();
+  
+  @ViewChild(MatPaginator,{static:true})
+  paginator!:MatPaginator;
 
   liberar = false;
   ocupados = false;
@@ -32,6 +36,7 @@ export class ListarChamadoComponent implements OnInit {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {      
       this.dataSource1.data = resultado//.filter(x => x.ativo == true);           
+      this.dataSource1.paginator = this.paginator;
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -89,6 +94,7 @@ export class ListarChamadoComponent implements OnInit {
           });
           this.chamadoService.ObterTodos().subscribe((resultado) =>{
             this.dataSource1.data = resultado//.filter(x => x.ativo == true);                     
+            this.dataSource1.paginator = this.paginator;
           });
          })
         }
