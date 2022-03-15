@@ -36,7 +36,7 @@
           <div>
             <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 48%;">
               <mat-label>Selecione o Ambiente</mat-label>
-              <mat-select formControlName="ambienteId">
+              <mat-select formControlName="ambienteId" [disabled]="true">
                 <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.ambienteId">{{responsavel.nome}}</mat-option>
               </mat-select>
               <mat-error *ngIf="propriedade.ambienteId.touched && propriedade.ambienteId.invalid" >
@@ -45,7 +45,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Selecione a API</mat-label>
-              <mat-select formControlName="apiId">
+              <mat-select formControlName="apiId" [disabled]="true">
                 <mat-option *ngFor="let responsavel of api" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
               </mat-select>
               <mat-error *ngIf="propriedade.apiId.touched && propriedade.apiId.invalid" >

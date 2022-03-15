@@ -5,23 +5,26 @@
     <mat-card-title>
         Login
     </mat-card-title>
-    <form class="example-form">
+    <form  [formGroup]="formulario" class="example-form">
         <div>
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Inserir o Email" type="email">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="Inserir o usuario" type="text" formControlName="nome">
         </mat-form-field>
     </div>
     <div>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Senha</mat-label>
-            <input matInput placeholder="Senha" type="password">
+            <input matInput placeholder="Senha" type="password" formControlName="senha">
           </mat-form-field>
     </div>
     <div>
         <button type="button" mat-raised-button color="primary" style="width: 100%;" (click)="LogarUsuario()">Logar</button>
-    </div>               
+    </div>
       </form>
+      <div style="text-align: center;">
+        <span style="color: red">{{mensagemLogin}}</span>
+    </div>              
 </mat-card>
 </div>
 </div>
