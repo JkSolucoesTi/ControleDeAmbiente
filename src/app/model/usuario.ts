@@ -5,4 +5,5 @@ export class Usuario{
     email!:string;
     senha!:string;
     perfil!:string;
+    token!:string;
 }

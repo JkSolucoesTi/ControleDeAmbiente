@@ -33,9 +33,9 @@ export class LoginUsuarioComponent implements OnInit {
 
     const userLogin = this.formulario.value;
     this.usuarioService.Logar(userLogin).subscribe(x => {
-      this.usuarioLogado = x.usuario.result;
-      localStorage.setItem("NomeUsuario",this.usuarioLogado.nome);
-      localStorage.setItem("EmailUsuario",this.usuarioLogado.email);
+      localStorage.setItem("NomeUsuario",x.usuario);
+      localStorage.setItem("EmailUsuario",x.email);
+      localStorage.setItem("TokenUsuario",x.token);
       this.route.navigate(["/chamados"]);
     }, erro =>{
       if(erro){
