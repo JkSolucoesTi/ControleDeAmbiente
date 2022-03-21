@@ -1,21 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { Usuario } from '../model/usuario';
+import { EndPoint } from '../model/endpoint';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  constructor(httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient , private endpoint : EndPoint) { }
 
-  Logar(usuario:Usuario):boolean{
-    console.log(usuario);
-    if(usuario.nome === "jm0002" && usuario.senha === "12345678"){
-      return true;
-    }else{
-      return false;
-    }
+  apiUrl = `${this.endpoint.ambiente}/api/usuario/LoginUsuario`
+
+  Logar(usuario:Usuario):Observable<any>{
+   return this.httpClient.post<Usuario>(this.apiUrl,usuario)  
   }
 
 }

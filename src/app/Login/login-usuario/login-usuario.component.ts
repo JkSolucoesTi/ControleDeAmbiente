@@ -13,14 +13,15 @@ export class LoginUsuarioComponent implements OnInit {
 
   constructor(private usuarioService : UsuarioService, private route:Router) { }
 
+  usuarioLogado!:Usuario;
   formulario!:any;
   mensagemLogin!:string;
 
   
   ngOnInit(): void {
     this.formulario = new FormGroup({
-      nome : new FormControl('',[Validators.minLength(2)]),
-      senha : new FormControl('',[Validators.minLength(5)])
+      login : new FormControl('',[Validators.required, Validators.minLength(2)]),
+      senha : new FormControl('',[Validators.required, Validators.minLength(5)])
     });
   }
 
@@ -31,15 +32,22 @@ export class LoginUsuarioComponent implements OnInit {
   LogarUsuario(){
 
     const userLogin = this.formulario.value;
-    if(this.usuarioService.Logar(userLogin)){
-      console.log('usuario logado');
-      localStorage.setItem("NomeUSuario",userLogin.nome);
+    this.usuarioService.Logar(userLogin).subscribe(x => {
+      this.usuarioLogado = x.usuario.result;
+      localStorage.setItem("NomeUsuario",this.usuarioLogado.nome);
+      localStorage.setItem("EmailUsuario",this.usuarioLogado.email);
       this.route.navigate(["/chamados"]);
-    }else{
-      alert("Usuario ou Senha inválidos");
-      this.mensagemLogin = "Usuario ou Senha inválidos";
-    }
-    
-  }
-
+    }, erro =>{
+      if(erro){
+        this.mensagemLogin = "Sem comunicaçaõ com o servidor"
+      }
+      if(erro.error !=='')
+      {
+        this.mensagemLogin = erro.error.mensagem
+      }        
+      else{
+       this.mensagemLogin = "Não foi possível obter a resposta do servidor"
+      }      
+  });
+}
 }

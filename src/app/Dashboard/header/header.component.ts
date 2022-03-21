@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    this.usuario = localStorage.getItem('NomeUSuario');
+    this.usuario = localStorage.getItem('NomeUsuario');
   }
 
   Logout(){

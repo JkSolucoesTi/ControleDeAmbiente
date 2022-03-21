@@ -9,17 +9,25 @@
         <div>
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Usuario</mat-label>
-          <input matInput placeholder="Inserir o usuario" type="text" formControlName="nome">
+          <input matInput placeholder="Inserir o usuario" type="text" formControlName="login">
+          <mat-error *ngIf="propriedade.login.touched && propriedade.login.invalid"></mat-error>
+          <mat-error>
+            <sup>*</sup> Preencher o usuário
+         </mat-error>
+
         </mat-form-field>
     </div>
     <div>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Senha</mat-label>
             <input matInput placeholder="Senha" type="password" formControlName="senha">
+            <mat-error *ngIf="propriedade.senha.invalid">
+                <sup>*</sup> Preencher a senha
+            </mat-error>
           </mat-form-field>
     </div>
     <div>
-        <button type="button" mat-raised-button color="primary" style="width: 100%;" (click)="LogarUsuario()">Logar</button>
+        <button type="button" mat-raised-button color="primary" style="width: 100%;" (click)="LogarUsuario()" [disabled]="formulario.invalid">Logar</button>
     </div>
       </form>
       <div style="text-align: center;">

@@ -11,13 +11,11 @@ export class UsuarioAutenticadoGuard implements CanActivate {
   }
 
   canActivate():boolean{
-    const usuario = localStorage.getItem('NomeUSuario');
-
-    if(usuario){     
-      console.log('permitido');
+    const usuario = localStorage.getItem('NomeUsuario');
+    const email = localStorage.getItem("EmailUsuario");
+    if(usuario != "" && email !== ""){     
       return true;
-    }
-    
+    }    
     console.log('Não permitido');
     this.router.navigate(['login']);
     return false;
