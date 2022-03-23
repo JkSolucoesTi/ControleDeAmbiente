@@ -4,6 +4,7 @@ table{
   margin-bottom: 20px;
   margin-top: 20px;
   margin-right: 20px;
+
 }
 
 button{
@@ -12,6 +13,7 @@ button{
 
 .table {
   background: rgba(243, 243, 245, 0.5);
+  
 }
 
 .mat-header-cell{
@@ -48,4 +50,8 @@ button{
 #mat-dialog-container{
   width:700px;
   height: 450px;
+}
+
+ul{
+  list-style-type: none;
 }

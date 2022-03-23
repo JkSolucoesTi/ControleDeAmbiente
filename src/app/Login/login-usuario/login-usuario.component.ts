@@ -16,6 +16,7 @@ export class LoginUsuarioComponent implements OnInit {
   usuarioLogado!:Usuario;
   formulario!:any;
   mensagemLogin!:string;
+  loader!:boolean;
 
   
   ngOnInit(): void {
@@ -30,19 +31,22 @@ export class LoginUsuarioComponent implements OnInit {
   }
 
   LogarUsuario(){
-
+    this.loader = true;
     const userLogin = this.formulario.value;
     this.usuarioService.Logar(userLogin).subscribe(x => {
       localStorage.setItem("NomeUsuario",x.usuario);
       localStorage.setItem("EmailUsuario",x.email);
       localStorage.setItem("TokenUsuario",x.token);
       this.route.navigate(["/chamados"]);
+      this.loader = false;
     }, erro =>{
+      this.loader =false;
       if(erro){
         this.mensagemLogin = "Sem comunicaçaõ com o servidor"
       }
       if(erro.error !=='')
       {
+
         this.mensagemLogin = erro.error.mensagem
       }        
       else{

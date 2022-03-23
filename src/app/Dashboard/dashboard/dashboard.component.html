@@ -1,37 +1,49 @@
 <app-header></app-header>
 <mat-sidenav-container class="side">
-    <mat-sidenav mode="side" opened>
+    <mat-sidenav #sidenav mode="side" opened="opened">
    <mat-list>
+     <div>
     <mat-list-item routerLink="chamados">
       <div>
         <mat-icon>tv</mat-icon>  Chamados  
       </div>
     </mat-list-item>
+  </div>
+   <div *ngIf="isAdministrador">
        <mat-divider></mat-divider>
        <mat-list-item routerLink="business">
            <div>
             <mat-icon>business</mat-icon>  Business
         </div>
      </mat-list-item>
+    </div>
+    <div *ngIf="isAdministrador">
     <mat-divider></mat-divider>
     <mat-list-item routerLink="desenvolvedores">
         <div>
          <mat-icon>developer_mode</mat-icon>  Desenvolvedores
         </div>
     </mat-list-item>
+  </div>
+  <div *ngIf="isAdministrador">
     <mat-divider></mat-divider>
-    <mat-list-item routerLink="api">
+    <mat-list-item routerLink="api" >
       <div>
         <mat-icon>storage</mat-icon>  API
       </div>
     </mat-list-item>
+  </div>
+  <div *ngIf="isAdministrador">
     <mat-divider></mat-divider>
-    <mat-list-item routerLink="ambiente">
+    <mat-list-item routerLink="ambiente" >
       <div>
-        <mat-icon>search</mat-icon>  Ambientes Mobile
+        <mat-icon>search</mat-icon>  Ambientes
       </div>
     </mat-list-item>
+  </div>
     <mat-divider></mat-divider>
+    <div>
+    </div>
    </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>           

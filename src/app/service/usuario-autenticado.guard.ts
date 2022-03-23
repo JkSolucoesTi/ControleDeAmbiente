@@ -1,24 +1,41 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router} from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioAutenticadoGuard implements CanActivate {
 
-  constructor(private router:Router) {
+  constructor(private jwtHelper: JwtHelperService, private router:Router) {
       
   }
 
   canActivate():boolean{
-    const usuario = localStorage.getItem('NomeUsuario');
-    const email = localStorage.getItem("EmailUsuario");
-    const token =   localStorage.getItem("TokenUsuario");
-    if(usuario !== null && email !== null){     
+    const token = localStorage.getItem('TokenUsuario');
+    this.VerificarAdministrador();
+
+    if(token && !this.jwtHelper.isTokenExpired(token)){
       return true;
-    }    
+    }
+
     this.router.navigate(['login']);
     return false;
+  }
+
+  VerificarAdministrador():boolean
+  {
+    const token:any = localStorage.getItem('TokenUsuario');
+    const tokenPerfil:any = this.jwtHelper.decodeToken(token);
+
+    if(tokenPerfil.role == "ADMIN")
+    {
+      console.log('admin')
+      return true;
+    }else{
+      console.log('não é admin')
+      return false;
+    }
   }
   
 }

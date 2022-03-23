@@ -9,7 +9,11 @@ import { Ambiente } from 'src/app/model/ambiente';
 })
 export class ListarAmbienteComponent implements OnInit {
 
-  
+  panelOpenState = false;
+  panelOpenState1 = false;
+  panelOpenState2 = false;
+  panelOpenState3 = false;
+  panelOpenState4 = false;
   dataSource = new MatTableDataSource<Ambiente>();
   displayedColumns:string[]=[];
 

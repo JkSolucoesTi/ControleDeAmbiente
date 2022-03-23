@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule} from '@auth0/angular-jwt';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -55,6 +58,11 @@ const maskConfig: Partial<IConfig> ={
   validation:false,
 }
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +92,7 @@ const maskConfig: Partial<IConfig> ={
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressBarModule,
     MatTableModule,
     MatButtonModule,
     MatDividerModule,
@@ -107,7 +116,15 @@ const maskConfig: Partial<IConfig> ={
     MatMenuModule,
     MatTabsModule,
     MatCheckboxModule,
-    NgxMaskModule.forRoot(maskConfig)
+    MatExpansionModule,
+    NgxMaskModule.forRoot(maskConfig),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [""],
+        disallowedRoutes: [""],
+      }
+    })
   ],
   providers: [
     ChamadoService,

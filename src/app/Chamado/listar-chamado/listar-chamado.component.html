@@ -1,6 +1,8 @@
 <mat-grid-list cols="4" rowHeight="50px">
   <mat-grid-tile colspan="1" rowspan="1">
-  <div>
+    <ul>
+      <li>
+  <div style="margin:auto">
     <mat-checkbox     
     disabled="{{ocupados}}"
     class="example-margin"
@@ -9,16 +11,19 @@
     Liberados
     </mat-checkbox>
   </div>
-  <div>
+</li>
+<li>
+  <div style="margin:auto">
     <mat-checkbox 
     disabled="{{liberar}}"
-    class="example-margin"
-    style="padding-left:10px"    
+    class="example-margin"    
     (click)="Ocupados()"
     >
     Ocupados
     </mat-checkbox>
   </div>
+  </li>
+  </ul>
   </mat-grid-tile>
   <mat-grid-tile colspan="2" rowspan="1">
     <div style="margin-top: 10px;text-align: center;">
@@ -38,6 +43,7 @@
     </h4>
   </div>
 </div>
+<div style="width: 100%; overflow-x: auto;">
       <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" class="table" *ngIf="dataSource1">
         <ng-container matColumnDef="detalhes">
           <th mat-header-cell *matHeaderCellDef></th>
@@ -81,8 +87,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+    </div>
 
-      <mat-paginator [pageSizeOptions]="[6]"
+      <mat-paginator [pageSizeOptions]="[8]"
       showFirstLastButtons></mat-paginator>
       
       <mat-divider></mat-divider>

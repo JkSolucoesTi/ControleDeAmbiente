@@ -32,6 +32,9 @@
       </form>
       <div style="text-align: center;">
         <span style="color: red">{{mensagemLogin}}</span>
+        <div style="margin-top:10px" *ngIf="loader">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
     </div>              
 </mat-card>
 </div>
