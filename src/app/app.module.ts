@@ -53,6 +53,7 @@ import { NgxMaskModule , IConfig } from 'ngx-mask';
 import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
 import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
 import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
+import { TableComponent } from './Ambiente/table/table.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -86,7 +87,8 @@ export function tokenGetter() {
     EditarChamadoComponent,
     AdicionarChamadoComponent,
     ListarAmbienteComponent,
-    LoginUsuarioComponent
+    LoginUsuarioComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
