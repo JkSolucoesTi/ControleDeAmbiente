@@ -41,6 +41,14 @@
       </div>
     </mat-list-item>
   </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="isAdministrador">
+    <mat-list-item routerLink="servidor" >
+      <div>
+        <mat-icon>domain</mat-icon>  Servidores
+      </div>
+    </mat-list-item>
+  </div>
     <mat-divider></mat-divider>
     <div>
     </div>

@@ -54,6 +54,9 @@ import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambie
 import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
 import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
 import { TableComponent } from './Ambiente/table/table.component';
+import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
+import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
+import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -88,7 +91,10 @@ export function tokenGetter() {
     AdicionarChamadoComponent,
     ListarAmbienteComponent,
     LoginUsuarioComponent,
-    TableComponent
+    TableComponent,
+    AdicionarServidorComponent,
+    EditarServidorComponent,
+    ListarServidorComponent
   ],
   imports: [
     BrowserModule,

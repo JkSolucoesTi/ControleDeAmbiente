@@ -16,6 +16,7 @@ import { ListarApiComponent } from './Api/listar-api/listar-api.component';
 import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
 import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
 import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
+import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
 
 const routes: Routes = [
   {
@@ -75,6 +76,9 @@ const routes: Routes = [
         path:"api/adicionar",component:AdicionarApiComponent
       }
       ,
+      {
+        path:"servidor",component:ListarServidorComponent
+      }
       ]
     },
       {
