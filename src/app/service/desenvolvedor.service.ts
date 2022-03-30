@@ -17,7 +17,7 @@ const httpOptions = {
 export class DesenvolvedorService {
 
   api = `${this.endpoint.ambiente}/api/desenvolvedores`
-  apiTipo = `${this.endpoint.ambiente}/api/desenvolvedores/TipoDesenvolvedores`
+  apiTipo = `${this.endpoint.ambiente}/api/Desenvolvedores/TipoDesenvolvedores`
 
   constructor(private httpClient: HttpClient, private endpoint:EndPoint) { }
 
@@ -25,7 +25,7 @@ export class DesenvolvedorService {
     return this.httpClient.get<Desenvolvedor[]>(this.api);    
   }
 
-  PegarTodosTipoDesenvolvedores():Observable<Tipo>{
-    return this.httpClient.get<Tipo>(this.api);    
+  PegarTodosTipoDesenvolvedores():Observable<Tipo[]>{
+    return this.httpClient.get<Tipo[]>(this.apiTipo);    
   }
 }

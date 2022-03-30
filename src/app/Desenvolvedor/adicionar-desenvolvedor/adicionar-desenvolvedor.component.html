@@ -22,15 +22,24 @@
                <sup>*</sup> Preencher o nome do Desenvolvedor
             </mat-error>
           </mat-form-field>
-        </div>
+        </div>        
         <div>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 19%;">
             <mat-label>Login</mat-label>
             <input type="text" matInput placeholder="Login" formControlName="usuario">
             <mat-error *ngIf="propriedade.usuario.touched && propriedade.usuario.invalid" >
               <sup>*</sup> Preencher com o login de rede do desenvolvedor
            </mat-error>
-          </mat-form-field>
+          </mat-form-field>  
+          <mat-form-field appearance="fill" style="margin-right: auto; width: 40%;">
+            <mat-label>Selecione o Tipo</mat-label>
+            <mat-select formControlName="tipo" placeholder="Tipo do Dev">
+              <mat-option *ngFor="let responsavel of tipoDesenvolvedor" [value]="responsavel.id">{{responsavel.tipo}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="propriedade.tipo.touched && propriedade.tipo.invalid" >
+              <sup>*</sup> Selecionar o Tipo
+           </mat-error>
+          </mat-form-field>        
         </div>
         <div>
           <mat-form-field appearance="fill">

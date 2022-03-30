@@ -247,3 +247,12 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+    <button mat-mini-fab
+    color="primary"
+    [routerLink]="['/desenvolvedores/adicionar','android']"
+    >
+    <mat-icon>add</mat-icon>
+  </button>
+  </div>

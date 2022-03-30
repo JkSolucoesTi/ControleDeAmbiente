@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DesenvolvedorService } from 'src/app/service/desenvolvedor.service';
+import { Tipo } from 'src/app/model/tipo';
 
 @Component({
   selector: 'app-adicionar-desenvolvedor',
@@ -17,8 +19,10 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
   erros:string[] =[];
   rota!:string;
   formulario!:any;
+  tipoDesenvolvedor:Tipo[]=[];
 
   constructor(private activatedRoute: ActivatedRoute,
+              private desenvolvedorService: DesenvolvedorService,
               private androiService:AndroidService,
               private iosService:IosService,
               private werbService:WebService,
@@ -28,11 +32,15 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
   ngOnInit(): void {
     this.rota = this.activatedRoute.snapshot.params.dev;
     this.tipo = this.rota.toUpperCase();
-    console.log(this.rota);
+    this.desenvolvedorService.PegarTodosTipoDesenvolvedores().subscribe( data =>{
+      this.tipoDesenvolvedor = data;
+      console.log(data);
+    })
     this.formulario = new FormGroup({
       nome : new FormControl('',[Validators.required,Validators.maxLength(50)]),
       usuario : new FormControl('',[Validators.required,Validators.maxLength(10)]),
-      email : new FormControl('',[Validators.required,Validators.email, Validators.maxLength(50)])
+      email : new FormControl('',[Validators.required,Validators.email, Validators.maxLength(50)]),
+      tipo : new FormControl('',[Validators.required,Validators.minLength(1)])
     })
   }
 
