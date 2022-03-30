@@ -8,6 +8,8 @@ import { AndroidService } from 'src/app/service/android.service';
 import { IosService } from 'src/app/service/ios.service';
 import { WebService } from 'src/app/service/web.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Desenvolvedor } from 'src/app/model/desenvolvedor';
+import { DesenvolvedorService } from 'src/app/service/desenvolvedor.service';
 
 @Component({
   selector: 'app-listar-desenvolvedor',
@@ -19,21 +21,28 @@ export class ListarDesenvolvedorComponent implements OnInit {
   dataSourceWeb = new MatTableDataSource<Web>();
   dataSourceIos = new MatTableDataSource<Ios>();
   dataSourceAndroid = new MatTableDataSource<Android>();
+  dataSourceDesenvolvedor = new MatTableDataSource<Desenvolvedor>();
 
   web!:Web[];
   ios!:Ios[];
   android!:Android[];
+  desenvolvedor!:Desenvolvedor[];
   displayedColumns : string[] =[];
   erros:string[]=[];
 
   constructor(private webService: WebService,
               private iosService: IosService,
               private androidService: AndroidService,
+              private desenvolvedorService: DesenvolvedorService,              
               private snackBar : MatSnackBar,
               private dialog : MatDialog) { }
 
   ngOnInit(): void {
 
+    this.desenvolvedorService.PegarTodos().subscribe( data =>{
+      this.dataSourceDesenvolvedor.data = data;
+      console.log(data);      
+    })
     this.webService.ObterTodos().subscribe(resultado =>{
      this.web = resultado;
       this.dataSourceWeb.data =  this.web.filter(x => x.nome != "Sem alocação");
