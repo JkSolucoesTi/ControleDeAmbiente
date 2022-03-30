@@ -9,12 +9,21 @@ import { Ambiente } from 'src/app/model/ambiente';
 })
 export class TableComponent implements OnInit {
 
-  @Input() dataSource = new MatTableDataSource<Ambiente>();
-  @Input() displayedColumns:string[]=[];
+  @Input() ambientes!: any;
+  displayedColumns:string[]=[];
+  dataSource = new MatTableDataSource<Ambiente>();
 
-  constructor() { }
+  constructor() { 
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    this.dataSource.data = this.ambientes;
+    this.displayedColumns = this.ExibirColunas();
+    console.log(this.ambientes)
+  }
+
+  ExibirColunas():string[]{
+    return ['nome','responsavel','acoes'];
   }
 
   AbrirSwagger(url:string){
