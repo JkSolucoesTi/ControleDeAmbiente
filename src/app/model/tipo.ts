@@ -1,4 +1,4 @@
-export class Tipo{
+export class TipoDesenvolvedor{
     id!:string;
     tipo!:string;
 }

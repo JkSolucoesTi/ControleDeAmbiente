@@ -1,208 +1,22 @@
-<div *ngIf="erros.length > 0">
-  <div class="divErros" style="margin-top: 10px;">
-    <h4 *ngFor="let erro of erros">
-      <mat-icon style="vertical-align: bottom;">error</mat-icon>
-      {{erro}}
-      <mat-icon style="vertical-align: bottom;">error</mat-icon>
-    </h4>
-  </div>
-</div>
-
-
-<div style="margin-top: 10px;text-align: center;">
-  <h2>Cadastro de Desenvolvedores</h2>
-</div>
-<mat-divider></mat-divider>
-
-<div style="align-items: center;">
-  <mat-progress-spinner *ngIf="!dataSourceWeb" mode="indeterminate" style="margin: 0 auto;">
-  </mat-progress-spinner>
-  </div>
-
-<mat-tab-group color="primary">
-    <mat-tab label="Web" selected>
-
-    <table mat-table
-     class="mat-elevation-z8"
-     [dataSource]="dataSourceWeb"
-     class="table"
-     *ngIf="dataSourceWeb"
-     >
-
-      <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell
-        *matCellDef="let dataSourceWeb"> {{dataSourceWeb.nome}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="login">
-        <th mat-header-cell *matHeaderCellDef>Login</th>
-        <td mat-cell *matCellDef="let dataSourceWeb"
-        >{{dataSourceWeb.usuario}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef>Email</th>
-        <td mat-cell *matCellDef="let dataSourceWeb"
-        > {{dataSourceWeb.email}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef>Ações</th>
-        <td mat-cell *matCellDef="let dataSourceWeb">
-          <button
-          mat-mini-fab
-          color="primary"
-          [routerLink]="['/desenvolvedores/alterar/',dataSourceWeb.id,'web']"
-          >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-        mat-mini-fab
-        color="accent"
-        (click)="AbrirDialog(dataSourceWeb.id,dataSourceWeb.nome,'web')"
-        >
-        <mat-icon>delete</mat-icon>
-      </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-      </tr>
-    </table>
-    <mat-divider></mat-divider>
-    <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
-      <button mat-mini-fab
-      color="primary"
-      [routerLink]="['/desenvolvedores/adicionar','web']"
-      >
-      <mat-icon>add</mat-icon>
-    </button>
+  <div *ngIf="erros.length > 0">
+    <div class="divErros" style="margin-top: 10px;">
+      <h4 *ngFor="let erro of erros">
+        <mat-icon style="vertical-align: bottom;">error</mat-icon>
+        {{erro}}
+        <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      </h4>
     </div>
-    <mat-divider></mat-divider>
-    </mat-tab>
-
-    <mat-tab label="Ios">
-
-      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSourceIos" class="table">
-
-        <ng-container matColumnDef="nome">
-          <th mat-header-cell *matHeaderCellDef>Nome</th>
-          <td mat-cell
-          *matCellDef="let dataSourceIos"> {{dataSourceIos.nome}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="login">
-          <th mat-header-cell *matHeaderCellDef>Login</th>
-          <td mat-cell *matCellDef="let dataSourceIos"
-          >{{dataSourceIos.usuario}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>Email</th>
-          <td mat-cell *matCellDef="let dataSourceIos"
-          > {{dataSourceIos.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="acoes">
-          <th mat-header-cell *matHeaderCellDef>Ações</th>
-          <td mat-cell *matCellDef="let dataSourceIos">
-            <button
-            mat-mini-fab
-            color="primary"
-            [routerLink]="['/desenvolvedores/alterar/',dataSourceIos.id,'ios']"
-            >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-          mat-mini-fab
-          color="accent"
-          (click)="AbrirDialog(dataSourceIos.id,dataSourceIos.nome,'ios')"
-          >
-          <mat-icon>delete</mat-icon>
-        </button>
-          </td>
-
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-      <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
-        <button mat-mini-fab
-         [routerLink]="['/desenvolvedores/adicionar','ios']"
-        color="primary">
-        <mat-icon>add</mat-icon>
-      </button>
-      </div>
-      <mat-divider></mat-divider>
-
-    </mat-tab>
-
-    <mat-tab label="Android">
-
-      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSourceAndroid" class="table">
-
-        <ng-container matColumnDef="nome">
-          <th mat-header-cell *matHeaderCellDef>Nome</th>
-          <td mat-cell
-          *matCellDef="let dataSourceAndroid"> {{dataSourceAndroid.nome}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="login">
-          <th mat-header-cell *matHeaderCellDef>Login</th>
-          <td mat-cell *matCellDef="let dataSourceAndroid"
-          >{{dataSourceAndroid.usuario}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef>Email</th>
-          <td mat-cell *matCellDef="let dataSourceAndroid"
-          > {{dataSourceAndroid.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="acoes">
-          <th mat-header-cell *matHeaderCellDef>Ações</th>
-          <td mat-cell *matCellDef="let dataSourceAndroid">
-            <button
-            mat-mini-fab
-            color="primary"
-            [routerLink]="['/desenvolvedores/alterar/',dataSourceAndroid.id,'android']"
-            >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-          mat-mini-fab
-          color="accent"
-          (click)="AbrirDialog(dataSourceAndroid.id,dataSourceAndroid.nome,'android')"
-          >
-          <mat-icon>delete</mat-icon>
-        </button>
-          </td>
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-      <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
-        <button mat-mini-fab
-        color="primary"
-        [routerLink]="['/desenvolvedores/adicionar','android']"
-        >
-        <mat-icon>add</mat-icon>
-      </button>
-      </div>
-      <mat-divider></mat-divider>
-    </mat-tab>
-  </mat-tab-group>
-
+  </div>
+    
+  <div style="margin-top: 10px;text-align: center;">
+    <h2>Cadastro de Desenvolvedores</h2>
+  </div>
   <mat-divider></mat-divider>
-  <p>teste</p>
+  
+  <div style="align-items: center;">
+    <mat-progress-spinner *ngIf="!dataSourceDesenvolvedor" mode="indeterminate" style="margin: 0 auto;">
+    </mat-progress-spinner>
+  </div>
   <table mat-table  class="mat-elevation-z8" [dataSource]="dataSourceDesenvolvedor" class="table">
 
     <ng-container matColumnDef="nome">
@@ -229,14 +43,14 @@
         <button
         mat-mini-fab
         color="primary"
-        [routerLink]="['/desenvolvedores/alterar/',dataSourceDesenvolvedor.id,'android']"
+        [routerLink]="['/desenvolvedores/alterar/',dataSourceDesenvolvedor.id]"
         >
         <mat-icon>edit</mat-icon>
       </button>
       <button
       mat-mini-fab
       color="accent"
-      (click)="AbrirDialog(dataSourceDesenvolvedor.id,dataSourceDesenvolvedor.nome,'android')"
+      (click)="AbrirDialog(dataSourceDesenvolvedor.id,dataSourceDesenvolvedor.nome)"
       >
       <mat-icon>delete</mat-icon>
     </button>

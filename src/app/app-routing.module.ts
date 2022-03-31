@@ -57,11 +57,11 @@ const routes: Routes = [
       }
       ,
       {
-        path:"desenvolvedores/alterar/:id/:dev",component:EditarDesenvolvedorComponent
+        path:"desenvolvedores/alterar/:id",component:EditarDesenvolvedorComponent
       }
       ,
       {
-        path:"desenvolvedores/adicionar/:dev",component:AdicionarDesenvolvedorComponent
+        path:"desenvolvedores/adicionar",component:AdicionarDesenvolvedorComponent
       }
       ,
       {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Desenvolvedor } from '../model/desenvolvedor';
 import { EndPoint } from '../model/endpoint';
-import { Tipo } from '../model/tipo';
+import { TipoDesenvolvedor } from '../model/tipo';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,7 +25,27 @@ export class DesenvolvedorService {
     return this.httpClient.get<Desenvolvedor[]>(this.api);    
   }
 
-  PegarTodosTipoDesenvolvedores():Observable<Tipo[]>{
-    return this.httpClient.get<Tipo[]>(this.apiTipo);    
+  PegarTodosTipoDesenvolvedores():Observable<TipoDesenvolvedor[]>{
+    return this.httpClient.get<TipoDesenvolvedor[]>(this.apiTipo);    
+  }
+
+  Inserir(desenvolvedor: Desenvolvedor):Observable<any>
+  {
+    return this.httpClient.post<Desenvolvedor>(this.api,desenvolvedor);
+  }
+
+  Excluir(desenvolvedorId:string):Observable<any>{
+    const url = `${this.api}/${desenvolvedorId}`;
+    return this.httpClient.delete<number>(url);
+  }
+
+  ObterPorId(id:number):Observable<Desenvolvedor>{
+    const url = `${this.api}/${id}`
+    return this.httpClient.get<Desenvolvedor>(url);
+  }
+
+  Atualizar(desenvolvedor : Desenvolvedor , desenvolvedorId : number):Observable<any>{
+    const url = `${this.api}/Atualizar/${desenvolvedorId}`;
+    return this.httpClient.put(url,desenvolvedor,httpOptions);
   }
 }
