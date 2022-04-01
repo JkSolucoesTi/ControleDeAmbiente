@@ -20,6 +20,8 @@ import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servi
 import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
 import { ListarAmbientesComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
 import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
+import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
+import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const routes: Routes = [
   {
@@ -88,10 +90,17 @@ const routes: Routes = [
       }
       ,
       {
+        path:"servidor/alterar/:id",component:EditarServidorComponent
+      }
+      ,
+      {
         path:"ambiente/adicionar",component:AdicionarAmbienteComponent
       },
       {
         path:"ambiente/listar",component:ListarAmbientesComponent
+      },
+      {
+        path:"ambiente/alterar/:id",component:EditarAmbienteComponent
       }
       ]
     },

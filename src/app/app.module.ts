@@ -56,9 +56,10 @@ import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
 import { TableComponent } from './Publish/table/table.component';
 import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
 import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
-import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
+import { ListarServidorComponent , DialogExcluirServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
 import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
 import { ListarAmbientesComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
+import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -98,7 +99,9 @@ export function tokenGetter() {
     EditarServidorComponent,
     ListarServidorComponent,
     AdicionarAmbienteComponent,
-    ListarAmbientesComponent
+    ListarAmbientesComponent,
+    DialogExcluirServidorComponent,
+    EditarAmbienteComponent
   ],
   imports: [
     BrowserModule,
