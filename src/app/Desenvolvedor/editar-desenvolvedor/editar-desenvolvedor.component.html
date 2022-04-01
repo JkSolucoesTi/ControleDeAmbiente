@@ -52,6 +52,14 @@
         </div>
         <mat-divider></mat-divider>
         <mat-card-actions align="end" style="padding-top:20px;margin-right: 30px;">        
+          <button
+          mat-button
+          mat-mini-fab
+          color="accent"
+          [routerLink]="['/desenvolvedores']"
+          >
+        <mat-icon>backspace</mat-icon>
+          </button>
         <button [disabled]="!formulario.valid"
         type="submit"
         mat-button

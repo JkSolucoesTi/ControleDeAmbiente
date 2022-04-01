@@ -81,7 +81,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
     }
 
   ExibirColunas() :string[] {
-    return  ['nome', 'login', 'email', 'acoes'];
+    return  ['nome', 'login', 'email','tipoDesenvolvedor', 'acoes'];
   }
 }
 

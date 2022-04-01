@@ -50,13 +50,15 @@ import { WebService } from './service/web.service';
 import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
 import { NgxMaskModule , IConfig } from 'ngx-mask';
-import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
+import { ListarAmbienteComponent } from './Publish/listar-ambiente/listar-ambiente.component';
 import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
 import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
-import { TableComponent } from './Ambiente/table/table.component';
+import { TableComponent } from './Publish/table/table.component';
 import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
 import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
 import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
+import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
+import { ListarAmbientesComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
@@ -94,7 +96,9 @@ export function tokenGetter() {
     TableComponent,
     AdicionarServidorComponent,
     EditarServidorComponent,
-    ListarServidorComponent
+    ListarServidorComponent,
+    AdicionarAmbienteComponent,
+    ListarAmbientesComponent
   ],
   imports: [
     BrowserModule,

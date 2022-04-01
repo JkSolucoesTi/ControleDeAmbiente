@@ -37,6 +37,12 @@
       > {{dataSourceDesenvolvedor.email}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="tipoDesenvolvedor">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let dataSourceDesenvolvedor"
+      > {{dataSourceDesenvolvedor.tipoDesenvolvedor.tipo}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let dataSourceDesenvolvedor">
@@ -65,7 +71,7 @@
   <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
     <button mat-mini-fab
     color="primary"
-    [routerLink]="['/desenvolvedores/adicionar','android']"
+    [routerLink]="['/desenvolvedores/adicionar']"
     >
     <mat-icon>add</mat-icon>
   </button>

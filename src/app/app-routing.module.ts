@@ -13,10 +13,13 @@ import { EditarBusinessComponent } from './Business/editar-business/editar-busin
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { ListarApiComponent } from './Api/listar-api/listar-api.component';
-import { ListarAmbienteComponent } from './Ambiente/listar-ambiente/listar-ambiente.component';
+import { ListarAmbienteComponent } from './Publish/listar-ambiente/listar-ambiente.component';
 import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
 import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
 import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
+import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
+import { ListarAmbientesComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
+import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
 
 const routes: Routes = [
   {
@@ -25,7 +28,7 @@ const routes: Routes = [
     canActivate:[UsuarioAutenticadoGuard],
     children:[
       {
-        path:"ambiente",component:ListarAmbienteComponent
+        path:"publish",component:ListarAmbienteComponent
       }
       ,
       {
@@ -78,6 +81,17 @@ const routes: Routes = [
       ,
       {
         path:"servidor",component:ListarServidorComponent
+      }
+      ,
+      {
+        path:"servidor/adicionar",component:AdicionarServidorComponent
+      }
+      ,
+      {
+        path:"ambiente/adicionar",component:AdicionarAmbienteComponent
+      },
+      {
+        path:"ambiente/listar",component:ListarAmbientesComponent
       }
       ]
     },
