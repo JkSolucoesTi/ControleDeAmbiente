@@ -33,4 +33,15 @@ export class AmbienteService {
     const url = `${this.apiUrl}/Atualizar/${apiId}`;
     return this.httpClient.put<Ambiente>(url,servidor);
   }
+
+  Inserir(ambiente : Ambiente):Observable<any>
+  {
+    return this.httpClient.post<Ambiente>(this.apiUrl,ambiente);
+  }
+
+  Excluir(ambienteId : string):Observable<any>
+  {
+    const url = `${this.apiUrl}/${ambienteId}`;
+    return this.httpClient.delete<Ambiente>(url);
+  }
 }

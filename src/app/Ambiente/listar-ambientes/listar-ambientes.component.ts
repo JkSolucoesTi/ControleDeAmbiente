@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Servidor } from 'src/app/model/servidor';
@@ -18,7 +20,10 @@ export class ListarAmbientesComponent implements OnInit {
   servidores:Servidor[]=[];
   erros:string[]=[];
 
-  constructor(private ambienteService : AmbienteService, private servidorService:ServidorService) { }
+  constructor(private ambienteService : AmbienteService, 
+              private servidorService:ServidorService,
+              private dialog : MatDialog,
+              private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
   
@@ -43,9 +48,53 @@ export class ListarAmbientesComponent implements OnInit {
       }
     })
   }
+  AbrirDialog(ambienteId:string,ambienteNome:string){
+    this.dialog.open(DialogExcluirAmbienteComponent,{
+      data:{
+        ambienteId : ambienteId,
+        ambienteNome : ambienteNome
+      }
+    }).afterClosed().subscribe(resultado => {
+      if(resultado === true){
+        this.ambienteService.Excluir(ambienteId).subscribe(resultado =>{
+          this.snackBar.open(resultado.mensagem,"Excluir",{
+            duration: 1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+          this.ambienteService.ObterTodos().subscribe((resultado) => {      
+            this.dataSource.data = resultado;    
+        });
+      },erro => {
+        if(erro === 400){
+          this.snackBar.open(erro.mensagem,"Exclusao",{
+            duration:1000,
+            horizontalPosition:'center',
+            verticalPosition:'bottom'
+          });
+        }else{
+          this.erros.push("Ocorreu algum problem ao excluir o servidor")
+        }
+      });
+      this.displayedColumns = this.ExibirColunas();
+    }      
+    });
+  }
 
   ExibirColunas():string[]{
     return ['nome','dominio','acoes'];
   }
 
+}
+
+@Component({
+  selector:"",
+  templateUrl:"DialogExcluirAmbienteComponent.html"
+})
+
+export class DialogExcluirAmbienteComponent{
+  constructor(@Inject (MAT_DIALOG_DATA) public data:any){}
+
+  ExcluirAmbiente(ambienteId:string,ambienteNome:string){
+  }
 }
