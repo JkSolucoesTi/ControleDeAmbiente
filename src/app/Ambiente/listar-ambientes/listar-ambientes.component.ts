@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Servidor } from 'src/app/model/servidor';
+import { TipoDesenvolvedor } from 'src/app/model/tipo';
 import { AmbienteService } from 'src/app/service/ambientes.service';
+import { DesenvolvedorService } from 'src/app/service/desenvolvedor.service';
 import { ServidorService } from 'src/app/service/servidor.service';
 
 @Component({
@@ -81,8 +82,24 @@ export class ListarAmbientesComponent implements OnInit {
     });
   }
 
+  AbrirDetalhe(ambienteId:number){   
+    this.ambienteService.ObterPorId(ambienteId).subscribe(resultado =>{
+      const valores = resultado;
+      console.log(valores);
+      this.dialog.open(DialogDetalheAmbienteComponent,{
+        width:'600px',
+        height:'330px',
+        data :{
+          acesso : valores.acesso,
+          responsavel : valores.desenvolvedor.nome
+        }
+      }
+      )
+    })
+  }   
+
   ExibirColunas():string[]{
-    return ['nome','dominio','acoes'];
+    return ['detalhes','nome','tipoDesenvolvedor','dominio','acoes'];
   }
 
 }
@@ -97,4 +114,17 @@ export class DialogExcluirAmbienteComponent{
 
   ExcluirAmbiente(ambienteId:string,ambienteNome:string){
   }
+}
+
+@Component({
+  selector: 'app-dialog-detalhe-ambiente',
+  templateUrl: 'dialog-detalhe-ambiente.component.html',
+  styleUrls: ['./listar-ambientes.component.css']
+})
+export class DialogDetalheAmbienteComponent {
+  constructor( @Inject (MAT_DIALOG_DATA) public data: any) {}
+}
+
+export interface ModalDetalhes{
+  acesso:string;
 }

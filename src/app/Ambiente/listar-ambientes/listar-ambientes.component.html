@@ -17,11 +17,26 @@
   class="mat-elevation-z8"
   [dataSource]="dataSource"
   class="table">
-  
+
+  <ng-container matColumnDef="detalhes">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let dataSource">
+      <div (click)="AbrirDetalhe(dataSource.ambienteId)">
+        <mat-icon>menu</mat-icon>
+      </div>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="nome">
       <th mat-header-cell *matHeaderCellDef>Nome</th>
       <td mat-cell
       *matCellDef="let dataSource"> {{dataSource.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoDesenvolvedor">
+      <th mat-header-cell *matHeaderCellDef>Responsável</th>
+      <td mat-cell *matCellDef="let dataSource"
+      > {{dataSource.desenvolvedor.nome}} </td>
     </ng-container>
 
     <ng-container matColumnDef="dominio">

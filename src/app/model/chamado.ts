@@ -1,6 +1,7 @@
 import { Ambiente } from "./ambiente";
 import { Android } from "./android";
 import { Api } from "./api";
+import { Detalhe } from "./detalhe";
 import { Ios } from "./ios";
 import { Negocio } from "./negocio";
 import { Web } from "./web";
@@ -18,5 +19,6 @@ export class Chamado{
   chamadoWeb!:string;
   chamadoIos!:string;
   chamadoAndroid!:string;
+  detalhe!:Detalhe[];
   ativo!:boolean;
 }

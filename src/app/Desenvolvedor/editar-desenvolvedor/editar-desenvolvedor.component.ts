@@ -28,7 +28,7 @@ export class EditarDesenvolvedorComponent implements OnInit {
     this.parametro = this.rota.snapshot.params.id;
 
       this.desenvolvedorService.PegarTodosTipoDesenvolvedores().subscribe(data =>{
-        this.tipoDesenvolvedor = data;
+        this.tipoDesenvolvedor = data.filter(x => x.tipo != "Sem Alocação");
       })
       this.desenvolvedorService.ObterPorId(this.parametro).subscribe(resultado =>{
         this.dados as Desenvolvedor;

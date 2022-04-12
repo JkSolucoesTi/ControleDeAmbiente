@@ -58,7 +58,7 @@ import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicio
 import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
 import { ListarServidorComponent , DialogExcluirServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
 import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
-import { ListarAmbientesComponent , DialogExcluirAmbienteComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
+import { ListarAmbientesComponent , DialogExcluirAmbienteComponent ,DialogDetalheAmbienteComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
 import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const maskConfig: Partial<IConfig> ={
@@ -78,6 +78,7 @@ export function tokenGetter() {
     DialogExcluirApiComponent,
     DialogLiberarChamadoComponent,
     DialogDetalheChamadoComponent,
+    DialogDetalheAmbienteComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,

@@ -27,8 +27,8 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
   ngOnInit(): void {
     this.rota = this.activatedRoute.snapshot.params.dev;
     this.desenvolvedorService.PegarTodosTipoDesenvolvedores().subscribe( data =>{
-      this.tipoDesenvolvedor = data;
-      console.log(data);
+      this.tipoDesenvolvedor = data.filter(x => x.tipo != "Sem Alocação");
+      console.log('desenvolvedores',data);
     })
     this.formulario = new FormGroup({
       nome : new FormControl('',[Validators.required,Validators.maxLength(50)]),

@@ -6,4 +6,5 @@ export class Desenvolvedor{
     usuario!:string;
     email!:string;
     tipo!:TipoDesenvolvedor;
+    tipoDesenvolvedor!:TipoDesenvolvedor;
 }

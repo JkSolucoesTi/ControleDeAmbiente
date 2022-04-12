@@ -29,7 +29,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
   ngOnInit(): void {
 
     this.desenvolvedorService.PegarTodos().subscribe( data =>{
-      this.dataSourceDesenvolvedor.data = data.filter(x => x.nome != "Sem alocação");;
+      this.dataSourceDesenvolvedor.data = data.filter(x => x.nome != "Sem Alocação");;
       console.log(data);      
     },erro => {
       if(erro.status === '400'){
@@ -40,7 +40,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
        }
       }
       else{
-        this.erros.push('Não foi possível listar os desenvolvedores Web')
+        this.erros.push('Não foi possível listar os desenvolvedores')
       }
     })
     this.displayedColumns = this.ExibirColunas();
