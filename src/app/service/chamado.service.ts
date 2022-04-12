@@ -28,7 +28,7 @@ export class ChamadoService {
     return this.chamadoService.get<Chamado>(apiUrl);
   }
 
-  AdicionarAmbiente(chamado:Chamado):Observable<any>{
+  AdicionarChamado(chamado:Chamado):Observable<any>{
     const apiUrl = `${this.api}/Adicionar`;
     return this.chamadoService.post<Chamado>(apiUrl,chamado);
   }

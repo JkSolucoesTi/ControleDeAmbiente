@@ -3,8 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
+import { Desenvolvedor } from 'src/app/model/desenvolvedor';
 import { Servidor } from 'src/app/model/servidor';
 import { AmbienteService } from 'src/app/service/ambientes.service';
+import { DesenvolvedorService } from 'src/app/service/desenvolvedor.service';
 import { ServidorService } from 'src/app/service/servidor.service';
 
 @Component({
@@ -19,14 +21,22 @@ export class EditarAmbienteComponent implements OnInit {
   formulario!:any;
   ambiente!:Ambiente;
   servidores:Servidor[]=[];
+  desenvolvedores:Desenvolvedor[]=[];
 
   constructor(private ambienteService:AmbienteService,
     private servidorService : ServidorService,
+    private desenvolvedorService : DesenvolvedorService,
     private router : Router,
     private activatedRoute : ActivatedRoute,
     private snackBar : MatSnackBar) { }
 
     ngOnInit(): void {
+
+      this.desenvolvedorService.PegarTodos().subscribe( data =>{
+        this.desenvolvedores = data;
+        console.log('desenvolvedores',data);
+      })
+
       this.servidorService.ObterTodos().subscribe(data =>{
         this.servidores = data;
       });
@@ -38,7 +48,9 @@ export class EditarAmbienteComponent implements OnInit {
         this.formulario = new FormGroup({
           ambienteId : new FormControl(this.ambiente.ambienteId),
           nome : new FormControl(this.ambiente.nome,[Validators.required,Validators.maxLength(50)]),
-          servidorId : new FormControl(this.ambiente.servidor.id,[Validators.required,Validators.maxLength(50)])
+          servidorId : new FormControl(this.ambiente.servidor.id,[Validators.required,Validators.maxLength(50)]),
+          desenvolvedorId : new FormControl(this.ambiente.desenvolvedor.id,[Validators.required,Validators.minLength(1)]),
+          acesso : new FormControl(this.ambiente.acesso,[Validators.required,Validators.minLength(1)])
         })
       })
     }

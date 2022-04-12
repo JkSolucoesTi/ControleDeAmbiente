@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
 import { Api } from 'src/app/model/api';
 import { Chamado } from 'src/app/model/chamado';
@@ -35,6 +35,7 @@ export class AdicionarChamadoComponent implements OnInit {
   api!:Api[];
   negocio!:Negocio[];
   erros:string[]=[];
+  ambienteId!:string;
 
   constructor(
     private chamadoService:ChamadoService,
@@ -42,21 +43,24 @@ export class AdicionarChamadoComponent implements OnInit {
     private ambienteService: AmbienteService,  
     private negocioService: NegocioService,
     private apiService : ApiService,
-    private router: Router,
-    private snackBar:MatSnackBar
+    private activetad: ActivatedRoute,
               ) { }
 
   ngOnInit(): void {
+
+    this.ambienteId =this.activetad.snapshot.params.id;
+    console.log('ambienteId',this.ambienteId);
+
     this.ambienteService.ObterTodos().subscribe(dados =>{
       this.ambiente = dados;
       console.log(this.ambiente);
     })
     this.desenvolvedorService.PegarTodos().subscribe(dados => {
       console.log(dados);
-      this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web");
+      this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
       console.log(this.web)
-      this.ios = dados.filter(x => x.tipoDesenvolvedor.tipo === "IOS");
-      this.android = dados.filter(x => x.tipoDesenvolvedor.tipo  === "Android");
+      this.ios = dados.filter(x => x.tipoDesenvolvedor.tipo === "IOS" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
+      this.android = dados.filter(x => x.tipoDesenvolvedor.tipo  === "Android" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
     })
     this.apiService.ObterTodos().subscribe(dados =>{
       this.api = dados;
@@ -70,15 +74,16 @@ export class AdicionarChamadoComponent implements OnInit {
     this.formulario = new FormGroup({
       numero : new FormControl('',[Validators.required,Validators.maxLength(15)]),
       descricao : new FormControl('',[Validators.required,Validators.maxLength(100)]),
-      ambienteId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+      ambienteId : new FormControl(this.ambienteId,[Validators.required,Validators.minLength(1)]),
+      ativo : new FormControl(true)
+     /* apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       webId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       negocioId : new FormControl('',[Validators.required,Validators.minLength(1)]),
       chamadoWeb : new FormControl('',[]),
       chamadoIos: new FormControl('',[]),
-      chamadoAndroid : new FormControl('',[])
+      chamadoAndroid : new FormControl('',[])*/
     })
   }
 
@@ -89,15 +94,20 @@ export class AdicionarChamadoComponent implements OnInit {
   Adicionar(){
     this.erros= [];
     const parametros = this.formulario.value;
-    console.log(parametros);
-    const chamado = new Chamado();
-    chamado.numero = parametros.numero;
-    chamado.descricao = parametros.descricao;
-    const ambiente = new Ambiente().ambienteId = parametros.ambienteId;
-    chamado.ambiente = ambiente;
-      
-  console.log(chamado,parametros.ambienteId,chamado.ambiente.ambienteId);
         
+  this.chamadoService.AdicionarChamado(parametros).subscribe(data =>{
+    console.log(data);
+  },erro => {
+    if(erro.status === '400'){
+     for(const campos in erro.error.errors){
+       if(erro.error.errors.hasOwnProperty(campos)){
+         this.erros.push(erro.error.errors[campos])
+       }
+     }
+    }
+    else{
+      this.erros.push("Não foi possível adicionar o chamado")
+    }
+  });        
   }
-
 }

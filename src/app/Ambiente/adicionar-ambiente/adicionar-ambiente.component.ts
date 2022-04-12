@@ -42,7 +42,8 @@ export class AdicionarAmbienteComponent implements OnInit {
       this.formulario = new FormGroup({
         nome : new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(50)]),
         servidorId : new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(50)]),
-        desenvolvedorId : new FormControl('',[Validators.required,Validators.minLength(1)])
+        desenvolvedorId : new FormControl('',[Validators.required,Validators.minLength(1)]),
+        acesso : new FormControl('',[Validators.required,Validators.minLength(1)])
       })    
   }
 

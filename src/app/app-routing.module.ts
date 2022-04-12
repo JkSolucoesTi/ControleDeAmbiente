@@ -42,6 +42,10 @@ const routes: Routes = [
       }
       ,
       {
+        path:"chamados/adicionar/:id",component:AdicionarChamadoComponent
+      }
+      ,
+      {
         path:"chamados/alterar/:ambienteId/:apiId",component:EditarChamadoComponent
       }
       ,
