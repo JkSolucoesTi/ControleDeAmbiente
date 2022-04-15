@@ -35,6 +35,7 @@ export class ListarChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {      
+      console.log(resultado);
       this.dataSource1.data = resultado//.filter(x => x.ativo == true);           
       this.dataSource1.paginator = this.paginator;
     },erro =>{
@@ -112,23 +113,23 @@ export class ListarChamadoComponent implements OnInit {
     this.displayedColumns = this.ExibirColunas();
   }
 
-  AbrirDetalhe(numeroChamado:string,nomeAmbiente:string){
+  AbrirDetalhe(numeroChamado:string){
     
-    this.chamadoService.Detahes(numeroChamado,nomeAmbiente).subscribe(resultado =>{
+    this.chamadoService.Detahes(numeroChamado).subscribe(resultado =>{
 
       const valores = resultado;
+      console.log(valores);
       this.dialog.open(DialogDetalheChamadoComponent,{
         width:'600px',
         height:'330px',
         data :{
           numero : valores.numero,
-          api : valores.api.nome,
-          nomeWeb : valores.web.nome,
-          reqWeb : valores.chamadoWeb,
-          nomeIos : valores.ios.nome,
-          reqIos : valores.chamadoIos,
-          nomeAndroid : valores.android.nome,
-          reqAndroid: valores.chamadoAndroid
+          nomeWeb : valores.detalhes[0].desenvolvedor.nome,
+          reqWeb : valores.detalhes[0].numero,
+          nomeIos : valores.detalhes[1].desenvolvedor.nome,
+          reqIos : valores.detalhes[1].numero,
+          nomeAndroid : valores.detalhes[2].desenvolvedor.nome,
+          reqAndroid: valores.detalhes[2].numero
         }
       }
       )

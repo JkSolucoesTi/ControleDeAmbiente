@@ -23,7 +23,16 @@
               </mat-error>
             </mat-form-field>
             </div>
-            <!--
+            <div>
+              <mat-form-field appearance="fill"  style="margin-right: 4%; margin-left: auto; width: 48%;">
+                <mat-label>Selecione o Ambiente</mat-label>
+                <mat-select formControlName="ambienteId">
+                  <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.ambienteId">{{responsavel.nome}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="propriedade.ambienteId.touched && propriedade.ambienteId.invalid" >
+                  <sup>*</sup> Selecione o ambiente
+               </mat-error>
+              </mat-form-field>  
             <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Selecione o Business</mat-label>
               <mat-select formControlName="negocioId">
@@ -87,7 +96,7 @@
                 <sup>*</sup> Preencher o numero do chamado Android
              </mat-error>
             </mat-form-field>
-          </div> -->
+          </div>
           <div>
             <mat-form-field appearance="fill" style="width: 100%;">
               <mat-label>Descrição do Chamado</mat-label>
@@ -111,7 +120,7 @@
             type="submit"
             mat-button
             mat-mini-fab
-            color="primary"
+            color="primary"            
             >
             <mat-icon>add</mat-icon>
           </button>

@@ -44,9 +44,9 @@ export class ChamadoService {
     return this.chamadoService.put(url,chamado,httpOptions);
   }
 
-  Detahes(numeroChamado:string,nomeAmbiente:string):Observable<Chamado>{
+  Detahes(numeroChamado:string):Observable<Chamado>{
 
-    const url = `${this.api}/Detalhes/${numeroChamado}/${nomeAmbiente}`
+    const url = `${this.api}/Detalhes/${numeroChamado}`
     return this.chamadoService.get<Chamado>(url,httpOptions);
 
   }

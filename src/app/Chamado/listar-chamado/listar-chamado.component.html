@@ -48,7 +48,7 @@
         <ng-container matColumnDef="detalhes">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let dataSource1">
-            <div  (click)="AbrirDetalhe(dataSource1.numero,dataSource1.ambiente.nome)">
+            <div  (click)="AbrirDetalhe(dataSource1.numero)">
               <mat-icon *ngIf="dataSource1.ativo">menu</mat-icon>
             </div>
           </td>

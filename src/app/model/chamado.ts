@@ -7,18 +7,23 @@ import { Negocio } from "./negocio";
 import { Web } from "./web";
 
 export class Chamado{
+  /*Propriedades da api*/
   id!:string;
   numero!:string;
   descricao!:string;
-  ambiente!:Ambiente;
+  ambienteId!:Ambiente;
+  negocioId!:Negocio;
+  detalhes!:Detalhe[];
+  ativo!:boolean;
+
+/*Propriedades de Get */
+
   api!:Api;
   web!:Web;
   ios!:Ios;
   android!:Android;
-  negocio!:Negocio;
   chamadoWeb!:string;
   chamadoIos!:string;
   chamadoAndroid!:string;
-  detalhe!:Detalhe[];
-  ativo!:boolean;
+
 }

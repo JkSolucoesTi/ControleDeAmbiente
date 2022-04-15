@@ -5,7 +5,7 @@ import { Negocio } from "./negocio";
 export class Detalhe{
     id!:string;
     numero!:string;
-    chamado!:Chamado;
+    chamadoId!:Chamado;
+    desenvolvedorId!:string;
     desenvolvedor!:Desenvolvedor;
-    negocio!:Negocio;
 }
