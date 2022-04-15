@@ -31,7 +31,7 @@ export class ListarAmbienteComponent implements OnInit {
   }
 
   AbrirSwagger(url:string){
-    window.open(url ,"Ambiente")
+    window.open(url ,"Ambiente","_blank")
   }
 
 }

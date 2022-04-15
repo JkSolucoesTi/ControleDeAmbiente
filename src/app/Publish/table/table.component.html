@@ -19,13 +19,10 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let dataSource">
-        <a type="button" (click)="AbrirSwagger(dataSource.link)"
+        <a type="button" (click)="AbrirSwagger(dataSource.acesso)"
         mat-button color="primary">
         Acessar
-      </a>                                          
-      <button type="button" mat-button color="primary" [routerLink]="['/chamados/adicionar',dataSource.ambienteId]">
-        Incluir Chamado
-      </button>
+      </a>                                               
       </td>
     </ng-container>
   
