@@ -2,20 +2,16 @@ import { ChamadoService } from 'src/app/service/chamado.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ambiente } from 'src/app/model/ambiente';
-import { Api } from 'src/app/model/api';
-import { Web } from 'src/app/model/web';
-import { Ios } from 'src/app/model/ios';
-import { Android } from 'src/app/model/android';
 import { Negocio } from 'src/app/model/negocio';
-import { WebService } from 'src/app/service/web.service';
 import { NegocioService } from 'src/app/service/negocio.service';
-import { AndroidService } from 'src/app/service/android.service';
 import { ApiService } from 'src/app/service/api.service';
-import { IosService } from 'src/app/service/ios.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Chamado } from 'src/app/model/chamado';
 import { AmbienteService } from 'src/app/service/ambientes.service';
+import { Desenvolvedor } from 'src/app/model/desenvolvedor';
+import { DesenvolvedorService } from 'src/app/service/desenvolvedor.service';
+import { Detalhe } from 'src/app/model/detalhe';
 
 @Component({
   selector: 'app-editar-chamado',
@@ -26,71 +22,61 @@ export class EditarChamadoComponent implements OnInit {
 
 
   formulario!:any;
-  ambiente!:Ambiente[];
-  api!:Api[];
-  web!:Web[];
-  ios!:Ios[];
-  android!:Android[];
+  ambiente!:string;
+  desenvolvedores!:Desenvolvedor[];
+  web!:Desenvolvedor[];
+  android!:Desenvolvedor[];
+  ios!:Desenvolvedor[];
   negocio!:Negocio[];
   erros:string[]=[];
   chamadoOld!:Chamado;
-
   rota1!:any;
-  rota2!:any;
+
 
   constructor(
     private activetad: ActivatedRoute,
     private ambienteService: AmbienteService,
+    private desenvolvedorService: DesenvolvedorService,
     private chamadoService:ChamadoService,
-    private apiService: ApiService,
-    private webService: WebService,
-    private iosService: IosService,
-    private androidService: AndroidService,
     private negocioService: NegocioService,
     private router: Router,
     private snackBar:MatSnackBar
               ) { }
               
   ngOnInit(): void {
-    this.rota1 = this.activetad.snapshot.params.ambienteId;
-    this.rota2 = this.activetad.snapshot.params.apiId;
+    this.rota1 = this.activetad.snapshot.params.chamadoId;
 
-    this.ambienteService.ObterTodos().subscribe(dados => {
-      this.ambiente = dados;
+    this.desenvolvedorService.PegarTodos().subscribe(dados => {
+      this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web" || x.tipoDesenvolvedor.tipo === "Sem Alocação");      
+      this.ios = dados.filter(x => x.tipoDesenvolvedor.tipo === "IOS" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
+      this.android = dados.filter(x => x.tipoDesenvolvedor.tipo  === "Android" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
     })
 
-    this.apiService.ObterTodos().subscribe(dados =>{
-      this.api = dados;
-    });
-    this.webService.ObterTodos().subscribe(dados =>{
-      this.web = dados;
-    });
-    this.iosService.ObterTodos().subscribe(dados =>{
-      this.ios = dados;
-    });
-    this.androidService.ObterTodos().subscribe(dados =>{
-      this.android = dados;
-    });
     this.negocioService.ObterTodos().subscribe(dados =>{
       this.negocio = dados;
     });
 
 
-    this.chamadoService.ObterPorAmbienteAPI(this.rota1,this.rota2).subscribe(resultado =>{
-      this.chamadoOld = resultado;
+    this.chamadoService.ObterChamadoPorId(this.rota1).subscribe(resultado =>{
+      if(resultado.ativo == true){
+        this.ambiente = resultado.ambiente.nome + "  Atualização"
+      }else{
+        this.ambiente = resultado.ambiente.nome + "  Cadastro"
+      }
+      console.log(resultado)
+      
       this.formulario = new FormGroup({
         chamadoId : new FormControl(resultado.chamadoId),
         descricao : new FormControl(resultado.descricao,[Validators.required,Validators.maxLength(100)]),
         numero : new FormControl(resultado.numero,[Validators.required,Validators.maxLength(15)]),
-        ambienteId : new FormControl(resultado.ambienteId,[Validators.required,Validators.minLength(1)]),
-        apiId : new FormControl(resultado.apiId,[Validators.required,Validators.minLength(1)]),
-        webId : new FormControl(resultado.webId,[Validators.required,Validators.minLength(1)]),
-        iosId : new FormControl(resultado.iosId,[Validators.required,Validators.minLength(1)]),
-        androidId : new FormControl(resultado.androidId,[Validators.required,Validators.minLength(1)]),
+        ambienteId : new FormControl(resultado.ambienteId,[Validators.required,Validators.minLength(1)]),  
+        webId : new FormControl(resultado.detalhes[0].desenvolvedorId,[Validators.required,Validators.minLength(1)]),
+        iosId : new FormControl(resultado.detalhes[1].desenvolvedorId,[Validators.required,Validators.minLength(1)]),
+        androidId : new FormControl(resultado.detalhes[2].desenvolvedorId,[Validators.required,Validators.minLength(1)]),
         negocioId : new FormControl(resultado.negocioId,[Validators.required,Validators.minLength(1)]),
-        chamadoWeb : new FormControl(resultado.chamadoWeb,[]),
-        chamadoIos: new FormControl(resultado.chamadoIos,[]),
-        chamadoAndroid : new FormControl(resultado.chamadoAndroid,[])
+        chamadoWeb : new FormControl(resultado.detalhes[0].numero),
+        chamadoIos: new FormControl(resultado.detalhes[1].numero),
+        chamadoAndroid : new FormControl(resultado.detalhes[2].numero)        
       });
     })
 
@@ -101,12 +87,34 @@ export class EditarChamadoComponent implements OnInit {
   }
 
   Alterar(){
+
     this.erros= [];
     const parametros = this.formulario.value;
-    console.log(parametros);
-    const parametrosOld = this.chamadoOld;
-    console.log(this.chamadoOld);
-    this.chamadoService.Atualizar(parametros,this.rota1,this.rota2,parametros.chamadoId).subscribe(resultado => {
+    var chamado = new Chamado();
+    chamado.numero = parametros.numero;
+    chamado.descricao = parametros.descricao;
+    chamado.negocioId = parametros.negocioId;
+    chamado.ambienteId = parametros.ambienteId;
+    chamado.ativo = true;
+
+    var detalhe1 = new Detalhe();
+    detalhe1.desenvolvedorId = parametros.webId;
+    detalhe1.numero = parametros.chamadoWeb;
+    var detalhe2 = new Detalhe();
+    detalhe2.desenvolvedorId = parametros.iosId;
+    detalhe2.numero = parametros.chamadoIos;
+    var detalhe3 = new Detalhe();
+    detalhe3.desenvolvedorId = parametros.androidId;
+    detalhe3.numero = parametros.chamadoAndroid;
+
+    var detalhes =[detalhe1,detalhe2,detalhe3];
+
+    chamado.detalhes =detalhes
+
+    console.log(chamado);
+    
+    this.erros= [];
+    this.chamadoService.Atualizar(chamado,this.rota1).subscribe(resultado => {
       if(resultado.codigo == 2){
         this.erros.push(resultado.mensagem);
       }
@@ -130,6 +138,5 @@ export class EditarChamadoComponent implements OnInit {
             this.erros.push("Não foi possível editar o Chamado")
           }
         });
-
       }
 }

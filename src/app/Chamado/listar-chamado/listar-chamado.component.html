@@ -3,7 +3,7 @@
     <ul>
       <li>
   <div style="margin:auto">
-    <mat-checkbox     
+    <mat-checkbox  *ngIf="!ocupados"
     disabled="{{ocupados}}"
     class="example-margin"
     (click)="Liberados()"
@@ -14,7 +14,7 @@
 </li>
 <li>
   <div style="margin:auto">
-    <mat-checkbox 
+    <mat-checkbox *ngIf="!liberar"
     disabled="{{liberar}}"
     class="example-margin"    
     (click)="Ocupados()"
@@ -70,12 +70,16 @@
            <td mat-cell *matCellDef="let dataSource1">
             <button 
             mat-mini-fab
-            color="primary">
+            color="primary"
+            [routerLink]="['/chamados/editar/',dataSource1.chamadoId]"
+            
+            >
             <mat-icon>edit</mat-icon>
           </button>
           <button *ngIf ="dataSource1.ativo" 
           mat-mini-fab
           color="accent"          
+          (click)="AbrirDialog(dataSource1.numero)"
           >
           <mat-icon>delete</mat-icon>
         </button>

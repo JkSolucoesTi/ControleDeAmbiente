@@ -11,7 +11,7 @@
 <div class="mat-card-cvr">
     <mat-card>
     <div class="titulo">
-      <mat-card-subtitle>O ambiente deve ser editado corretamente</mat-card-subtitle>
+      <mat-card-subtitle>Ambiente - {{ambiente}} </mat-card-subtitle>
     </div>
         <form [formGroup]="formulario" *ngIf="formulario" class="formulario" (ngSubmit)="Alterar()">        
           <div>
@@ -31,28 +31,7 @@
                 <sup>*</sup> Preencher o responsável pelo Negocio
              </mat-error>
             </mat-form-field>
-
-          </div>
-          <div>
-            <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 48%;">
-              <mat-label>Selecione o Ambiente</mat-label>
-              <mat-select formControlName="ambienteId" [disabled]="true">
-                <mat-option *ngFor="let responsavel of ambiente" [value]="responsavel.ambienteId">{{responsavel.nome}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="propriedade.ambienteId.touched && propriedade.ambienteId.invalid" >
-                <sup>*</sup> Selecionar o Ambiente
-             </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
-              <mat-label>Selecione a API</mat-label>
-              <mat-select formControlName="apiId" [disabled]="true">
-                <mat-option *ngFor="let responsavel of api" [value]="responsavel.id">{{responsavel.nome}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="propriedade.apiId.touched && propriedade.apiId.invalid" >
-                <sup>*</sup> Selecionar a API
-             </mat-error>
-            </mat-form-field>
-          </div>
+          </div>         
           <div>
             <mat-form-field appearance="fill" style="margin-right: 4%; margin-left: auto; width: 48%;">
               <mat-label>Responsável pela WEB</mat-label>

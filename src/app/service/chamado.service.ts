@@ -23,8 +23,8 @@ export class ChamadoService {
     return this.chamadoService.get<Chamado[]>(this.api);
   }
 
-  ObterPorAmbienteAPI(ambienteId:string,apiId:string):Observable<any>{
-    const apiUrl = `${this.api}/Alterar/${ambienteId}/${apiId}`;
+  ObterChamadoPorId(chamadoId:any):Observable<any>{
+    const apiUrl = `${this.api}/Alterar/${chamadoId}`;
     return this.chamadoService.get<Chamado>(apiUrl);
   }
 
@@ -33,21 +33,21 @@ export class ChamadoService {
     return this.chamadoService.post<Chamado>(apiUrl,chamado);
   }
 
-  LiberarAmbiente(ambienteId:string,apiId:string):Observable<any>{
-    const apiUrl = `${this.api}/Liberar/${ambienteId}/${apiId}`;
+  LiberarAmbiente(numeroChamado:string):Observable<any>{
+    const apiUrl = `${this.api}/Liberar/${numeroChamado}`;
     return this.chamadoService.delete<Chamado>(apiUrl);
   }
 
-  Atualizar(chamado : Chamado , ambienteIdOld:string,apiIdOld:number,chamadoId : number):Observable<any>{
-    const url = `${this.api}/Alterar/${ambienteIdOld}/${apiIdOld}/${chamadoId}`;
-    console.log(url)
-    return this.chamadoService.put(url,chamado,httpOptions);
-  }
-
+  
   Detahes(numeroChamado:string):Observable<Chamado>{
-
     const url = `${this.api}/Detalhes/${numeroChamado}`
     return this.chamadoService.get<Chamado>(url,httpOptions);
+  }
+
+  Atualizar(chamado:Chamado,chamadoId:any):Observable<any>{
+
+    const url = `${this.api}/Alterar/${chamadoId}`;
+    return this.chamadoService.put<Chamado>(url,chamado);
 
   }
 

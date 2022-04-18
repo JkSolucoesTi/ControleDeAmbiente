@@ -79,15 +79,14 @@ export class ListarChamadoComponent implements OnInit {
 
   }  
 
-  AbrirDialog(ambienteId:any,apiId:any){
+  AbrirDialog(numeroChamado:any){
     this.dialog.open(DialogLiberarChamadoComponent,{
       data:{
-        ambienteId:ambienteId,
-        apiId:apiId
+        numeroChamado:numeroChamado,        
       }
     }).afterClosed().subscribe(resultado => {
       if(resultado === true){
-        this.chamadoService.LiberarAmbiente(ambienteId,apiId).subscribe(resultado =>{
+        this.chamadoService.LiberarAmbiente(numeroChamado).subscribe(resultado =>{
           this.snackBar.open(resultado.mensagem,"Liberar Ambiente", {
             duration : 2000,
             horizontalPosition:'center',
@@ -144,7 +143,7 @@ export class ListarChamadoComponent implements OnInit {
 export class DialogLiberarChamadoComponent {
   constructor( @Inject (MAT_DIALOG_DATA) public data: any) {}
 
-   LiberarAmbiente(ambienteId:string,apiId:string){     
+   LiberarAmbiente(numeroChamado:string){     
     }
 
   ExibirColunas():string[]{

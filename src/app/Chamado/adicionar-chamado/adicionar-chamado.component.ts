@@ -46,19 +46,11 @@ export class AdicionarChamadoComponent implements OnInit {
     this.ambienteId =this.activetad.snapshot.params.id;
     console.log('ambienteId',this.ambienteId);
 
-    this.ambienteService.ObterTodos().subscribe( dados => {
-      this.ambiente = dados;
-      console.log(this.ambiente);
-    })
-
     this.ambienteService.ObterTodos().subscribe(dados =>{
       this.ambiente = dados;
-      console.log(this.ambiente);
     })
     this.desenvolvedorService.PegarTodos().subscribe(dados => {
-      console.log(dados);
-      this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
-      console.log(this.web)
+      this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web" || x.tipoDesenvolvedor.tipo === "Sem Alocação");      
       this.ios = dados.filter(x => x.tipoDesenvolvedor.tipo === "IOS" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
       this.android = dados.filter(x => x.tipoDesenvolvedor.tipo  === "Android" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
     })
