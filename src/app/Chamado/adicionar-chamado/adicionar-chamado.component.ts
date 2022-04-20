@@ -44,11 +44,9 @@ export class AdicionarChamadoComponent implements OnInit {
   ngOnInit(): void {
 
     this.ambienteId =this.activetad.snapshot.params.id;
-    console.log('ambienteId',this.ambienteId);
-
-    this.ambienteService.ObterTodos().subscribe(dados =>{
-      this.ambiente = dados;
-    })
+    this.ambienteService.ObterAmbientesDisponiveis().subscribe(resultado =>{
+      this.ambiente = resultado;
+    });
     this.desenvolvedorService.PegarTodos().subscribe(dados => {
       this.web = dados.filter(x => x.tipoDesenvolvedor.tipo === "Web" || x.tipoDesenvolvedor.tipo === "Sem Alocação");      
       this.ios = dados.filter(x => x.tipoDesenvolvedor.tipo === "IOS" || x.tipoDesenvolvedor.tipo === "Sem Alocação");
@@ -102,9 +100,6 @@ export class AdicionarChamadoComponent implements OnInit {
     var detalhes =[detalhe1,detalhe2,detalhe3];
 
     chamado.detalhes =detalhes
-
-    console.log(chamado)
-
 
   this.chamadoService.AdicionarChamado(chamado).subscribe(data =>{
     this.snackBar.open(data.mensagem,"Adicionar" , {

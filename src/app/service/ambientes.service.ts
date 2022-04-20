@@ -24,6 +24,11 @@ export class AmbienteService {
     return this.httpClient.get<Ambiente[]>(this.apiUrl);
   }
 
+  ObterAmbientesDisponiveis():Observable<Ambiente[]>{
+    const url = `${this.apiUrl}/Disponivel`;
+    return this.httpClient.get<Ambiente[]>(url);
+  }
+
   ObterPorId(apiId : number): Observable<Ambiente>{
     const url = `${this.apiUrl}/${apiId}`;
     return this.httpClient.get<Ambiente>(url);

@@ -110,8 +110,6 @@ export class EditarChamadoComponent implements OnInit {
     var detalhes =[detalhe1,detalhe2,detalhe3];
 
     chamado.detalhes =detalhes
-
-    console.log(chamado);
     
     this.erros= [];
     this.chamadoService.Atualizar(chamado,this.rota1).subscribe(resultado => {

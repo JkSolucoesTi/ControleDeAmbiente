@@ -23,7 +23,6 @@ export class ListarServidorComponent implements OnInit {
   ngOnInit(): void {
     this.servidorService.ObterTodos().subscribe( data => {
       this.dataSource.data = data
-      console.log(data);
       this.displayedColumns = this.ExibirColunas();
     }, erro =>
       {

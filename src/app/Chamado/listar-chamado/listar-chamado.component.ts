@@ -35,7 +35,6 @@ export class ListarChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {      
-      console.log(resultado);
       this.dataSource1.data = resultado//.filter(x => x.ativo == true);           
       this.dataSource1.paginator = this.paginator;
     },erro =>{
