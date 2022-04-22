@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdministrador = this.authGuard.VerificarAdministrador();
-    console.log('admin')
   }
 
 }

@@ -41,8 +41,8 @@
       </div>
     </mat-list-item>
   </div>
-  <div>
-    <mat-divider></mat-divider>
+  <div *ngIf="isAdministrador">
+    <mat-divider></mat-divider>    
     <mat-list-item routerLink="ambiente/listar" >
       <div>
         <mat-icon>desktop_windows</mat-icon>  Ambientes
@@ -56,8 +56,8 @@
         <mat-icon>domain</mat-icon>  Servidores
       </div>
     </mat-list-item>
-  </div>
     <mat-divider></mat-divider>
+  </div>
     <div>
     </div>
    </mat-list>

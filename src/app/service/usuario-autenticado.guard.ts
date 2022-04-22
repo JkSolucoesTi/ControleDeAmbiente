@@ -30,10 +30,8 @@ export class UsuarioAutenticadoGuard implements CanActivate {
 
     if(tokenPerfil.role == "ADMIN")
     {
-      console.log('admin')
       return true;
     }else{
-      console.log('não é admin')
       return false;
     }
   }

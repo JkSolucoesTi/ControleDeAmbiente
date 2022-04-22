@@ -63,8 +63,6 @@ export class EditarChamadoComponent implements OnInit {
       }else{
         this.ambiente = resultado.ambiente.nome + "  Cadastro"
       }
-      console.log(resultado)
-      
       this.formulario = new FormGroup({
         chamadoId : new FormControl(resultado.chamadoId),
         descricao : new FormControl(resultado.descricao,[Validators.required,Validators.maxLength(100)]),

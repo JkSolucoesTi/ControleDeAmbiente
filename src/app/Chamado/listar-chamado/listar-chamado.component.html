@@ -43,30 +43,31 @@
     </h4>
   </div>
 </div>
+
 <div style="width: 100%; overflow-x: auto;">
-      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" class="table" *ngIf="dataSource1">
+      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" matSort class="table" *ngIf="dataSource1" >
         <ng-container matColumnDef="detalhes">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let dataSource1">
             <div  (click)="AbrirDetalhe(dataSource1.numero)">
               <mat-icon *ngIf="dataSource1.ativo">menu</mat-icon>
             </div>
           </td>
         </ng-container>
-        <ng-container matColumnDef="requisicao">
-          <th mat-header-cell *matHeaderCellDef>Requisição</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.numero | mask:'S00 000 0000'}} </td>
-        </ng-container>
         <ng-container matColumnDef="ambiente">
-          <th mat-header-cell *matHeaderCellDef>Ambiente</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ambiente</th>
           <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.ambiente.nome}} </td>
         </ng-container>
+        <ng-container matColumnDef="requisicao">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Requisição</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.numero | mask:'S00 000 00000' | uppercase}} </td>
+        </ng-container>
         <ng-container matColumnDef="descricao">
-          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
           <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.descricao}} </td>
         </ng-container>
          <ng-container matColumnDef="acoes">
-           <th mat-header-cell *matHeaderCellDef>Ações</th>
+           <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
            <td mat-cell *matCellDef="let dataSource1">
             <button 
             mat-mini-fab
@@ -88,11 +89,13 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
       </table>
-    </div>
 
       <mat-paginator [pageSizeOptions]="[10]"
       showFirstLastButtons></mat-paginator>
+    </div>
+
       
       <mat-divider></mat-divider>
     

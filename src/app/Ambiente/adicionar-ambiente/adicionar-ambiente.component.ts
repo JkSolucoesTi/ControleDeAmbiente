@@ -33,7 +33,6 @@ export class AdicionarAmbienteComponent implements OnInit {
   
     this.desenvolvedorService.PegarTodos().subscribe( data =>{
       this.desenvolvedores = data;
-      console.log('desenvolvedores',data);
     })
 
     this.servidorService.ObterTodos().subscribe( data =>{

@@ -29,8 +29,7 @@ export class ListarDesenvolvedorComponent implements OnInit {
   ngOnInit(): void {
 
     this.desenvolvedorService.PegarTodos().subscribe( data =>{
-      this.dataSourceDesenvolvedor.data = data.filter(x => x.nome != "Sem Alocação");;
-      console.log(data);      
+      this.dataSourceDesenvolvedor.data = data.filter(x => x.nome != "Sem alocação");;     
     },erro => {
       if(erro.status === '400'){
        for(const campos in erro.error.errors){

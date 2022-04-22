@@ -17,7 +17,7 @@
           <div>
             <mat-form-field appearance="fill" style="width:100%;">
               <mat-label>Numero do Chamado</mat-label>
-              <input type="text" matInput placeholder="Nº do Chamado" formControlName="numero" mask="S00 000 0000">
+              <input type="text" matInput placeholder="Nº do Chamado" formControlName="numero" mask="S00 000 00000">
               <mat-error *ngIf="propriedade.numero.touched && propriedade.numero.invalid" >
                  <sup>*</sup> Preencher o numero do chamado
               </mat-error>
@@ -55,10 +55,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Numero do Chamado Web</mat-label>
-              <input type="text" matInput placeholder="Nº do Chamado Web" formControlName="chamadoWeb" mask="S00 000 0000">
-              <mat-error *ngIf="propriedade.chamadoWeb.touched && propriedade.chamadoWeb.invalid" >
-                <sup>*</sup> Preencher o numero do chamado web
-             </mat-error>
+              <input type="text" matInput placeholder="Nº do Chamado Web" formControlName="chamadoWeb" mask="S00 000 00000">
             </mat-form-field>
           </div>
            <div>
@@ -73,10 +70,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Numero do Chamado IOS</mat-label>
-              <input type="text" matInput placeholder="Nº do Chamado IOS" formControlName="chamadoIos" mask="S00 000 0000"> 
-              <mat-error *ngIf="propriedade.chamadoIos.touched && propriedade.chamadoIos.invalid" >
-                <sup>*</sup> Preencher o numero do chamado IOS
-             </mat-error>
+              <input type="text" matInput placeholder="Nº do Chamado IOS" formControlName="chamadoIos" mask="S00 000 00000"> 
             </mat-form-field>
           </div>
           <div>
@@ -91,10 +85,7 @@
             </mat-form-field>
             <mat-form-field appearance="fill" style="margin-right: auto; width: 48%;">
               <mat-label>Numero do Chamado Android</mat-label>
-              <input type="text" matInput placeholder="Nº do Chamado IOS" formControlName="chamadoAndroid" mask="S00 000 0000">
-              <mat-error *ngIf="propriedade.chamadoAndroid.touched && propriedade.chamadoAndroid.invalid" >
-                <sup>*</sup> Preencher o numero do chamado Android
-             </mat-error>
+              <input type="text" matInput placeholder="Nº do Chamado IOS" formControlName="chamadoAndroid" mask="S00 000 00000">
             </mat-form-field>
           </div>
           <div>
@@ -120,7 +111,8 @@
             type="submit"
             mat-button
             mat-mini-fab
-            color="primary"            
+            color="primary"
+            [disabled]="formulario.invalid"          
             >
             <mat-icon>add</mat-icon>
           </button>

@@ -34,17 +34,14 @@ export class EditarAmbienteComponent implements OnInit {
 
       this.desenvolvedorService.PegarTodos().subscribe( data =>{
         this.desenvolvedores = data;
-        console.log('desenvolvedores',data);
       })
 
       this.servidorService.ObterTodos().subscribe(data =>{
         this.servidores = data;
       });
       this.rota = this.activatedRoute.snapshot.params.id;
-      console.log(this.rota);
       this.ambienteService.ObterPorId(this.rota).subscribe(resultado => {
         this.ambiente = resultado;
-        console.log(resultado);
         this.formulario = new FormGroup({
           ambienteId : new FormControl(this.ambiente.ambienteId),
           nome : new FormControl(this.ambiente.nome,[Validators.required,Validators.maxLength(50)]),

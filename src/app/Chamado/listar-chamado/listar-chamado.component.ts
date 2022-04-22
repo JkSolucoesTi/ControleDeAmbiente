@@ -6,6 +6,7 @@ import { Ambiente } from 'src/app/model/ambiente';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-listar-chamado',
@@ -35,8 +36,8 @@ export class ListarChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.erros = [];
     this.chamadoService.ObterTodos().subscribe(resultado => {      
-      this.dataSource1.data = resultado//.filter(x => x.ativo == true);           
-      this.dataSource1.paginator = this.paginator;
+      this.dataSource1.data = resultado//.filter(x => x.ativo == true);         
+      this.dataSource1.paginator = this.paginator;  
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -112,11 +113,8 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   AbrirDetalhe(numeroChamado:string){
-    
     this.chamadoService.Detahes(numeroChamado).subscribe(resultado =>{
-
       const valores = resultado;
-      console.log(valores);
       this.dialog.open(DialogDetalheChamadoComponent,{
         width:'600px',
         height:'330px',

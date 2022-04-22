@@ -19,7 +19,6 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {   
     this.dataSource.data = this.ambientes;
     this.displayedColumns = this.ExibirColunas();
-    console.log(this.ambientes)
   }
 
   ExibirColunas():string[]{

@@ -22,7 +22,6 @@ export class ListarAmbienteComponent implements OnInit {
 
     this.servidorService.ObterTodos().subscribe( data =>{
       this.servidores = data;
-      console.log(this.servidores);
     })
   }
 

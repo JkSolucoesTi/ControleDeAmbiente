@@ -58,18 +58,16 @@ export class AdicionarChamadoComponent implements OnInit {
 
 
     this.formulario = new FormGroup({
-      numero : new FormControl('',[Validators.required,Validators.maxLength(15)]),
+      numero : new FormControl('',[Validators.required,Validators.maxLength(20)]),
       descricao : new FormControl('',[Validators.required,Validators.maxLength(100)]),
-      ambienteId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      ativo : new FormControl(true),
-      apiId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      webId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      iosId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      androidId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      negocioId : new FormControl('',[Validators.required,Validators.minLength(1)]),
-      chamadoWeb : new FormControl('',[]),
-      chamadoIos: new FormControl('',[]),
-      chamadoAndroid : new FormControl('',[])
+      ambienteId : new FormControl('',[Validators.required]),
+      webId : new FormControl(1,[Validators.required]),
+      iosId : new FormControl(1,[Validators.required]),
+      androidId : new FormControl(1,[Validators.required]),
+      negocioId : new FormControl(1,[Validators.required]),
+      chamadoWeb : new FormControl(''),
+      chamadoIos: new FormControl(''),
+      chamadoAndroid : new FormControl('')
     })
   }
 
@@ -85,7 +83,7 @@ export class AdicionarChamadoComponent implements OnInit {
     chamado.descricao = parametros.descricao;
     chamado.negocioId = parametros.negocioId;
     chamado.ambienteId = parametros.ambienteId;
-    chamado.ativo = parametros.ativo;
+    chamado.ativo = true;//parametros.ativo;
 
     var detalhe1 = new Detalhe();
     detalhe1.desenvolvedorId = parametros.webId;

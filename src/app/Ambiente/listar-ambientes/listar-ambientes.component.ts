@@ -30,11 +30,9 @@ export class ListarAmbientesComponent implements OnInit {
   
     this.servidorService.ObterTodos().subscribe( data =>{
       this.servidores = data;
-      console.log(data);
     })
     this.ambienteService.ObterTodos().subscribe(data =>{
       this.dataSource.data = data;
-      console.log(data);
       this.displayedColumns= this.ExibirColunas();
     },erro =>{
       if(erro === '400'){
@@ -85,7 +83,7 @@ export class ListarAmbientesComponent implements OnInit {
   AbrirDetalhe(ambienteId:number){   
     this.ambienteService.ObterPorId(ambienteId).subscribe(resultado =>{
       const valores = resultado;
-      console.log(valores);
+
       this.dialog.open(DialogDetalheAmbienteComponent,{
         width:'600px',
         height:'330px',

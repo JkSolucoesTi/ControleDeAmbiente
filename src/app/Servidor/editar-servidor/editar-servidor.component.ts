@@ -28,7 +28,6 @@ export class EditarServidorComponent implements OnInit {
     this.rota = this.activatedRoute.snapshot.params.id;
     this.servidorService.ObterPorId(this.rota).subscribe(resultado => {
       this.servidor = resultado;
-      console.log(resultado);
       this.formulario = new FormGroup({
         id : new FormControl(this.servidor.id),
         nome : new FormControl(this.servidor.nome,[Validators.required,Validators.maxLength(50)]),
@@ -44,7 +43,6 @@ export class EditarServidorComponent implements OnInit {
   {
     this.erros = [];
     const parametros = this.formulario.value;
-    console.log(parametros);
     this.servidorService.Atualizar(parametros,this.rota).subscribe(resultado => {
       this.snackBar.open(resultado.mensagem,"Atualizar",{
         duration: 1000,

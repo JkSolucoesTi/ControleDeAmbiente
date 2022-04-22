@@ -28,7 +28,6 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
     this.rota = this.activatedRoute.snapshot.params.dev;
     this.desenvolvedorService.PegarTodosTipoDesenvolvedores().subscribe( data =>{
       this.tipoDesenvolvedor = data.filter(x => x.tipo != "Sem Alocação");
-      console.log('desenvolvedores',data);
     })
     this.formulario = new FormGroup({
       nome : new FormControl('',[Validators.required,Validators.maxLength(50)]),
@@ -45,7 +44,6 @@ export class AdicionarDesenvolvedorComponent implements OnInit {
   AdicionarDesenvolvedor()
   {
     const desenvolvedor = this.formulario.value;
-    console.log(desenvolvedor);
     this.desenvolvedorService.Inserir(desenvolvedor).subscribe(data => {
       this.snackBar.open(data.mensagem,"Adicionar" , {
         duration:1000,
