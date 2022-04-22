@@ -13,12 +13,26 @@ import { EditarBusinessComponent } from './Business/editar-business/editar-busin
 import { AdicionarApiComponent } from './Api/adicionar-api/adicionar-api.component';
 import { EditarApiComponent } from './Api/editar-api/editar-api.component';
 import { ListarApiComponent } from './Api/listar-api/listar-api.component';
+import { ListarAmbienteComponent } from './Publish/listar-ambiente/listar-ambiente.component';
+import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
+import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
+import { ListarServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
+import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
+import { ListarAmbientesComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
+import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
+import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
+import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const routes: Routes = [
   {
     path:"",
     component:DashboardComponent,
+    canActivate:[UsuarioAutenticadoGuard],
     children:[
+      {
+        path:"publish",component:ListarAmbienteComponent
+      }
+      ,
       {
         path:"chamados",component:ListarChamadoComponent
       }
@@ -28,7 +42,11 @@ const routes: Routes = [
       }
       ,
       {
-        path:"chamados/alterar/:ambienteId/:apiId",component:EditarChamadoComponent
+        path:"chamados/adicionar/:id",component:AdicionarChamadoComponent
+      }
+      ,
+      {
+        path:"chamados/editar/:chamadoId",component:EditarChamadoComponent
       }
       ,
       {
@@ -48,11 +66,11 @@ const routes: Routes = [
       }
       ,
       {
-        path:"desenvolvedores/alterar/:id/:dev",component:EditarDesenvolvedorComponent
+        path:"desenvolvedores/alterar/:id",component:EditarDesenvolvedorComponent
       }
       ,
       {
-        path:"desenvolvedores/adicionar/:dev",component:AdicionarDesenvolvedorComponent
+        path:"desenvolvedores/adicionar",component:AdicionarDesenvolvedorComponent
       }
       ,
       {
@@ -66,8 +84,33 @@ const routes: Routes = [
       {
         path:"api/adicionar",component:AdicionarApiComponent
       }
-    ]
-  }
+      ,
+      {
+        path:"servidor",component:ListarServidorComponent
+      }
+      ,
+      {
+        path:"servidor/adicionar",component:AdicionarServidorComponent
+      }
+      ,
+      {
+        path:"servidor/alterar/:id",component:EditarServidorComponent
+      }
+      ,
+      {
+        path:"ambiente/adicionar",component:AdicionarAmbienteComponent
+      },
+      {
+        path:"ambiente/listar",component:ListarAmbientesComponent
+      },
+      {
+        path:"ambiente/alterar/:id",component:EditarAmbienteComponent
+      }
+      ]
+    },
+      {
+        path:"login", component:LoginUsuarioComponent
+      }  
 ];
 
 @NgModule({

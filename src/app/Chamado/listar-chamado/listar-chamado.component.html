@@ -1,7 +1,37 @@
+<mat-grid-list cols="4" rowHeight="50px">
+  <mat-grid-tile colspan="1" rowspan="1">
+    <ul>
+      <li>
+  <div style="margin:auto">
+    <mat-checkbox  *ngIf="!ocupados"
+    disabled="{{ocupados}}"
+    class="example-margin"
+    (click)="Liberados()"
+    >
+    Liberados
+    </mat-checkbox>
+  </div>
+</li>
+<li>
+  <div style="margin:auto">
+    <mat-checkbox *ngIf="!liberar"
+    disabled="{{liberar}}"
+    class="example-margin"    
+    (click)="Ocupados()"
+    >
+    Ocupados
+    </mat-checkbox>
+  </div>
+  </li>
+  </ul>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2" rowspan="1">
+    <div style="margin-top: 10px;text-align: center;">
+      <h1 style="text-align: center;display: inline-block;">Chamados</h1>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
-<div style="margin-top: 10px;text-align: center;">
-  <h1 style="text-align: center;display: inline-block;"> <mat-icon>tv</mat-icon>   Ambientes   <mat-icon>tv</mat-icon></h1>
-</div>
 <mat-divider></mat-divider>
 
 <div *ngIf="erros.length > 0">
@@ -14,54 +44,43 @@
   </div>
 </div>
 
-  <mat-tab-group color="primary">
-    <mat-tab label="DEV 01">
-      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" class="table" *ngIf="dataSource1">
+<div style="width: 100%; overflow-x: auto;">
+      <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource1" matSort class="table" *ngIf="dataSource1" >
         <ng-container matColumnDef="detalhes">
-          <th mat-header-cell *matHeaderCellDef>Detalhes</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let dataSource1">
-            <div (click)="AbrirDetalhe(dataSource1.numero,dataSource1.ambiente.nome)">
-              <mat-icon>menu</mat-icon>
+            <div  (click)="AbrirDetalhe(dataSource1.numero)">
+              <mat-icon *ngIf="dataSource1.ativo">menu</mat-icon>
             </div>
           </td>
         </ng-container>
-        <ng-container matColumnDef="numero">
-          <th mat-header-cell *matHeaderCellDef>Numero</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.numero | mask:'S00 000 0000'}} </td>
+        <ng-container matColumnDef="ambiente">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ambiente</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.ambiente.nome}} </td>
         </ng-container>
-        <ng-container matColumnDef="api">
-          <th mat-header-cell *matHeaderCellDef>API</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.api.nome}} </td>
+        <ng-container matColumnDef="requisicao">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Requisição</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.numero | mask:'S00 000 00000' | uppercase}} </td>
         </ng-container>
-        <ng-container matColumnDef="web">
-          <th mat-header-cell *matHeaderCellDef>Web</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.web.nome}} </td>
-        </ng-container>
-        <ng-container matColumnDef="ios">
-          <th mat-header-cell *matHeaderCellDef>IOS</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.ios.nome}} </td>
-        </ng-container>
-        <ng-container matColumnDef="android">
-          <th mat-header-cell *matHeaderCellDef>Android</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.android.nome}} </td>
-        </ng-container>
-        <ng-container matColumnDef="business">
-          <th mat-header-cell *matHeaderCellDef>Business</th>
-          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.negocio.nome}} </td>
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+          <td mat-cell *matCellDef="let dataSource1"> {{dataSource1.descricao}} </td>
         </ng-container>
          <ng-container matColumnDef="acoes">
-           <th mat-header-cell *matHeaderCellDef>Ações</th>
+           <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
            <td mat-cell *matCellDef="let dataSource1">
-            <button
+            <button 
             mat-mini-fab
             color="primary"
-            [routerLink]="['/chamados/alterar/',dataSource1.ambiente.id,dataSource1.api.id]">
+            [routerLink]="['/chamados/editar/',dataSource1.chamadoId]"
+            
+            >
             <mat-icon>edit</mat-icon>
           </button>
-          <button
+          <button *ngIf ="dataSource1.ativo" 
           mat-mini-fab
-          color="accent"
-          (click)="AbrirDialog(dataSource1.ambiente.id,dataSource1.api.id)"
+          color="accent"          
+          (click)="AbrirDialog(dataSource1.numero)"
           >
           <mat-icon>delete</mat-icon>
         </button>
@@ -70,610 +89,17 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
       </table>
+
+      <mat-paginator [pageSizeOptions]="[10]"
+      showFirstLastButtons></mat-paginator>
+    </div>
+
+      
       <mat-divider></mat-divider>
-    </mat-tab>
-      <mat-tab label="DEV 02">
-        <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource2" class="table" *ngIf="dataSource2">
-          <ng-container matColumnDef="detalhes">
-            <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-            <td mat-cell *matCellDef="let dataSource2">
-              <div (click)="AbrirDetalhe(dataSource2.numero,dataSource2.ambiente.nome)">
-                <mat-icon>menu</mat-icon>
-              </div>
-            </td>
-          </ng-container> 
-          <ng-container matColumnDef="numero">
-            <th mat-header-cell *matHeaderCellDef>Numero</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.numero | mask:'S00 000 0000'}} </td>
-          </ng-container>
-          <ng-container matColumnDef="api">
-            <th mat-header-cell *matHeaderCellDef>API</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.api.nome}} </td>
-          </ng-container>
-          <ng-container matColumnDef="web">
-            <th mat-header-cell *matHeaderCellDef>Web</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.web.nome}} </td>
-          </ng-container>
-          <ng-container matColumnDef="ios">
-            <th mat-header-cell *matHeaderCellDef>IOS</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.ios.nome}} </td>
-          </ng-container>
-          <ng-container matColumnDef="android">
-            <th mat-header-cell *matHeaderCellDef>Android</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.android.nome}} </td>
-          </ng-container>
-          <ng-container matColumnDef="business">
-            <th mat-header-cell *matHeaderCellDef>Business</th>
-            <td mat-cell *matCellDef="let dataSource2"> {{dataSource2.negocio.nome}} </td>
-          </ng-container>
-           <ng-container matColumnDef="acoes">
-             <th mat-header-cell *matHeaderCellDef>Ações</th>
-             <td mat-cell *matCellDef="let dataSource2">
-              <button
-              mat-mini-fab
-              color="primary"
-              [routerLink]="['/chamados/alterar/',dataSource2.ambiente.id,dataSource2.api.id]">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-            mat-mini-fab
-            color="accent"
-            (click)="AbrirDialog(dataSource2.ambiente.id,dataSource2.api.id)"
-            >
-            <mat-icon>delete</mat-icon>
-          </button>
-            </td>
-           </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      <mat-divider></mat-divider>
-      </mat-tab>
-        <mat-tab label="DEV 03">
-          <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource3" class="table" *ngIf="dataSource3">
-            <ng-container matColumnDef="detalhes">
-              <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-              <td mat-cell *matCellDef="let dataSource3">
-                <div (click)="AbrirDetalhe(dataSource3.numero,dataSource3.ambiente.nome)">
-                  <mat-icon>menu</mat-icon>
-                </div>
-              </td>
-            </ng-container>   
-            <ng-container matColumnDef="numero">
-              <th mat-header-cell *matHeaderCellDef>Numero</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.numero | mask:'S00 000 0000'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="api">
-              <th mat-header-cell *matHeaderCellDef>API</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.api.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="web">
-              <th mat-header-cell *matHeaderCellDef>Web</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.web.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="ios">
-              <th mat-header-cell *matHeaderCellDef>IOS</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.ios.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="android">
-              <th mat-header-cell *matHeaderCellDef>Android</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.android.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="business">
-              <th mat-header-cell *matHeaderCellDef>Business</th>
-              <td mat-cell *matCellDef="let dataSource3"> {{dataSource3.negocio.nome}} </td>
-            </ng-container>
-             <ng-container matColumnDef="acoes">
-               <th mat-header-cell *matHeaderCellDef>Ações</th>
-               <td mat-cell *matCellDef="let dataSource3">
-                <button
-                mat-mini-fab
-                color="primary"
-                [routerLink]="['/chamados/alterar/',dataSource3.ambiente.id,dataSource3.api.id]">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-              mat-mini-fab
-              color="accent"
-              (click)="AbrirDialog(dataSource3.ambiente.id,dataSource3.api.id)"
-              >
-              <mat-icon>delete</mat-icon>
-            </button>
-
-              </td>
-             </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        <mat-divider></mat-divider>
-        </mat-tab>
-
-        <mat-tab label="DEV 04">
-          <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource4" class="table" *ngIf="dataSource4">
-            <ng-container matColumnDef="detalhes">
-              <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-              <td mat-cell *matCellDef="let dataSource4">
-                <div (click)="AbrirDetalhe(dataSource4.numero,dataSource4.ambiente.nome)">
-                  <mat-icon>menu</mat-icon>
-                </div>
-              </td>
-            </ng-container>              
-            <ng-container matColumnDef="numero">
-              <th mat-header-cell *matHeaderCellDef>Numero</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.numero | mask:'S00 000 0000'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="api">
-              <th mat-header-cell *matHeaderCellDef>API</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.api.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="web">
-              <th mat-header-cell *matHeaderCellDef>Web</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.web.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="ios">
-              <th mat-header-cell *matHeaderCellDef>IOS</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.ios.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="android">
-              <th mat-header-cell *matHeaderCellDef>Android</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.android.nome}} </td>
-            </ng-container>
-            <ng-container matColumnDef="business">
-              <th mat-header-cell *matHeaderCellDef>Business</th>
-              <td mat-cell *matCellDef="let dataSource4"> {{dataSource4.negocio.nome}} </td>
-            </ng-container>
-             <ng-container matColumnDef="acoes">
-               <th mat-header-cell *matHeaderCellDef>Ações</th>
-               <td mat-cell *matCellDef="let dataSource4">
-                <button
-                mat-mini-fab
-                color="primary"
-                [routerLink]="['/chamados/alterar/',dataSource4.ambiente.id,dataSource4.api.id]">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-              mat-mini-fab
-              color="accent"
-              (click)="AbrirDialog(dataSource4.ambiente.id,dataSource4.api.id)"
-              >
-              <mat-icon>delete</mat-icon>
-            </button>
-
-              </td>
-             </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-          <mat-divider></mat-divider>
-          </mat-tab>
-
-          <mat-tab label="DEV 05">
-            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource5" class="table" *ngIf="dataSource5">
-              <ng-container matColumnDef="detalhes">
-                <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                <td mat-cell *matCellDef="let dataSource5">
-                  <div (click)="AbrirDetalhe(dataSource5.numero,dataSource5.ambiente.nome)">
-                    <mat-icon>menu</mat-icon>
-                  </div>
-                </td>
-              </ng-container>         
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef>Numero</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.numero | mask:'S00 000 0000'}} </td>
-              </ng-container>
-              <ng-container matColumnDef="api">
-                <th mat-header-cell *matHeaderCellDef>API</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.api.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="web">
-                <th mat-header-cell *matHeaderCellDef>Web</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.web.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ios">
-                <th mat-header-cell *matHeaderCellDef>IOS</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.ios.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="android">
-                <th mat-header-cell *matHeaderCellDef>Android</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.android.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="business">
-                <th mat-header-cell *matHeaderCellDef>Business</th>
-                <td mat-cell *matCellDef="let dataSource5"> {{dataSource5.negocio.nome}} </td>
-              </ng-container>
-               <ng-container matColumnDef="acoes">
-                 <th mat-header-cell *matHeaderCellDef>Ações</th>
-                 <td mat-cell *matCellDef="let dataSource5">
-                  <button
-                  mat-mini-fab
-                  color="primary"
-                  [routerLink]="['/chamados/alterar/',dataSource5.ambiente.id,dataSource5.api.id]">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource5.ambiente.id,dataSource5.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                </td>
-               </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-divider></mat-divider>
-            </mat-tab>
-
-            <mat-tab label="DEV 06">
-
-              <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource6" class="table" *ngIf="dataSource6">
-                <ng-container matColumnDef="detalhes">
-                  <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                  <td mat-cell *matCellDef="let dataSource6">
-                    <div (click)="AbrirDetalhe(dataSource6.numero,dataSource6.ambiente.nome)">
-                      <mat-icon>menu</mat-icon>
-                    </div>
-                  </td>
-                </ng-container>    
-                <ng-container matColumnDef="numero">
-                  <th mat-header-cell *matHeaderCellDef>Numero</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.numero | mask:'S00 000 0000'}} </td>
-                </ng-container>
-                <ng-container matColumnDef="api">
-                  <th mat-header-cell *matHeaderCellDef>API</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.api.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="web">
-                  <th mat-header-cell *matHeaderCellDef>Web</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.web.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="ios">
-                  <th mat-header-cell *matHeaderCellDef>IOS</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.ios.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="android">
-                  <th mat-header-cell *matHeaderCellDef>Android</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.android.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="business">
-                  <th mat-header-cell *matHeaderCellDef>Business</th>
-                  <td mat-cell *matCellDef="let dataSource6"> {{dataSource6.negocio.nome}} </td>
-                </ng-container>
-                 <ng-container matColumnDef="acoes">
-                   <th mat-header-cell *matHeaderCellDef>Ações</th>
-                   <td mat-cell *matCellDef="let dataSource6">
-                    <button
-                    mat-mini-fab
-                    color="primary"
-                    [routerLink]="['/chamados/alterar/',dataSource6.ambiente.id,dataSource6.api.id]">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource6.ambiente.id,dataSource6.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                  </td>
-                 </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-            <mat-divider></mat-divider>
-            </mat-tab>
-
-            <mat-tab label="DEV 07">
-
-              <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource7" class="table" *ngIf="dataSource7">
-                <ng-container matColumnDef="detalhes">
-                  <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                  <td mat-cell *matCellDef="let dataSource7">
-                    <div (click)="AbrirDetalhe(dataSource7.numero,dataSource7.ambiente.nome)">
-                      <mat-icon>menu</mat-icon>
-                    </div>
-                  </td>
-                </ng-container>         
-                <ng-container matColumnDef="numero">
-                  <th mat-header-cell *matHeaderCellDef>Numero</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.numero | mask:'S00 000 0000'}} </td>
-                </ng-container>
-                <ng-container matColumnDef="api">
-                  <th mat-header-cell *matHeaderCellDef>API</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.api.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="web">
-                  <th mat-header-cell *matHeaderCellDef>Web</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.web.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="ios">
-                  <th mat-header-cell *matHeaderCellDef>IOS</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.ios.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="android">
-                  <th mat-header-cell *matHeaderCellDef>Android</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.android.nome}} </td>
-                </ng-container>
-                <ng-container matColumnDef="business">
-                  <th mat-header-cell *matHeaderCellDef>Business</th>
-                  <td mat-cell *matCellDef="let dataSource7"> {{dataSource7.negocio.nome}} </td>
-                </ng-container>
-                 <ng-container matColumnDef="acoes">
-                   <th mat-header-cell *matHeaderCellDef>Ações</th>
-                   <td mat-cell *matCellDef="let dataSource7">
-                    <button
-                    mat-mini-fab
-                    color="primary"
-                    [routerLink]="['/chamados/alterar/',dataSource7.ambiente.id,dataSource7.api.id]">
-                    <mat-icon>edit</mat-icon>
-                  </button>
-                  <button
-                  mat-mini-fab
-                  color="accent"
-                  (click)="AbrirDialog(dataSource7.ambiente.id,dataSource7.api.id)"
-                  >
-                  <mat-icon>delete</mat-icon>
-                </button>
-                  </td>
-                 </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-            <mat-divider></mat-divider>
-           </mat-tab>
-
-           <mat-tab label="DEV 08">
-            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource8" class="table" *ngIf="dataSource8">
-              <ng-container matColumnDef="detalhes">
-                <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                <td mat-cell *matCellDef="let dataSource8">
-                  <div (click)="AbrirDetalhe(dataSource8.numero,dataSource8.ambiente.nome)">
-                    <mat-icon>menu</mat-icon>
-                  </div>
-                </td>
-              </ng-container>       
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef>Numero</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.numero | mask:'S00 000 0000'}} </td>
-              </ng-container>
-              <ng-container matColumnDef="api">
-                <th mat-header-cell *matHeaderCellDef>API</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.api.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="web">
-                <th mat-header-cell *matHeaderCellDef>Web</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.web.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ios">
-                <th mat-header-cell *matHeaderCellDef>IOS</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.ios.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="android">
-                <th mat-header-cell *matHeaderCellDef>Android</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.android.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="business">
-                <th mat-header-cell *matHeaderCellDef>Business</th>
-                <td mat-cell *matCellDef="let dataSource8"> {{dataSource8.negocio.nome}} </td>
-              </ng-container>
-               <ng-container matColumnDef="acoes">
-                 <th mat-header-cell *matHeaderCellDef>Ações</th>
-                 <td mat-cell *matCellDef="let dataSource8">
-                  <button
-                  mat-mini-fab
-                  color="primary"
-                  [routerLink]="['/chamados/alterar/',dataSource8.ambiente.id,dataSource8.api.id]">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource8.ambiente.id,dataSource8.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                </td>
-               </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-divider></mat-divider>
-           </mat-tab>
-
-           <mat-tab label="DEV 09">
-
-            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource9" class="table" *ngIf="dataSource9">
-              <ng-container matColumnDef="detalhes">
-                <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                <td mat-cell *matCellDef="let dataSource9">
-                  <div (click)="AbrirDetalhe(dataSource9.numero,dataSource9.ambiente.nome)">
-                    <mat-icon>menu</mat-icon>
-                  </div>
-                </td>
-              </ng-container>      
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef>Numero</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.numero | mask:'S00 000 0000'}} </td>
-              </ng-container>
-              <ng-container matColumnDef="api">
-                <th mat-header-cell *matHeaderCellDef>API</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.api.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="web">
-                <th mat-header-cell *matHeaderCellDef>Web</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.web.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ios">
-                <th mat-header-cell *matHeaderCellDef>IOS</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.ios.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="android">
-                <th mat-header-cell *matHeaderCellDef>Android</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.android.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="business">
-                <th mat-header-cell *matHeaderCellDef>Business</th>
-                <td mat-cell *matCellDef="let dataSource9"> {{dataSource9.negocio.nome}} </td>
-              </ng-container>
-               <ng-container matColumnDef="acoes">
-                 <th mat-header-cell *matHeaderCellDef>Ações</th>
-                 <td mat-cell *matCellDef="let dataSource9">
-                  <button
-                  mat-mini-fab
-                  color="primary"
-                  [routerLink]="['/chamados/alterar/',dataSource9.ambiente.id,dataSource9.api.id]">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource9.ambiente.id,dataSource9.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                </td>
-               </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-            <mat-divider></mat-divider>
-           </mat-tab>
-
-           <mat-tab label="DEV 10">
-            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource10" class="table" *ngIf="dataSource10">
-              <ng-container matColumnDef="detalhes">
-                <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                <td mat-cell *matCellDef="let dataSource10">
-                  <div (click)="AbrirDetalhe(dataSource10.numero,dataSource10.ambiente.nome)">
-                    <mat-icon>menu</mat-icon>
-                  </div>
-                </td>
-              </ng-container>   
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef>Numero</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.numero | mask:'S00 000 0000'}} </td>
-              </ng-container>
-              <ng-container matColumnDef="api">
-                <th mat-header-cell *matHeaderCellDef>API</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.api.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="web">
-                <th mat-header-cell *matHeaderCellDef>Web</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.web.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ios">
-                <th mat-header-cell *matHeaderCellDef>IOS</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.ios.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="android">
-                <th mat-header-cell *matHeaderCellDef>Android</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.android.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="business">
-                <th mat-header-cell *matHeaderCellDef>Business</th>
-                <td mat-cell *matCellDef="let dataSource10"> {{dataSource10.negocio.nome}} </td>
-              </ng-container>
-               <ng-container matColumnDef="acoes">
-                 <th mat-header-cell *matHeaderCellDef>Ações</th>
-                 <td mat-cell *matCellDef="let dataSource10">
-                  <button
-                  mat-mini-fab
-                  color="primary"
-                  [routerLink]="['/chamados/alterar/',dataSource10.ambiente.id,dataSource10.api.id]">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource10.ambiente.id,dataSource10.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                </td>
-               </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-            <mat-divider></mat-divider>
-           </mat-tab>
-
-           <mat-tab label="DEV 11">
-
-            <table mat-table  class="mat-elevation-z8" [dataSource]="dataSource11" class="table" *ngIf="dataSource11">
-              <ng-container matColumnDef="detalhes">
-                <th mat-header-cell *matHeaderCellDef>Detalhes</th>
-                <td mat-cell *matCellDef="let dataSource11">
-                  <div (click)="AbrirDetalhe(dataSource11.numero,dataSource11.ambiente.nome)">
-                    <mat-icon>menu</mat-icon>
-                  </div>
-                </td>
-              </ng-container>      
-              <ng-container matColumnDef="numero">
-                <th mat-header-cell *matHeaderCellDef>Numero</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.numero | mask:'S00 000 0000'}} </td>
-              </ng-container>
-              <ng-container matColumnDef="api">
-                <th mat-header-cell *matHeaderCellDef>API</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.api.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="web">
-                <th mat-header-cell *matHeaderCellDef>Web</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.web.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="ios">
-                <th mat-header-cell *matHeaderCellDef>IOS</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.ios.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="android">
-                <th mat-header-cell *matHeaderCellDef>Android</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.android.nome}} </td>
-              </ng-container>
-              <ng-container matColumnDef="business">
-                <th mat-header-cell *matHeaderCellDef>Business</th>
-                <td mat-cell *matCellDef="let dataSource11"> {{dataSource11.negocio.nome}} </td>
-              </ng-container>
-               <ng-container matColumnDef="acoes">
-                 <th mat-header-cell *matHeaderCellDef>Ações</th>
-                 <td mat-cell *matCellDef="let dataSource11">
-                  <button
-                  mat-mini-fab
-                  color="primary"
-                  [routerLink]="['/chamados/alterar/',dataSource11.ambiente.id,dataSource11.api.id]">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                mat-mini-fab
-                color="accent"
-                (click)="AbrirDialog(dataSource11.ambiente.id,dataSource11.api.id)"
-                >
-                <mat-icon>delete</mat-icon>
-              </button>
-                </td>
-               </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-            <mat-divider></mat-divider>
-           </mat-tab>
-        </mat-tab-group>
-
-        <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+    
+      <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
           <button mat-mini-fab
           color="primary"
           [routerLink]="['/chamados/adicionar']"
@@ -681,4 +107,5 @@
           <mat-icon>add</mat-icon>
         </button>
         </div>
+
         <mat-divider></mat-divider>

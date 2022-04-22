@@ -1,6 +1,14 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row style="text-align: center;">
-      <span style="text-align: center;">Controle de Ambientes Dayconnect</span>
-      <span class="spacer"></span>
-      </mat-toolbar-row>
+<mat-toolbar style="background-color:#99a6ec;height: 50px;">
+    <div>
+        <img src="assets/daycoval-logo-plus.png" style="width:30%">        
+    </div>  
+    <div>
+    </div>
+    <span class="example-spacer"></span>      
+      <div>
+      <h1 style="font-size:16px">Usuario : {{usuario}}</h1>
+    </div>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="Logout()">
+          <mat-icon>account_circle</mat-icon>
+      </button>
 </mat-toolbar>

@@ -15,12 +15,38 @@ const httpOptions = {
 })
 
 export class AmbienteService {
-  constructor(private http : HttpClient,
+  constructor(private httpClient : HttpClient,
               private endpoint: EndPoint) { }
 
-  api:string =  `${this.endpoint.ambiente}/api/ambientes`
+  apiUrl:string =  `${this.endpoint.ambiente}/api/ambientes`
 
   ObterTodos():Observable<Ambiente[]>{
-    return this.http.get<Ambiente[]>(this.api);
+    return this.httpClient.get<Ambiente[]>(this.apiUrl);
+  }
+
+  ObterAmbientesDisponiveis():Observable<Ambiente[]>{
+    const url = `${this.apiUrl}/Disponivel`;
+    return this.httpClient.get<Ambiente[]>(url);
+  }
+
+  ObterPorId(apiId : number): Observable<Ambiente>{
+    const url = `${this.apiUrl}/${apiId}`;
+    return this.httpClient.get<Ambiente>(url);
+  }
+
+  Atualizar(servidor:Ambiente,apiId :number):Observable<any>{
+    const url = `${this.apiUrl}/Atualizar/${apiId}`;
+    return this.httpClient.put<Ambiente>(url,servidor);
+  }
+
+  Inserir(ambiente : Ambiente):Observable<any>
+  {
+    return this.httpClient.post<Ambiente>(this.apiUrl,ambiente);
+  }
+
+  Excluir(ambienteId : string):Observable<any>
+  {
+    const url = `${this.apiUrl}/${ambienteId}`;
+    return this.httpClient.delete<Ambiente>(url);
   }
 }

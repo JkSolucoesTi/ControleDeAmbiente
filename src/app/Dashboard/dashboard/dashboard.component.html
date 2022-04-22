@@ -1,31 +1,65 @@
 <app-header></app-header>
 <mat-sidenav-container class="side">
-    <mat-sidenav mode="side" opened>
+    <mat-sidenav #sidenav mode="side" opened="opened">
    <mat-list>
+     <div>
     <mat-list-item routerLink="chamados">
-        <div>
-            <mat-icon>tv</mat-icon>  Ambientes
-        </div>
+      <div>
+        <mat-icon> map</mat-icon>  Chamados  
+      </div>
     </mat-list-item>
+  </div>
+   <div *ngIf="isAdministrador">
        <mat-divider></mat-divider>
        <mat-list-item routerLink="business">
            <div>
             <mat-icon>business</mat-icon>  Business
         </div>
      </mat-list-item>
+    </div>
+    <div *ngIf="isAdministrador">
     <mat-divider></mat-divider>
     <mat-list-item routerLink="desenvolvedores">
         <div>
          <mat-icon>developer_mode</mat-icon>  Desenvolvedores
         </div>
     </mat-list-item>
+  </div>
+  <div *ngIf="isAdministrador">
     <mat-divider></mat-divider>
-    <mat-list-item routerLink="api">
+    <mat-list-item routerLink="api" >
       <div>
         <mat-icon>storage</mat-icon>  API
       </div>
     </mat-list-item>
+  </div>
+  <div>
     <mat-divider></mat-divider>
+    <mat-list-item routerLink="publish" >
+      <div>
+        <mat-icon> publish</mat-icon>  Dashboard
+      </div>
+    </mat-list-item>
+  </div>
+  <div *ngIf="isAdministrador">
+    <mat-divider></mat-divider>    
+    <mat-list-item routerLink="ambiente/listar" >
+      <div>
+        <mat-icon>desktop_windows</mat-icon>  Ambientes
+      </div>
+    </mat-list-item>
+  </div>
+  <mat-divider></mat-divider>
+  <div *ngIf="isAdministrador">
+    <mat-list-item routerLink="servidor" >
+      <div>
+        <mat-icon>domain</mat-icon>  Servidores
+      </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+    <div>
+    </div>
    </mat-list>
     </mat-sidenav>
     <mat-sidenav-content>           

@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtModule} from '@auth0/angular-jwt';
 
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator'
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
@@ -43,10 +50,25 @@ import { WebService } from './service/web.service';
 import { IosService } from './service/ios.service';
 import { NegocioService } from './service/negocio.service';
 import { NgxMaskModule , IConfig } from 'ngx-mask';
+import { ListarAmbienteComponent } from './Publish/listar-ambiente/listar-ambiente.component';
+import { LoginUsuarioComponent } from './Login/login-usuario/login-usuario.component';
+import { UsuarioAutenticadoGuard } from './service/usuario-autenticado.guard';
+import { TableComponent } from './Publish/table/table.component';
+import { AdicionarServidorComponent } from './Servidor/adicionar-servidor/adicionar-servidor.component';
+import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servidor.component';
+import { ListarServidorComponent , DialogExcluirServidorComponent } from './Servidor/listar-servidor/listar-servidor.component';
+import { AdicionarAmbienteComponent } from './Ambiente/adicionar-ambiente/adicionar-ambiente.component';
+import { ListarAmbientesComponent , DialogExcluirAmbienteComponent ,DialogDetalheAmbienteComponent } from './Ambiente/listar-ambientes/listar-ambientes.component';
+import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const maskConfig: Partial<IConfig> ={
   validation:false,
 }
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
+
 
 @NgModule({
   declarations: [
@@ -56,6 +78,7 @@ const maskConfig: Partial<IConfig> ={
     DialogExcluirApiComponent,
     DialogLiberarChamadoComponent,
     DialogDetalheChamadoComponent,
+    DialogDetalheAmbienteComponent,
     HeaderComponent,
     DashboardComponent,
     ListarDesenvolvedorComponent,
@@ -69,12 +92,24 @@ const maskConfig: Partial<IConfig> ={
     AdicionarApiComponent,
     ListarChamadoComponent,
     EditarChamadoComponent,
-    AdicionarChamadoComponent
+    AdicionarChamadoComponent,
+    ListarAmbienteComponent,
+    LoginUsuarioComponent,
+    TableComponent,
+    AdicionarServidorComponent,
+    EditarServidorComponent,
+    ListarServidorComponent,
+    AdicionarAmbienteComponent,
+    ListarAmbientesComponent,
+    DialogExcluirServidorComponent,
+    EditarAmbienteComponent,
+    DialogExcluirAmbienteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressBarModule,
     MatTableModule,
     MatButtonModule,
     MatDividerModule,
@@ -85,6 +120,7 @@ const maskConfig: Partial<IConfig> ={
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatPaginatorModule,
     MatDialogModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
@@ -93,8 +129,19 @@ const maskConfig: Partial<IConfig> ={
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatGridListModule,
+    MatMenuModule,
     MatTabsModule,
-    NgxMaskModule.forRoot(maskConfig)
+    MatCheckboxModule,
+    MatExpansionModule,
+    NgxMaskModule.forRoot(maskConfig),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [""],
+        disallowedRoutes: [""],
+      }
+    })
   ],
   providers: [
     ChamadoService,
@@ -102,7 +149,8 @@ const maskConfig: Partial<IConfig> ={
     WebService,
     IosService,
     NegocioService,
-    EndPoint
+    EndPoint,
+    UsuarioAutenticadoGuard
   ],
   bootstrap: [AppComponent]
 })

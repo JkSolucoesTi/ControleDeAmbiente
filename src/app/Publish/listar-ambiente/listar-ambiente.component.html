@@ -1,0 +1,24 @@
+<div style="margin-top: 10px;text-align: center;">
+  <h2>Ambiente de Desenvolvimento</h2>
+</div>
+<mat-divider></mat-divider>
+
+<div class="DivServidores" *ngFor="let servidor of servidores" >
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        {{servidor.dominio}}
+        </mat-panel-title>
+        <mat-panel-description>
+         {{servidor.nome}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>  
+        <app-table 
+        [ambientes]="servidor.ambientes"         
+        >
+      </app-table>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-divider></mat-divider>
+</div>

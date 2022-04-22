@@ -1,0 +1,83 @@
+<div style="margin-top: 10px;text-align: center;">
+    <h2>Cadastro de Ambientes</h2>
+  </div>
+  <mat-divider></mat-divider>
+  
+  <div *ngIf="erros.length > 0">
+    <div class="divErros" style="margin-top: 10px;">
+      <h4 *ngFor="let erro of erros">
+        <mat-icon style="vertical-align: bottom;">error</mat-icon>
+        {{erro}}
+        <mat-icon style="vertical-align: bottom;">error</mat-icon>
+      </h4>
+    </div>
+  </div>
+  
+  <table mat-table
+  class="mat-elevation-z8"
+  [dataSource]="dataSource"
+  class="table">
+
+  <ng-container matColumnDef="detalhes">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let dataSource">
+      <div (click)="AbrirDetalhe(dataSource.ambienteId)">
+        <mat-icon>menu</mat-icon>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell
+      *matCellDef="let dataSource"> {{dataSource.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipoDesenvolvedor">
+      <th mat-header-cell *matHeaderCellDef>Responsável</th>
+      <td mat-cell *matCellDef="let dataSource"
+      > {{dataSource.desenvolvedor.nome}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dominio">
+      <th mat-header-cell *matHeaderCellDef>Servidor</th>
+      <td mat-cell
+      *matCellDef="let dataSource"> {{dataSource.servidor.dominio}} </td>
+    </ng-container>
+   
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let dataSource">
+        <button
+        mat-mini-fab
+        color="primary"
+        [routerLink]="['/ambiente/alterar',dataSource.ambienteId]"
+        >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+      mat-mini-fab
+      color="accent"
+      (click)="AbrirDialog(dataSource.ambienteId,dataSource.nome)"
+      >
+      <mat-icon>delete</mat-icon>
+    </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  
+  </table>
+  
+  <div class="btnAdicionar" fxLayout="row" fxLayoutAlign="end end">
+    <button mat-mini-fab
+    color="primary"
+    [routerLink]="['/ambiente/adicionar']"
+    >
+    <mat-icon>add</mat-icon>
+  </button>
+  </div>
+  <mat-divider></mat-divider>
+  

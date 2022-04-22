@@ -1,0 +1,41 @@
+<div>
+    <img src="assets/DaycovalVale.jpg" alt="some text" width=100% height=100% style="position: absolute;"/>
+<div class="container" style="  display: flex;justify-content: center;align-items: center;height: 100vh">
+    <mat-card style="max-width: 200px">
+    <mat-card-title>
+        Login
+    </mat-card-title>
+    <form  [formGroup]="formulario" class="example-form">
+        <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input matInput placeholder="Inserir o usuario" type="text" formControlName="login">
+          <mat-error *ngIf="propriedade.login.touched && propriedade.login.invalid"></mat-error>
+          <mat-error>
+            <sup>*</sup> Preencher o usuário
+         </mat-error>
+
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Senha</mat-label>
+            <input matInput placeholder="Senha" type="password" formControlName="senha">
+            <mat-error *ngIf="propriedade.senha.invalid">
+                <sup>*</sup> Preencher a senha
+            </mat-error>
+          </mat-form-field>
+    </div>
+    <div>
+        <button type="button" mat-raised-button color="primary" style="width: 100%;" (click)="LogarUsuario()" [disabled]="formulario.invalid">Logar</button>
+    </div>
+      </form>
+      <div style="text-align: center;">
+        <span style="color: red">{{mensagemLogin}}</span>
+        <div style="margin-top:10px" *ngIf="loader">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+    </div>              
+</mat-card>
+</div>
+</div>

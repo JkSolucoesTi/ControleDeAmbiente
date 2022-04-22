@@ -41,7 +41,6 @@ export class EditarApiComponent implements OnInit {
   AtualizarApi(){
     this.erros = [];
     const parametros = this.formulario.value;
-    console.log(parametros);
     this.apiService.Atualizar(parametros,this.rota).subscribe(resultado => {
       this.snackBar.open(resultado.mensagem,"Atualizar",{
         duration: 1000,
