@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import { ChamadoService } from './../../service/chamado.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Chamado } from 'src/app/model/chamado';
@@ -7,6 +7,8 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
+import { AmbienteService } from 'src/app/service/ambientes.service';
+import { Negocio } from 'src/app/model/negocio';
 
 @Component({
   selector: 'app-listar-chamado',
@@ -23,21 +25,24 @@ export class ListarChamadoComponent implements OnInit {
   liberar = false;
   ocupados = false;
 
+  botao!:boolean;
   displayedColumns!:string[];
   chamado!:Chamado[];
   erros!:string[];
-  ambiente!:Ambiente[];
+  negocio!:Negocio[];
 
   constructor(private chamadoService:ChamadoService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar
              ) { }
-
   ngOnInit(): void {
-    this.erros = [];
+    this.erros = [];    
+   
     this.chamadoService.ObterTodos().subscribe(resultado => {      
       this.dataSource1.data = resultado//.filter(x => x.ativo == true);         
       this.dataSource1.paginator = this.paginator;  
+      console.log(resultado)
+
     },erro =>{
       if(erro ==='400'){
         for(const campo in erro.error.errors){
@@ -50,11 +55,11 @@ export class ListarChamadoComponent implements OnInit {
       }
     }
     );
-    this.displayedColumns = this.ExibirColunas();
+    this.displayedColumns = this.ExibirColunas();    
   }
 
   ExibirColunas():string[]{
-    return ['detalhes','ambiente','requisicao','descricao','acoes']
+    return ['detalhes','negocio','ambiente','requisicao','descricao','acoes']
   }
 
   Liberados(){

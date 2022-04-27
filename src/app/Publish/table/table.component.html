@@ -19,7 +19,7 @@
     <ng-container matColumnDef="acoes">
       <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let dataSource">
-        <a type="button" (click)="AbrirSwagger(dataSource.acesso)"
+        <a *ngIf="dataSource.acesso != ''" type="button" (click)="AbrirSwagger(dataSource.acesso)"
         mat-button color="primary">
         Acessar
       </a>                                               
