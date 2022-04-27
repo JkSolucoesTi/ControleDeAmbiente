@@ -24,8 +24,16 @@ import { EditarServidorComponent } from './Servidor/editar-servidor/editar-servi
 import { EditarAmbienteComponent } from './Ambiente/editar-ambiente/editar-ambiente.component';
 
 const routes: Routes = [
-  {
-    path:"",
+      {
+        path:"", component:LoginUsuarioComponent
+      }
+      ,
+      {
+        path:"login", component:LoginUsuarioComponent
+      }
+      ,  
+      {
+    path:"",    
     component:DashboardComponent,
     canActivate:[UsuarioAutenticadoGuard],
     children:[
@@ -107,10 +115,7 @@ const routes: Routes = [
         path:"ambiente/alterar/:id",component:EditarAmbienteComponent
       }
       ]
-    },
-      {
-        path:"login", component:LoginUsuarioComponent
-      }  
+    }      
 ];
 
 @NgModule({
